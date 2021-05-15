@@ -1,0 +1,15 @@
+alsa-utils
+pulseaudio
+dhcpcd
+firefox
+git
+i3
+rofi
+vim
+xorg
+xinit
+lxappearance
+rxvt-unicode
+sudo
+tff-dejavu
+tff-font-awesome
