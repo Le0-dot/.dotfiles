@@ -46,9 +46,11 @@ LONG_FORMAT="${SYMB}${VOL}"
 interval=once
 signal=1
 
+# Battery usage
+#
 [battery2]
 markup=pango
-interval=10
+interval=5
 
 # Memory usage
 #
