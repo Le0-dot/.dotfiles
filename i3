@@ -33,12 +33,13 @@ exec --no-startup-id nm-applet
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3statusi
 
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+ && $refresh_i3status
-#exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%- && $refresh_i3status
-#exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -195,7 +196,8 @@ client.urgent		$urgent-bg-color	$urgent-bg-color	$text-color		#00ff00
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        #status_command i3status
+        status_command i3blocks
 	position top
 	colors {
 		background $bg-color
@@ -209,9 +211,10 @@ bar {
 
 bindsym $mod+Return exec i3-sensible-terminal; workspace $ws1
 bindsym $mod+shift+x exec i3lock
-bindsym $mod+shift+f exec  [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
+bindsym $mod+shift+f exec [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
 
 assign [class="URxvt"] $ws1
 assign [class="firefox"] $ws2
 
 exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
+exec setxkbmap -layout us,ru -option grp:alt_shift_toggle
