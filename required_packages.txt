@@ -13,3 +13,4 @@ rxvt-unicode
 sudo
 tff-dejavu
 tff-font-awesome
+telegram-desktop

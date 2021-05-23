@@ -111,7 +111,7 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: "
 set $ws2 "2: "
-set $ws3 "3"
+set $ws3 "3: "
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -212,9 +212,11 @@ bar {
 bindsym $mod+Return exec i3-sensible-terminal; workspace $ws1
 bindsym $mod+shift+x exec i3lock
 bindsym $mod+shift+f exec [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
+bindsym $mod+t exec telegram-desktop; workspace $ws3
 
 assign [class="URxvt"] $ws1
 assign [class="firefox"] $ws2
+assign [class="TelegramDesktop"] $ws3
 
 exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
 exec setxkbmap -layout us,ru -option grp:alt_shift_toggle
