@@ -3,7 +3,10 @@ pulseaudio
 dhcpcd
 firefox
 git
-i3
+i3-wm
+i3blocks
+i3lock
+feh
 rofi
 vim
 xorg
