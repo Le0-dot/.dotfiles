@@ -183,7 +183,7 @@ bar {
 }
 
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal; workspace $ws1
-bindsym $mod+shift+x exec --no-startup-id i3lock
+bindsym $mod+shift+x exec --no-startup-id ~/.local/bin/lock
 bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
 
@@ -191,6 +191,6 @@ assign [class="URxvt"] $ws1
 assign [class="firefox"] $ws2
 assign [class="TelegramDesktop"] $ws3
 
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/wallpaper0.jpg
 exec --no-startup-id setxkbmap -layout us,ru -option grp:alt_shift_toggle
 #exec --no-startup-id telegram-desktop

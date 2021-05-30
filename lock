@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Lock screen with i3lock using random lock_imageN.png in ~/Pictures/wallpapers
+
+# Count all lock images (lock_imageN.png N = 0, 1, 2, ...)
+image_counter=$(ls -dq ~/Pictures/wallpapers/lock_image* | wc -l)
+
+# Getting random number within range of lock images
+image_number=$((RANDOM % $image_counter))
+
+# Concatinating image_number with lock_image to get file name
+filename="lock_image$image_number.png"
+
+# echo $(ls ~/Pictures/wallpapers/$filename)
+
+exec i3lock -i ~/Pictures/wallpapers/$filename
