@@ -24,3 +24,6 @@ set showcmd
  
 set undolevels=1000
 set backspace=indent,eol,start	
+
+packadd! dracula
+colorscheme dracula

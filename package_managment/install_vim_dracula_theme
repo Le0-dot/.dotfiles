@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pwd_old=$(pwd) &&
+cd &&
+mkdir -p .vim/pack &&
+mkdir -p .vim/pack/themes/ &&
+mkdir -p .vim/pack/themes/start/ &&
+cd ~/.vim/pack/themes/start/ &&
+git clone https://github.com/dracula/vim.git dracula &&
+cd $pwd_old
