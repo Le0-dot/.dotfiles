@@ -12,8 +12,9 @@ vim
 xorg
 xinit
 lxappearance
-rxvt-unicode
+alacritty
 sudo
 tff-dejavu
 tff-font-awesome
 telegram-desktop
+light
