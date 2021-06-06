@@ -19,8 +19,8 @@ bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -R
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
-bindsym XF86MonBrightnessUp exec sudo light -A 2
-bindsym XF86MonBrightnessDown exec sudo light -U 2
+bindsym XF86MonBrightnessUp exec sudo light -A 5 && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessDown exec sudo light -U 5 && pkill -RTMIN+2 i3blocks
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

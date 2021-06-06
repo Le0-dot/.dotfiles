@@ -46,6 +46,13 @@ LONG_FORMAT="${SYMB}${VOL}"
 interval=once
 signal=1
 
+# Screen brightness control
+#
+[my_brightness]
+label=☀ 
+interval=once
+signal=2
+
 # Battery usage
 #
 [battery2]
@@ -75,7 +82,7 @@ interval=persist
 #
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
+interval=1
 
 # Generic media player support
 #
