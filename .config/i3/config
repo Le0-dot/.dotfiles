@@ -128,21 +128,21 @@ mode "resize" {
 
 
 # Set shut down, restart and locking features
-bindsym $mod+Escape mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.local/bin/lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#bindsym $mod+Escape mode "$mode_system"
+#set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+#mode "$mode_system" {
+#    bindsym l exec --no-startup-id ~/.local/bin/lock, mode "default"
+#    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+#    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+#    bindsym e exec --no-startup-id i3exit logout, mode "default"
+#    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+#    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+#    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+#
+#    # exit system mode: "Enter" or "Escape"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
 
 # Color managment
 #
@@ -161,19 +161,19 @@ client.urgent		$urgent-bg-color	$urgent-bg-color	$text-color		#00ff00
 
 
 # Bar config
-bar {
-        #status_command i3status
-        status_command i3blocks
-	position top
-	colors {
-		background $bg-color
-		separator #757575
-		#			border			bg			text
-		focused_workspace	$bg-color		$bg-color		$text-color
-		inactive_workspace	$inactive-bg-color	$inactive-bg-color	$inactive-text-color
-		urgent_workspace	$urgent-bg-colot	$urgent-bg-color	$text-color
-	}
-}
+#bar {
+#        #status_command i3status
+#        status_command i3blocks
+#	position top
+#	colors {
+#		background $bg-color
+#		separator #757575
+#		#			border			bg			text
+#		focused_workspace	$bg-color		$bg-color		$text-color
+#		inactive_workspace	$inactive-bg-color	$inactive-bg-color	$inactive-text-color
+#		urgent_workspace	$urgent-bg-colot	$urgent-bg-color	$text-color
+#	}
+#}
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -191,6 +191,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo light -U 5 && pkill -RTM
 
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal; workspace $ws1
 bindsym $mod+shift+x exec --no-startup-id ~/.local/bin/lock
+bindsym $mod+Escape exec --no-startup-id ~/.local/bin/exit_menu
 bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
 
@@ -198,6 +199,7 @@ assign [class="URxvt"] $ws1
 assign [class="firefox"] $ws2
 assign [class="TelegramDesktop"] $ws3
 
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/wallpaper0.jpg
 exec --no-startup-id setxkbmap -layout us,ru -option grp:alt_shift_toggle

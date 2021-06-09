@@ -1,0 +1,37 @@
+#!/bin/bash
+
+declare -a option_list=(
+    "Lock"
+    "Exit"
+    "Shutdown"
+    "Reboot"
+    "Suspend"
+    "Hibernate"
+    "Quit"
+)
+
+option=$(printf '%s\n' "${option_list[@]}" | rofi -dmenu -i -l 20 -p "Choose what to do:" "$@") ||
+exit 1
+
+case $option in
+    "Lock")
+	~/.local/bin/lock 
+    	;;
+    "Exit")
+	i3exit logout
+    	;;
+    "Suspend")
+	i3exit suspend
+    	;;
+    "Hibernate")
+	i3exit hibernate
+    	;;
+    "Reboot")
+	reboot
+    	;;
+    "Shutdown")
+	shutdown 0
+    	;;
+    "Quit" | *)
+	;;
+esac
