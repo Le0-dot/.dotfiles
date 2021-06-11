@@ -10,6 +10,7 @@ calc(){ awk "BEGIN { print "$*" }"; }
 alias ls='ls --color=auto'
 alias la='ls -la'
 
+export PATH="$HOME/.local/bin/:$PATH"
 PS1='[\u@\h \W]\$ '
 
 neofetch
