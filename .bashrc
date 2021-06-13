@@ -7,6 +7,17 @@
 
 calc(){ awk "BEGIN { print "$*" }"; }
 
+function swap {
+    if [ $# -eq 2 ]
+    then
+	cp "$1" tmpfile
+	mv "$2" "$1"
+	mv tmpfile "$2"
+    else
+	echo "Needed 2 arguments"
+    fi
+}
+
 ##-----------------------------------------------------
 ## synth-shell-prompt.sh
 if [ -f /home/le0/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
@@ -22,8 +33,6 @@ fi
 alias ls='exa'
 alias la='ls -a'
 alias ll='ls -laF --time-style=long-iso'
-
-alias grep='rg'
 
 alias gs='git status'
 
