@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Check wether arguments are enough for work
+if [ $# -ge 1 ]
+then
+    # Check if path to save file was set
+    if [ $# -eq 2 ]
+    then
+	# Save current directory
+	pwd=$(pwd)
+	# Go to working directory
+	cd "$2"
+    fi
+    # Download audio files from youtube via youtube-dl
+    youtube-dl -o '%(title)s.%(ext)s' --match-title 'OFFICIAL' -x --audio-format m4a --audio-quality 128K "$1"
+    # Rename all dowloaded files that only track names were left
+    for f in *.m4a
+    do
+	mv "$f" "$(echo $f | sed 's/ ([A-Z ]\{14\})//g; s/^[0-9a-zA-Z ]*//g; s/^[ -]*//g')"
+    done
+    # Return to previos directory
+    if [ $# -eq 2 ]
+    then
+	cd "$pwd"
+    fi
+# Show error if arguments are not enough
+else
+    echo "Error: bash: download_audio: Expected at least 1 argument given 0"
+fi

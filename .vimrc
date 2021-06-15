@@ -1,3 +1,10 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'arcticicestudio/nord-vim'
+Plug 'ap/vim-css-color'
+
+call plug#end()
+
 set number	
 set linebreak
 set showbreak=+++
@@ -25,5 +32,4 @@ set showcmd
 set undolevels=1000
 set backspace=indent,eol,start	
 
-packadd! dracula
-colorscheme dracula
+colorscheme nord
