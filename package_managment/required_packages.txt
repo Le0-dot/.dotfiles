@@ -18,3 +18,7 @@ tff-dejavu
 tff-font-awesome
 telegram-desktop
 light
+mpd
+ncmpcpp
+mpc
+polybar

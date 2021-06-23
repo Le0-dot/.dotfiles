@@ -89,7 +89,7 @@ font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=6;1"
 font-4 = "Font Awesome 5 Brands:pixelsize=6;1"
 
 modules-left = i3
-modules-center = 
+modules-center = mpd
 modules-right = arrow1 wlan eth arrow2 pulseaudio arrow3 backlight arrow2 battery arrow3 memory arrow2 filesystem arrow3 xkeyboard arrow2 date
 
 tray-position = none
@@ -211,14 +211,17 @@ content-background = ${colors.background-2}
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+icon-prev = " "
+icon-stop = " "
+icon-play = " "
+icon-pause = " "
+icon-next = " "
 
-label-song-maxlen = 25
+label-song-maxlen = 40 
 label-song-ellipsis = true
+
+host = 127.0.0.1
+port = 6606
 
 [module/wlan]
 type = internal/network
