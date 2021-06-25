@@ -169,6 +169,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 
+# System volume and brightness control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
@@ -177,10 +178,26 @@ bindsym XF86MonBrightnessUp exec --no-startup-id sudo light -A 5 && pkill -RTMIN
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo light -U 5 && pkill -RTMIN+2 i3blocks
 
 
-bindsym $mod+shift+Left exec --no-startup-id mpc --port=6606 prev
-bindsym $mod+shift+Right exec --no-startup-id mpc --port=6606 next
-bindsym $mod+shift+Down exec --no-startup-id mpc --port=6606 toggle
-bindsym $mod+shift+Up exec --no-startup-id mpc --port=6606 stop
+# MPD control
+set $music_toggle exec --no-startup-id mpc --port=$(mpd_port) toggle
+set $music_prev exec --no-startup-id mpc --port=$(mpd_port) prev
+set $music_next exec --no-startup-id mpc --port=$(mpd_port) next
+set $music_volume_up exec --no-startup-id mpc --port=$(mpd_port) volume +2
+set $music_volume_down exec --no-startup-id mpc --port=$(mpd_port) volume -2
+
+#MPD control with numpad with numlock
+bindsym $mod+Mod1+mod2+KP_5 $music_toggle
+bindsym $mod+Mod1+mod2+KP_4 $music_prev
+bindsym $mod+Mod1+mod2+KP_6 $music_next
+bindsym $mod+Mod1+mod2+KP_8 $music_volume_up
+bindsym $mod+Mod1+mod2+KP_2 $music_volume_down
+
+#MPD control with numpad without numlock
+bindsym $mod+Mod1+KP_Begin $music_toggle
+bindsym $mod+Mod1+KP_Left $music_prev
+bindsym $mod+Mod1+KP_Right $music_next
+bindsym $mod+Mod1+KP_Up $music_volume_up
+bindsym $mod+Mod1+KP_Down $music_volume_down
 
 
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal; workspace $ws1
@@ -190,7 +207,6 @@ bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && 
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
 
 
-assign [class="URxvt"] $ws1
 assign [class="firefox"] $ws2
 assign [class="TelegramDesktop"] $ws3
 
