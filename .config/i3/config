@@ -54,13 +54,13 @@ bindsym $mod+space focus mode_toggle
 set $ws1 "1: "
 set $ws2 "2: "
 set $ws3 "3: "
-set $ws4 "4:  "
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "10: "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -185,19 +185,26 @@ set $music_next exec --no-startup-id mpc --port=$(mpd_port) next
 set $music_volume_up exec --no-startup-id mpc --port=$(mpd_port) volume +2
 set $music_volume_down exec --no-startup-id mpc --port=$(mpd_port) volume -2
 
-#MPD control with numpad with numlock
+# MPD control with numpad with numlock
 bindsym $mod+Mod1+mod2+KP_5 $music_toggle
 bindsym $mod+Mod1+mod2+KP_4 $music_prev
 bindsym $mod+Mod1+mod2+KP_6 $music_next
 bindsym $mod+Mod1+mod2+KP_8 $music_volume_up
 bindsym $mod+Mod1+mod2+KP_2 $music_volume_down
 
-#MPD control with numpad without numlock
+# MPD control with numpad without numlock
 bindsym $mod+Mod1+KP_Begin $music_toggle
 bindsym $mod+Mod1+KP_Left $music_prev
 bindsym $mod+Mod1+KP_Right $music_next
 bindsym $mod+Mod1+KP_Up $music_volume_up
 bindsym $mod+Mod1+KP_Down $music_volume_down
+
+
+# Start application with numpad and $mod with numlock 
+bindsym $mod+mod2+KP_1 exec --no-startup-id [ $(ps h -C vlc | wc -l) = 0 ] && vlc; workspace $ws10
+
+# Start application with numpad and $mod without numlock
+bindsym $mod+KP_End exec --no-startup-id [ $(ps h -C vlc | wc -l) = 0 ] && vlc; workspace $ws10
 
 
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal; workspace $ws1
@@ -206,9 +213,9 @@ bindsym $mod+Escape exec --no-startup-id ~/.local/bin/exit_menu
 bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
 
-
 assign [class="firefox"] $ws2
 assign [class="TelegramDesktop"] $ws3
+assign [class="vlc"] $ws10
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
