@@ -1,9 +1,24 @@
-call plug#begin('~/.vim/plugged')
+set nocompatible
+filetype off
 
-Plug 'arcticicestudio/nord-vim'
-Plug 'ap/vim-css-color'
+set rtp+=~/.vim/bundle/Vundle.vim
 
-call plug#end()
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'ap/vim-css-color'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ryanoasis/vim-devicons'
+
+call vundle#end()
+
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+set exrc
+set secure
 
 set number	
 set linebreak
@@ -31,5 +46,6 @@ set showcmd
  
 set undolevels=1000
 set backspace=indent,eol,start	
+set encoding=UTF-8
 
 colorscheme nord
