@@ -37,6 +37,7 @@ alias ll='ls -laF --time-style=long-iso'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
+alias gp='git push'
 
 shopt -s autocd
 
