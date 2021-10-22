@@ -24,6 +24,7 @@ Videos/
 .Xauthority
 .gtkrc-2.0
 .nvidia-settings-rc
+.git-credentials
 
 .config/QtProject.conf
 .config/caja/
