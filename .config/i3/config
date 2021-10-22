@@ -4,7 +4,7 @@
 
 set $mod Mod4
 
-# Font 
+# Font
 font pango:monospace 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -14,7 +14,7 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # start rofi
-bindsym $mod+Shift+Return exec rofi -show drun 
+bindsym $mod+Shift+Return exec rofi -show drun
 
 # Windows mangment
 #
@@ -179,11 +179,12 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo light -U 5 && pkill -RTM
 
 
 # MPD control
-set $music_toggle exec --no-startup-id mpc --port=$(mpd_port) toggle
-set $music_prev exec --no-startup-id mpc --port=$(mpd_port) prev
-set $music_next exec --no-startup-id mpc --port=$(mpd_port) next
-set $music_volume_up exec --no-startup-id mpc --port=$(mpd_port) volume +2
-set $music_volume_down exec --no-startup-id mpc --port=$(mpd_port) volume -2
+set $music_toggle exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) toggle
+set $music_prev exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) prev
+set $music_next exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) next
+set $music_volume_up exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) volume +2
+set $music_volume_down exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) volume -2
+set $music_random_toggle exec --no-startup-id mpc --host=127.0.0.1 --port=$(mpd_port) random 
 
 # MPD control with numpad with numlock
 bindsym $mod+Mod1+mod2+KP_5 $music_toggle
@@ -191,6 +192,7 @@ bindsym $mod+Mod1+mod2+KP_4 $music_prev
 bindsym $mod+Mod1+mod2+KP_6 $music_next
 bindsym $mod+Mod1+mod2+KP_8 $music_volume_up
 bindsym $mod+Mod1+mod2+KP_2 $music_volume_down
+bindsym $mod+Mod1+mod2+KP_7 $music_random_toggle
 
 # MPD control with numpad without numlock
 bindsym $mod+Mod1+KP_Begin $music_toggle
@@ -198,9 +200,10 @@ bindsym $mod+Mod1+KP_Left $music_prev
 bindsym $mod+Mod1+KP_Right $music_next
 bindsym $mod+Mod1+KP_Up $music_volume_up
 bindsym $mod+Mod1+KP_Down $music_volume_down
+bindsym $mod+Mod1+KP_Home $music_random_toggle
 
 
-# Start application with numpad and $mod with numlock 
+# Start application with numpad and $mod with numlock
 bindsym $mod+mod2+KP_1 exec --no-startup-id [ $(ps h -C vlc | wc -l) = 0 ] && vlc; workspace $ws10
 
 # Start application with numpad and $mod without numlock
@@ -211,6 +214,7 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal; workspace $ws1
 bindsym $mod+shift+x exec --no-startup-id ~/.local/bin/lock
 bindsym $mod+Escape exec --no-startup-id ~/.local/bin/exit_menu
 bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
+bindsym $mod+shift+p exec --no-startup-id [ $(ps h -C firefox | rg 'firefox --private-window' | wc -l) = 0 ] && firefox --private-window; workspace $ws2
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
 
 assign [class="firefox"] $ws2

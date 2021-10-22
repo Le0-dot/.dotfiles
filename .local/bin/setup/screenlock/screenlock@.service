@@ -1,0 +1,13 @@
+[Unit]
+Description=Starts i3lock at suspend time
+Before=sleep.target
+
+[Service]
+User=le0
+Type=forking
+Environment=DISPLAY=:0
+ExecStartPre=
+ExecStart=/home/le0/.local/bin/lock
+
+[Install]
+WantedBy=sleep.target

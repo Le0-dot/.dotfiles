@@ -25,9 +25,9 @@ scrolling:
   #multiplier: 3
 
 font:
-  #normal:
+  normal:
     # Font family
-    #family: monospace
+    family: hack 
     #style: Regular
   #bold:
     #family: monospace

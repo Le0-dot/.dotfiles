@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pwd_old=$(pwd) &&
+cd ~/Downloads/ &&
+git clone --recursive https://github.com/andresgongora/synth-shell.git &&
+chmod +x synth-shell/setup.sh &&
+cd synth-shell &&
+./setup.sh &&
+cd $pwd_old

@@ -1,0 +1,19 @@
+#!/bin/python
+
+import os, os.path, sys
+
+if len(sys.argv) < 1:
+    os.exit(1)
+
+path = os.getcwd()
+if len(sys.argv) == 3:
+    path = sys.argv[2]
+
+dir_list = sorted(os.listdir(path))
+
+for file in dir_list:
+    try:
+        if not os.path.isdir(file) and int(file[:file.find('.')]) < int(sys.argv[1]):
+            os.remove(path + file)
+    except ValueError:
+        break
