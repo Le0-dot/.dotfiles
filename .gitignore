@@ -15,6 +15,7 @@ Downloads/
 Music/
 Pictures/
 Videos/
+ftp
 
 .local/share/
 .local/lib/
@@ -38,3 +39,4 @@ Videos/
 .config/systemd/
 .config/mimeapps.list
 .config/discord/
+.config/vlc/
