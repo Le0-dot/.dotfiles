@@ -8,6 +8,7 @@
 .vim/
 .mpd/
 .icons/
+.pki/
 
 Documents/
 Downloads/
@@ -36,3 +37,4 @@ Videos/
 .config/pulse/
 .config/systemd/
 .config/mimeapps.list
+.config/discord/
