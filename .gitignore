@@ -2,6 +2,8 @@
 .*hst*
 .viminf*
 
+__pycache__/
+
 .cache/
 .mozilla/
 .ssh/

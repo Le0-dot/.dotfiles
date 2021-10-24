@@ -6,31 +6,37 @@ declare -a option_list=(
     "Shutdown"
     "Reboot"
     "Suspend"
-    "Hibernate"
     "Quit"
 )
 
 option=$(printf '%s\n' "${option_list[@]}" | rofi -dmenu -i -l 20 -p "Choose what to do:" "$@") ||
 exit 1
 
+declare -a MANAGERS
+while IFS= read -r manager
+do
+    MANAGERS+=("${manager,,}")
+done < <(grep 'Name=' /usr/share/xsessions/*.desktop | cut -d'=' -f2)
+
+
 case $option in
     "Lock")
 	~/.local/bin/lock 
     	;;
     "Exit")
-	i3exit logout
+	for manager in "${MANAGERS[@]}"; do 
+	    killall "${manager}" ||
+		output "Process ${manager} was not running."
+	done
     	;;
     "Suspend")
-	i3exit suspend
-    	;;
-    "Hibernate")
-	i3exit hibernate
+	systemctl suspend
     	;;
     "Reboot")
-	reboot
+	systemctl reboot
     	;;
     "Shutdown")
-	shutdown 0
+	systemctl poweroff
     	;;
     "Quit" | *)
 	;;
