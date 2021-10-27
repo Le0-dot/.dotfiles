@@ -55,6 +55,18 @@ commands = {
     'lock': './.local/bin/lock'
 }
 
+group_names = (
+        '1: ',
+        '2: ',
+        '3: ',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10: '
+)
 
 keys = [
     # Switch between windows
@@ -116,50 +128,56 @@ keys = [
         desc='Brightness down'),
 
     # MPD control
-    KeyChord([mod], 'm', [
-        Key([], 'j', lazy.spawn(commands['music_toggle']),
-            desc='Toggle music'),
-        Key([], 'h', lazy.spawn(commands['music_prev']),
-            desc='Next track'),
-        Key([], 'k', lazy.spawn(commands['music_next']),
-            desc='Previous track'),
-        Key([], 'u', lazy.spawn(commands['music_volume_up']),
-            desc='Music volume up'),
-        Key([], 'm', lazy.spawn(commands['music_volume_down']),
-            desc='Music volume down'),
-        Key([], 'r', lazy.spawn(commands['music_random_toggle']),
-            desc='Toggle random track')
-    ], mode='music'),
+    Key([mod, 'mod1'], 'j', lazy.spawn(commands['music_toggle']),
+        desc='Toggle music'),
+    Key([mod, 'mod1'], 'h', lazy.spawn(commands['music_prev']),
+        desc='Next track'),
+    Key([mod, 'mod1'], 'k', lazy.spawn(commands['music_next']),
+        desc='Previous track'),
+    Key([mod, 'mod1'], 'u', lazy.spawn(commands['music_volume_up']),
+        desc='Music volume up'),
+    Key([mod, 'mod1'], 'm', lazy.spawn(commands['music_volume_down']),
+        desc='Music volume down'),
+    Key([mod, 'mod1'], 'r', lazy.spawn(commands['music_random_toggle']),
+        desc='Toggle random track'),
 
     # Launch programs
     Key([mod, 'shift'], 'Return', lazy.spawn(commands['rofi']),
             desc='Launch rofi'),
-    Key([mod], 'f', lazy.spawn(commands['firefox']),
-            desc='Launch rofi'),
-    Key([mod], 'p', lazy.spawn(commands['firefox-private']),
-            desc='Launch rofrrrri'),
-    Key([mod], 't', lazy.spawn(commands['telegram']),
-            desc='Launch rofi'),
-    Key([mod], 'd', lazy.spawn(commands['discord']),
-            desc='Launch rofi'),
-
     Key([mod], 'Escape', lazy.spawn(commands['exit_menu']),
             desc='Launch exit_menu script'),
     Key([mod, 'shift'], 'x', lazy.spawn(commands['lock']),
-            desc='Launch locker script')
+            desc='Launch locker script'),
 
+    Key([mod], 'f', lazy.spawn(commands['firefox']),
+            lazy.group[group_names[1]].toscreen(toggle=False),
+            desc='Launch firefox'),
+    Key([mod], 'p', lazy.spawn(commands['firefox-private']),
+            lazy.group[group_names[1]].toscreen(toggle=False),
+            desc='Launch firefox private window'),
+    Key([mod], 't', lazy.spawn(commands['telegram']),
+            lazy.group[group_names[2]].toscreen(toggle=False),
+            desc='Launch telegram'),
+    Key([mod], 'd', lazy.spawn(commands['discord']),
+            lazy.group[group_names[2]].toscreen(toggle=False),
+            desc='Launch discord')
 ]
 
-groups = [Group("1: ", {'layout': 'columns'}),
-          Group("2: ", {'layout': 'max'}),
-          Group("3: ", {'layout': 'max'}),
-          Group("4"),
-          Group("5"),
-          Group("6"),
-          Group("7"),
-          Group("8"),
-          Group("9"),
-          Group("10: ", {'layout': 'max'})]
+groups = [Group(group_names[0], layout='columns',
+              matches=[Match(wm_class=["alacritty"])]),
+          Group(group_names[1], layout='max', 
+              matches=[Match(wm_class=["firefox"])]),
+          Group(group_names[2], layout='max', 
+              matches=[Match(wm_class=["TelegramDesktop"]),
+                       Match(wm_class=["discord"])]),
+          Group(group_names[3]),
+          Group(group_names[4]),
+          Group(group_names[5]),
+          Group(group_names[6]),
+          Group(group_names[7]),
+          Group(group_names[8]),
+          Group(group_names[9], layout='max',
+              matches=[Match(wm_class=["vlc"])])]
 
 
 layouts = [
@@ -251,3 +269,4 @@ auto_minimize = True
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+wmname = 'qtile'
