@@ -5,7 +5,7 @@
 set $mod Mod4
 
 # Font
-font pango:monospace 10
+font pango:monospace 6
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -225,6 +225,3 @@ assign [class="vlc"] $ws10
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/wallpaper0.jpg
-exec --no-startup-id setxkbmap -layout us,ru -option grp:alt_shift_toggle
-exec --no-startup-id mpc --port=6606 repeat on
