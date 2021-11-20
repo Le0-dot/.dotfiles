@@ -50,6 +50,7 @@ commands = {
     'firefox': 'firefox',
     'firefox-private': 'firefox --private-window',
     'telegram': 'telegram-desktop',
+    'ms_teams': 'teams',
     'discord': 'discord',
     'exit_menu': './.local/bin/exit_menu',
     'lock': './.local/bin/lock'
@@ -58,7 +59,7 @@ commands = {
 group_names = (
         '1: ',
         '2: ',
-        '3: ',
+        '3: ',
         '4',
         '5',
         '6',
@@ -159,8 +160,9 @@ keys = [
             lazy.group[group_names[2]].toscreen(toggle=False),
             desc='Launch telegram'),
     Key([mod], 'd', lazy.spawn(commands['discord']),
-            lazy.group[group_names[2]].toscreen(toggle=False),
-            desc='Launch discord')
+            desc='Launch discord'),
+    Key([mod, 'shift'], 't', lazy.spawn(commands['ms_teams']),
+            desc='Launch Miscrosoft Teams')
 ]
 
 groups = [Group(group_names[0], layout='columns',
@@ -169,7 +171,8 @@ groups = [Group(group_names[0], layout='columns',
               matches=[Match(wm_class=["firefox"])]),
           Group(group_names[2], layout='max', 
               matches=[Match(wm_class=["TelegramDesktop"]),
-                       Match(wm_class=["discord"])]),
+                       Match(wm_class=["discord"]),
+                       Match(wm_class=["microsoft teams - preview"])]),
           Group(group_names[3]),
           Group(group_names[4]),
           Group(group_names[5]),
@@ -253,7 +256,8 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='pinentry'),  # GPG key password entry
 ])
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "focus"
+#focus_on_window_activation = "smart"
 reconfigure_screens = True
 
 # If things like steam games want to auto-minimize themselves when losing

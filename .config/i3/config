@@ -216,11 +216,13 @@ bindsym $mod+Escape exec --no-startup-id ~/.local/bin/exit_menu
 bindsym $mod+shift+f exec --no-startup-id [ $(ps h -C firefox | wc -l) = 0 ] && firefox; workspace $ws2
 bindsym $mod+shift+p exec --no-startup-id [ $(ps h -C firefox | rg 'firefox --private-window' | wc -l) = 0 ] && firefox --private-window; workspace $ws2
 bindsym $mod+t exec --no-startup-id telegram-desktop; workspace $ws3
+bindsym $mod+Shift+t exec --no-startup-id teams; workspace $ws3
 bindsym $mod+d exec --no-startup-id discord; workspace $ws3
 
 assign [class="firefox"] $ws2
 assign [class="TelegramDesktop"] $ws3
 assign [class="discord"] $ws3
+assign [class="microsoft teams - preview"] $ws3
 assign [class="vlc"] $ws10
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
