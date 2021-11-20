@@ -10,6 +10,8 @@ fi
 feh --bg-scale ~/Pictures/wallpapers/wallpaper0.jpg
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 mpc --port=6606 repeat on
+blueman-applet &
+kbdd &
 
 exec qtile start
 #exec i3

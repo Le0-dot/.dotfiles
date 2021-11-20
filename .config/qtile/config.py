@@ -36,6 +36,7 @@ mod = "mod4"
 terminal = guess_terminal()
 
 commands = {
+    'volume_mute': 'amixer -q -D pulse sset Master 0%',
     'volume_up': 'amixer -q -D pulse sset Master 5%+',
     'volume_down': 'amixer -q -D pulse sset Master 5%-',
     'brightness_up': 'sudo light -A 5',
@@ -57,17 +58,32 @@ commands = {
 }
 
 group_names = (
-        '1: ',
-        '2: ',
-        '3: ',
+        '1:  ',
+        '2:  ',
+        '3:  ',
         '4',
         '5',
         '6',
         '7',
         '8',
         '9',
-        '10: '
+        '10:  '
 )
+
+colors = {
+    'background': ['#282c34','#282c34'],
+    'foreground': ['#f3f4f5', '#f3f4f5'],
+    'background-1': ['#cccccc', '#cccccc'],
+    'foreground-1': ['#282c34','#282c34'],
+    'background-2': ['#15488c', '#15488c'],
+    'foreground-2': ['#cccccc', '#cccccc'],
+    'active-background': ['#282c34','#282c34'],
+    'active-foreground': ['#f3f4f5', '#f3f4f5'],
+    'inactive-background': ['#282c34','#282c34'],
+    'inactive-foreground': ['#676e7d', '#676e7d'],
+    'urgent-background': ['#e53835', '#e53835'],
+    'urgent-foreground': ['#f3f4f5', '#f3f4f5']
+}
 
 keys = [
     # Switch between windows
@@ -118,6 +134,8 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 
     # Volume and brightness control
+    Key([], 'XF86AudioMute', lazy.spawn(commands['volume_mute']),
+        desc='Volume mute'),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn(commands['volume_up']),
         desc='Volume up'),
     Key([], 'XF86AudioLowerVolume', lazy.spawn(commands['volume_down']),
@@ -200,9 +218,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='sans',
-    fontsize=12,
-    padding=3,
+    font='UbuntuMono Nerd Font',
+    fontsize=14,
+    padding=1,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -210,21 +228,220 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
+                widget.GroupBox(
+                    #font = '',
+                    #fontsize = '',
+                    rounded = False,
+                    disable_drag = True,
+                    # Colors for active group
+                    active = colors['active-foreground'],
+                    highlight_color = colors['active-background'],
+                    highlight_method = 'block',
+                    # Colors for inactive groups
+                    inactive = colors['inactive-foreground'],
+                    # Colors for urgent groups
+                    urgent_text = colors['urgent-foreground'],
+                    urgent_border = colors['urgent-background'],
+                    urgent_alert_method = 'block',
+                    # Default colors
+                    background = colors['background'],
+                    foreground = colors['foreground']
+                ),
+                widget.CurrentLayout(
+                    background = colors['background'],
+                    foreground = colors['foreground']
+                ),
+                widget.Prompt(
+                    background = colors['background'],
+                    foreground = colors['foreground']
+                ),
+                widget.WindowName(
+                    background = colors['background'],
+                    foreground = colors['foreground']
+                ),
                 widget.Chord(
                     chords_colors={
                         'launch': ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-                widget.QuickExit(),
+                widget.TextBox(
+                    font = 'sans',
+                    text = ' ',
+                    background = colors['background'],
+                    foreground = colors['background-1'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.TextBox(
+                    font = 'sans',
+                    text = '',
+                    fontsize = 30,
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.Wlan(
+                    format = ' {essid}',
+                    disconnected_message = '',
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.Net(
+                    format = ' {down} ↓↑ {up}',
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-1'],
+                    foreground = colors['background-2'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    fontsize = 24,
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2']
+                ),
+                widget.Volume(
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-2'],
+                    foreground = colors['background-1'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    fontsize = 14,
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.Backlight(
+                    format = '{percent:2.0%}',
+                    backlight_name = 'amdgpu_bl1',
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1'],
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-1'],
+                    foreground = colors['background-2'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.Battery(
+                    format = '{char}',
+                    font = 'sans',
+                    fontsize = 26,
+                    charge_char = ' ',
+                    discharge_char = ' ',
+                    empty_char = '',
+                    full_char = ' ',
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2'],
+                    low_background = colors['urgent-background'],
+                    low_foreground = colors['urgent-foreground']
+                ),
+                widget.Battery(
+                    format = '{percent:2.0%}',
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2'],
+                    low_background = colors['urgent-background'],
+                    low_foreground = colors['urgent-foreground']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-2'],
+                    foreground = colors['background-1'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    fontsize = 24,
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.Memory(
+                    format = '{MemUsed:.2f}{mm}',
+                    measure_mem = 'G',
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-1'],
+                    foreground = colors['background-2'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.DF(
+                    format = '  {r:.0f}%',
+                    visible_on_warn = False,
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-2'],
+                    foreground = colors['background-1'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.TextBox(
+                    text = '  ',
+                    font = 'sans',
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.KeyboardKbdd(
+                    configured_keyboards = ['us', 'ru'],
+                    background = colors['background-1'],
+                    foreground = colors['foreground-1']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-1'],
+                    foreground = colors['background-2'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.Clock(
+                    format='%Y-%m-%d %H:%M:%S',
+                    background = colors['background-2'],
+                    foreground = colors['foreground-2']
+                ),
+                widget.TextBox(
+                    text = ' ',
+                    font = 'sans',
+                    background = colors['background-2'],
+                    foreground = colors['background'],
+                    padding = 0,
+                    fontsize = 26,
+                ),
+                widget.Systray(
+                    background = colors['background'],
+                ),
+                widget.Sep(
+                    background = colors['background'],
+                    foreground = colors['background'],
+                    padding = 4
+                )
             ],
             24,
         ),
@@ -273,4 +490,3 @@ auto_minimize = True
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-wmname = 'qtile'
