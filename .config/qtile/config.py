@@ -422,7 +422,8 @@ screens = [
                     fontsize = 26,
                 ),
                 widget.Clock(
-                    format='%Y-%m-%d %H:%M:%S',
+                    #format='%Y-%m-%d %H:%M:%S',
+                    format='%H:%M:%S',
                     background = colors['background-2'],
                     foreground = colors['foreground-2']
                 ),

@@ -11,6 +11,7 @@ __pycache__/
 .mpd/
 .icons/
 .pki/
+.putty/
 
 Documents/
 Downloads/
