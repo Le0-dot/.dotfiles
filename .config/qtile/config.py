@@ -206,7 +206,11 @@ groups = [Group(group_names[0], layout='columns',
 
 
 layouts = [
-    layout.Columns(border_focus_stack=['#d75f5f', '#8f3d3d'], border_width=4),
+    layout.Columns(
+        border_focus = colors['background-2'],
+        border_normal = colors['background'],
+        border_width = 1
+    ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -251,15 +255,17 @@ screens = [
                     background = colors['background'],
                     foreground = colors['foreground']
                 ),
-                widget.CurrentLayout(
-                    background = colors['background'],
-                    foreground = colors['foreground']
-                ),
-                widget.Prompt(
+                widget.Mpd2(
+                    port = 6606,
+                    status_format = '{play_status}  {artist} - {title} [{repeat}{random}{single}]',
+                    play_states = {'pause': '', 'play': '', 'stop': ''},
+                    mouse_callbacks = {'Button1': lazy.spawn(commands['music_toggle']),
+                        'Button2': lazy.spawncmd('ncmpcpp')},
                     background = colors['background'],
                     foreground = colors['foreground']
                 ),
                 widget.WindowName(
+                    format = '',
                     background = colors['background'],
                     foreground = colors['foreground']
                 ),
@@ -268,6 +274,10 @@ screens = [
                         'launch': ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
+                ),
+                widget.CurrentLayoutIcon(
+                    background = colors['background'],
+                    foreground = colors['foreground']
                 ),
                 widget.TextBox(
                     font = 'sans',
