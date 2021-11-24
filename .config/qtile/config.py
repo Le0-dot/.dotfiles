@@ -136,14 +136,24 @@ keys = [
     # Volume and brightness control
     Key([], 'XF86AudioMute', lazy.spawn(commands['volume_mute']),
         desc='Volume mute'),
+    Key([], 'F1', lazy.spawn(commands['volume_mute']),
+        desc='Volume mute'),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn(commands['volume_up']),
         desc='Volume up'),
+    Key([], 'F3', lazy.spawn(commands['volume_up']),
+        desc='Volume up'),
     Key([], 'XF86AudioLowerVolume', lazy.spawn(commands['volume_down']),
+        desc='Volume down'),
+    Key([], 'F2', lazy.spawn(commands['volume_down']),
         desc='Volume down'),
 
     Key([], 'XF86MonBrightnessUp', lazy.spawn(commands['brightness_up']),
         desc='Brightness up'),
+    Key([], 'F8', lazy.spawn(commands['brightness_up']),
+        desc='Brightness up'),
     Key([], 'XF86MonBrightnessDown', lazy.spawn(commands['brightness_down']),
+        desc='Brightness down'),
+    Key([], 'F7', lazy.spawn(commands['brightness_down']),
         desc='Brightness down'),
 
     # MPD control
