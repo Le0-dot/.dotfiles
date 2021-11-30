@@ -47,7 +47,7 @@ commands = {
     'music_volume_up': 'mpc --host=127.0.0.1 --port=6606 volume +2',
     'music_volume_down': 'mpc --host=127.0.0.1 --port=6606 volume -2',
     'music_random_toggle': 'mpc --host=127.0.0.1 --port=6606 random',
-    'rofi': 'rofi -show drun',
+    'rofi': 'rofi -show drun -theme ~/.config/rofi/themes/center.rasi',
     'firefox': 'firefox',
     'firefox-private': 'firefox --private-window',
     'telegram': 'telegram-desktop',

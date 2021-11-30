@@ -9,7 +9,7 @@ declare -a option_list=(
     "Quit"
 )
 
-option=$(printf '%s\n' "${option_list[@]}" | rofi -dmenu -i -l 20 -p "Choose what to do:" "$@") ||
+option=$(printf '%s\n' "${option_list[@]}" | rofi -dmenu -theme ~/.config/rofi/themes/center.rasi -i -l 20 -p "Choose what to do:" "$@") ||
 exit 1
 
 declare -a MANAGERS
