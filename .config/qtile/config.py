@@ -85,6 +85,9 @@ colors = {
     'urgent-foreground': ['#f3f4f5', '#f3f4f5']
 }
 
+padding_from_arrow = 10 
+padding_between_widget_and_sign = 6
+
 keys = [
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -282,9 +285,14 @@ screens = [
                     background = colors['background'],
                     foreground = colors['foreground']
                 ),
+                widget.Sep(
+                    background = colors['background'],
+                    foreground = colors['background'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
                     font = 'sans',
-                    text = ' ',
+                    text = '',
                     background = colors['background'],
                     foreground = colors['background-1'],
                     padding = 0,
@@ -297,8 +305,13 @@ screens = [
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
                 ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_between_widget_and_sign 
+                ),
                 widget.Wlan(
-                    format = ' {essid}',
+                    format = '{essid}',
                     disconnected_message = '',
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
@@ -308,8 +321,13 @@ screens = [
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
                 ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-1'],
                     foreground = colors['background-2'],
@@ -317,18 +335,28 @@ screens = [
                     fontsize = 26,
                 ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     fontsize = 24,
                     background = colors['background-2'],
                     foreground = colors['foreground-2']
                 ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_between_widget_and_sign 
+                ),
                 widget.Volume(
                     background = colors['background-2'],
                     foreground = colors['foreground-2']
                 ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-2'],
                     foreground = colors['background-1'],
@@ -336,11 +364,16 @@ screens = [
                     fontsize = 26,
                 ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     fontsize = 14,
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
+                ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_between_widget_and_sign 
                 ),
                 widget.Backlight(
                     format = '{percent:2.0%}',
@@ -348,8 +381,13 @@ screens = [
                     background = colors['background-1'],
                     foreground = colors['foreground-1'],
                 ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-1'],
                     foreground = colors['background-2'],
@@ -363,11 +401,16 @@ screens = [
                     charge_char = ' ',
                     discharge_char = ' ',
                     empty_char = '',
-                    full_char = ' ',
+                    full_char = '',
                     background = colors['background-2'],
                     foreground = colors['foreground-2'],
                     low_background = colors['urgent-background'],
                     low_foreground = colors['urgent-foreground']
+                ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_between_widget_and_sign 
                 ),
                 widget.Battery(
                     format = '{percent:2.0%}',
@@ -376,8 +419,13 @@ screens = [
                     low_background = colors['urgent-background'],
                     low_foreground = colors['urgent-foreground']
                 ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-2'],
                     foreground = colors['background-1'],
@@ -385,11 +433,16 @@ screens = [
                     fontsize = 26,
                 ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     fontsize = 24,
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
+                ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_between_widget_and_sign 
                 ),
                 widget.Memory(
                     format = '{MemUsed:.2f}{mm}',
@@ -397,8 +450,13 @@ screens = [
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
                 ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-1'],
                     foreground = colors['background-2'],
@@ -411,8 +469,13 @@ screens = [
                     background = colors['background-2'],
                     foreground = colors['foreground-2']
                 ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-2'],
                     foreground = colors['background-1'],
@@ -420,18 +483,28 @@ screens = [
                     fontsize = 26,
                 ),
                 widget.TextBox(
-                    text = '  ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
+                ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_between_widget_and_sign 
                 ),
                 widget.KeyboardKbdd(
                     configured_keyboards = ['us', 'ru'],
                     background = colors['background-1'],
                     foreground = colors['foreground-1']
                 ),
+                widget.Sep(
+                    background = colors['background-1'],
+                    foreground = colors['background-1'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-1'],
                     foreground = colors['background-2'],
@@ -444,8 +517,13 @@ screens = [
                     background = colors['background-2'],
                     foreground = colors['foreground-2']
                 ),
+                widget.Sep(
+                    background = colors['background-2'],
+                    foreground = colors['background-2'],
+                    padding = padding_from_arrow
+                ),
                 widget.TextBox(
-                    text = ' ',
+                    text = '',
                     font = 'sans',
                     background = colors['background-2'],
                     foreground = colors['background'],
