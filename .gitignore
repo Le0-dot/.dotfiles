@@ -34,6 +34,7 @@ ftp
 .gtkrc-2.0
 .nvidia-settings-rc
 .git-credentials
+.gitconfig
 
 .config/QtProject.conf
 .config/caja/
