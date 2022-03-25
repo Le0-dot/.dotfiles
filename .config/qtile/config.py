@@ -51,7 +51,7 @@ commands = {
     'firefox': 'firefox',
     'firefox-private': 'firefox --private-window',
     'telegram': 'telegram-desktop',
-    'ms_teams': 'teams',
+    'ms_teams': 'teams --disable-seccomp-filter-sandbox',
     'discord': 'discord',
     'exit_menu': './.local/bin/exit_menu',
     'lock': './.local/bin/lock'
