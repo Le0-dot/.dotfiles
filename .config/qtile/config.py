@@ -54,7 +54,9 @@ commands = {
     'ms_teams': 'teams --disable-seccomp-filter-sandbox',
     'discord': 'discord',
     'exit_menu': './.local/bin/exit_menu',
-    'lock': './.local/bin/lock'
+    'lock': './.local/bin/lock',
+    'filezilla': 'filezilla',
+    'thunderbird': 'thunderbird'
 }
 
 group_names = (
@@ -62,11 +64,11 @@ group_names = (
         '2:  ',
         '3:  ',
         '4:  ',
-        '5',
+        '5:  ',
         '6',
         '7',
         '8',
-        '9',
+        '9:  ',
         '10:  '
 )
 
@@ -186,7 +188,13 @@ keys = [
     Key([mod], 'd', lazy.spawn(commands['discord']),
             desc='Launch discord'),
     Key([mod, 'shift'], 't', lazy.spawn(commands['ms_teams']),
-            desc='Launch Miscrosoft Teams')
+            desc='Launch Miscrosoft Teams'),
+    Key([mod, 'control'], 'f', lazy.spawn(commands['filezilla']),
+            lazy.group[group_names[4]].toscreen(toggle=False),
+            desc='Launch Filezilla'),
+    Key([mod, 'control'], 't', lazy.spawn(commands['thunderbird']),
+            lazy.group[group_names[8]].toscreen(toggle=False),
+            desc='Launch Thunderbird')
 ]
 
 groups = [Group(group_names[0], layout='columns',
@@ -202,11 +210,15 @@ groups = [Group(group_names[0], layout='columns',
           Group(group_names[3], layout='max',
               matches=[Match(wm_class=['mupdf'])]
               ),
-          Group(group_names[4]),
+          Group(group_names[4], layout='max',
+              matches=[Match(wm_class=['filezilla'])]
+              ),
           Group(group_names[5]),
           Group(group_names[6]),
           Group(group_names[7]),
-          Group(group_names[8]),
+          Group(group_names[8], layout='max',
+              matches=[Match(wm_class=['Thunderbird'])]
+              ),
           Group(group_names[9], layout='max',
               matches=[Match(wm_class=["vlc"])])]
 

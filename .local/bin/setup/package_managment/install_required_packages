@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo pacman -S $(awk '{print $1}' required_packages.txt)
+pacman -S $(awk '{print $1}' required_packages.txt)
