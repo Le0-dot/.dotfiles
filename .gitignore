@@ -52,4 +52,4 @@ ftp
 .config/teams/
 .config/transmission
 .config/coc
-.config/keepassxc/
+.config/keepassxc/*
