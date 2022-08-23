@@ -65,3 +65,4 @@ xorg
 xorg-setxkbmap
 youtube-dl
 zip
+pacman-contrib
