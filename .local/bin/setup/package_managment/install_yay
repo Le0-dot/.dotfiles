@@ -11,4 +11,4 @@ sudo chown -R $(get_username) yay
 cd yay
 makepkg -si
 cd ..
-rm- -rf yay
+rm -rf yay
