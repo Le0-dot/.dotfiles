@@ -1,68 +1,68 @@
-alacritty
-alsa-utils
-arc-gtk-theme
-blueman
-bluez
-cmake
-dhcpcd
-discord
-docker
-exa
-feh
-filezilla
-firefox
-gcc
-git
-grub
-grub-customizer
-htop
-i3lock
-iwd
-kbdd-git
-keepassxc
-light
-linux-headers
-lxappearance
-mpc
-mpd
-ncmpcpp
-neofetch
-nerd-fonts-ubuntu-mono
-net-tools
-nvidia
-nvidia-settings
-openssh
-openssl
-pacman-contrib
-polybar
-powerline
-powerline-fonts
-pulseaudio
-pulseaudio-alsa
-python
-python-dbus-next
-python-iwlib
-python-pip
-qtile
-ranger
-ripgrep
-rofi
-sudo
-telegram-desktop
-tff-dejavu
-tff-font-awesome
-thunderbird
-ttf-hack
-ueberzug
-unzip
-viber
-vim
-vlc
-vsftpd
-wget
-xdg-user-dirs
-xorg-xinit
-xorg
-xorg-setxkbmap
-youtube-dl
-zip
+alacritty pac
+alsa-utils pac
+arc-gtk-theme pac
+blueman pac
+bluez pac
+cmake pac
+dhcpcd pac
+discord pac
+docker pac
+exa pac
+feh pac
+filezilla pac
+firefox pac
+gcc pac
+git pac
+grub pac
+grub-customizer pac
+htop pac
+i3lock pac
+iwd pac
+kbdd-git aur
+keepassxc pac
+light pac
+linux-headers pac
+lxappearance pac
+mpc pac
+mpd pac
+ncmpcpp pac
+neofetch pac
+nerd-fonts-ubuntu-mono aur
+net-tools pac
+nvidia pac
+nvidia-settings pac
+openssh pac
+openssl pac
+pacman-contrib pac
+polybar pac
+powerline pac
+powerline-fonts pac
+pulseaudio pac
+pulseaudio-alsa pac
+python pac
+python-dbus-next pac
+python-iwlib pac
+python-pip pac
+qtile pac
+ranger pac
+ripgrep pac
+rofi pac
+sudo pac
+telegram-desktop pac
+ttf-dejavu pac
+ttf-font-awesome pac
+thunderbird pac
+ttf-hack pac
+ueberzug pac
+unzip pac
+viber aur
+vim pac
+vlc pac
+vsftpd pac
+wget pac
+xdg-user-dirs pac
+xorg-xinit pac
+xorg pac
+xorg-setxkbmap pac
+youtube-dl pac
+zip pac
