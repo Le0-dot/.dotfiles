@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Please enter which packages you want to install [a]ll/[m]inimum: "
+read input
+
+if [[ "$input" == "a" ]] || [[ "$input" == "all" ]]; then
+    package_file="all_packages.txt"
+elif [[ "$input" == "m" ]] || [[ "$input" == "minimum" ]]; then
+    package_file="minimum_packages.txt"
+else
+    echo "Invalid input"
+    exit 1
+fi
+
+sudo pacman -S $(awk '{print $1}' "$package_file")

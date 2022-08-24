@@ -33,6 +33,7 @@ nvidia
 nvidia-settings
 openssh
 openssl
+pacman-contrib
 polybar
 powerline
 powerline-fonts
@@ -60,9 +61,8 @@ vlc
 vsftpd
 wget
 xdg-user-dirs
-xinit
+xorg-xinit
 xorg
 xorg-setxkbmap
 youtube-dl
 zip
-pacman-contrib
