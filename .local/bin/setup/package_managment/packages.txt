@@ -1,0 +1,69 @@
+alacritty pac min
+alsa-utils pac min
+arc-gtk-theme pac min
+blueman pac
+bluez pac
+cmake pac min
+dhcpcd pac min
+discord pac
+docker pac
+exa pac
+feh pac
+filezilla pac
+firefox pac min
+gcc pac min
+git pac min
+grub pac min
+grub-customizer pac
+htop pac min
+i3lock pac min
+i3wm pac
+iwd pac min
+kbdd-git aur min
+keepassxc pac
+light pac
+linux-headers pac min
+lxappearance pac min
+mpc pac min
+mpd pac min
+ncmpcpp pac min
+neofetch pac min
+nerd-fonts-ubuntu-mono aur min
+net-tools pac min
+nvidia pac
+nvidia-settings pac
+openssh pac min
+openssl pac min
+pacman-contrib pac min
+polybar pac
+powerline pac min
+powerline-fonts pac min
+pulseaudio pac min
+pulseaudio-alsa pac min
+python pac min
+python-dbus-next pac min
+python-iwlib pac min
+python-pip pac min
+qtile pac min
+ranger pac min
+ripgrep pac min
+rofi pac min
+sudo pac min
+telegram-desktop pac
+ttf-dejavu pac min
+ttf-font-awesome pac min
+thunderbird pac
+ttf-hack pac min
+ueberzug pac min
+unzip pac min
+viber aur
+vim pac min
+vlc pac
+vsftpd pac
+wget pac min
+xdg-user-dirs pac min
+xorg-xinit pac min
+xorg pac min
+xorg-setxkbmap pac min
+youtube-dl pac
+zip pac min
