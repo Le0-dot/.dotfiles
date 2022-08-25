@@ -13,5 +13,7 @@ mpc --port=6606 repeat on
 blueman-applet &
 kbdd &
 
+xrandr -s 2560x1440
+
 exec qtile start
 #exec i3

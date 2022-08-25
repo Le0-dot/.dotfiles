@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Please enter which packages you want to install [a]ll/[m]inimum: "
+echo -e "Please enter which packages you want to install [a]ll/[m]inimum: \c"
 read input
 
 if [[ "$input" == "a" ]] || [[ "$input" == "all" ]]; then

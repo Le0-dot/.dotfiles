@@ -35,6 +35,8 @@ from libqtile.dgroups import simple_key_binder
 mod = "mod4"
 terminal = guess_terminal()
 
+print(terminal)
+
 commands = {
     'volume_mute': 'amixer -q -D pulse sset Master 0%',
     'volume_up': 'amixer -q -D pulse sset Master 5%+',
