@@ -7,8 +7,8 @@ cmake pac min
 dhcpcd pac min
 discord pac
 docker pac
-exa pac
-feh pac
+exa pac min
+feh pac min
 filezilla pac
 firefox pac min
 gcc pac min
