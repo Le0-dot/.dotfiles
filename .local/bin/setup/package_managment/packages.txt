@@ -50,9 +50,9 @@ ripgrep pac min
 rofi pac min
 sudo pac min
 telegram-desktop pac
+thunderbird pac
 ttf-dejavu pac min
 ttf-font-awesome pac min
-thunderbird pac
 ttf-hack pac min
 ueberzug pac min
 unzip pac min
@@ -61,9 +61,10 @@ vim pac min
 vlc pac
 vsftpd pac
 wget pac min
+xclip pac min
 xdg-user-dirs pac min
-xorg-xinit pac min
 xorg pac min
 xorg-setxkbmap pac min
+xorg-xinit pac min
 youtube-dl pac
 zip pac min
