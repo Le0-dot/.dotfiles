@@ -18,6 +18,7 @@ Plugin 'voldikss/vim-floaterm'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'cdelledonne/vim-cmake'
+Plugin 'jackguo380/vim-lsp-cxx-highlight'
 
 call vundle#end()
 
@@ -28,6 +29,7 @@ autocmd FileType vim setlocal foldmethod=marker
 " CMake Config {{{
 
 let g:cmake_link_compile_commands = 1
+let g:cmake_root_markers = ['compile_commands.json']
 
 nmap <leader>cg :CMakeGenerate<cr>
 nmap <leader>cb :CMakeBuild<cr>
@@ -108,6 +110,12 @@ set backspace=indent,eol,start
 set encoding=UTF-8
 
 colorscheme nord
+
+" }}}
+
+" Vim lsp Highlight {{{
+
+let g:lsp_cxx_hl_use_text_props = 1
 
 " }}}
 
