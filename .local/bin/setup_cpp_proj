@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function cmake-version() {
+    echo -e $(cmake --version | cut -d' ' -f3 | head -1 | cut -d. -f1-2)
+}
+
+function cmake-file-setup() {
+    echo -e "cmake_minimum_required(VERSION $(cmake-version))\n" >> $1
+    echo -e "project(--INSER PROJECT NAME--)\n" >> $1
+    echo -e "set(EXECUTABLE_OUTPUT_PATH ./bin/)\n" >> $1
+    echo -e "set(CMAKE_CXX_STANDARD 20)\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\n" >> $1
+    echo -e "set(MAIN src/main.cpp)\n" >> $1
+    echo -e "add_executable(\${PROJECT_NAME} \${MAIN})" >> $1
+}
+
+function main-file-setup() {
+    echo -e "#include <iostream>\n" >> $1
+    echo -e "int main(int argc, char** argv)\n{" >> $1
+    echo -e "\tstd::cout << \"Hello world!\" << std::endl;" >> $1
+    echo -e "\treturn 0;\n}" >> $1
+}
+
+ln -s Debug/compile_commands.json .
+touch .ccls
+touch CMakeLists.txt
+mkdir -p src
+touch src/main.cpp
+
+cmake-file-setup CMakeLists.txt
+main-file-setup src/main.cpp
