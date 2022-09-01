@@ -1,0 +1,45 @@
+#!/bin/bash
+
+function cmake-version() {
+    echo -e $(cmake --version | cut -d' ' -f3 | head -1 | cut -d. -f1-2)
+}
+
+function cmake-file-setup() {
+    echo -e "cmake_minimum_required(VERSION $(cmake-version))\n" >> $1
+    echo -e "project(--INSER PROJECT NAME--)\n" >> $1
+    echo -e "find_package(GTest REQUIRED)\n" >> $1
+    echo -e "set(CMAKE_CXX_STANDARD 20)" >> $1
+    echo -e "set(CMAKE_CXX_STANDARD_REQUIRED ON)\n" >> $1
+    echo -e "enable_testing()\n" >> $1
+    echo -e "set(TEST_EXECUTABLE \${PROJECT_NAME}_test)\n" >> $1
+    echo -e "set(MAIN src/main.cpp)" >> $1
+    echo -e "set(TESTS test/test.cpp)\n" >> $1
+    echo -e "add_executable(\${PROJECT_NAME} \${MAIN})" >> $1
+    echo -e "add_executable(\${TEST_EXECUTABLE} \${TESTS})\n" >> $1
+    echo -e "target_include_directories(\${TEST_EXECUTABLE} PUBLIC GTEST_INCLUDE_DIRS)" >> $1
+    echo -e "target_link_libraries(\${TEST_EXECUTABLE} GTest::gtest_main)\n" >> $1
+    echo -e "add_test(Tests \${TEST_EXECUTABLE})" >> $1
+}
+
+function main-file-setup() {
+    echo -e "#include <iostream>\n" >> $1
+    echo -e "int main(int argc, char** argv)\n{" >> $1
+    echo -e "    std::cout << \"Hello world!\" << std::endl;" >> $1
+    echo -e "    return 0;\n}" >> $1
+}
+
+function test-file-setup() {
+    echo -e "#include <gtest/gtest.h>\n" >> $1
+}
+
+ln -s Debug/compile_commands.json .
+touch .ccls
+touch CMakeLists.txt
+mkdir -p src
+mkdir -p test
+touch src/main.cpp
+touch test/test.cpp
+
+cmake-file-setup CMakeLists.txt
+main-file-setup src/main.cpp
+test-file-setup test/test.cpp

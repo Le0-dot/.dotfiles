@@ -19,6 +19,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'cdelledonne/vim-cmake'
 Plugin 'jackguo380/vim-lsp-cxx-highlight'
+Plugin 'alepez/vim-gtest'
 
 call vundle#end()
 
@@ -34,6 +35,12 @@ let g:cmake_root_markers = ['compile_commands.json']
 nmap <leader>cg :CMakeGenerate<cr>
 nmap <leader>cb :CMakeBuild<cr>
 nmap <leader>cc :CMakeClean<cr>
+
+" }}}
+
+" GTest Config {{{
+
+nmap <leader>gt :GTestRunUnderCursor<cr>
 
 " }}}
 
