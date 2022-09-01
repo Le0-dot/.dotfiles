@@ -16,8 +16,8 @@ function cmake-file-setup() {
 function main-file-setup() {
     echo -e "#include <iostream>\n" >> $1
     echo -e "int main(int argc, char** argv)\n{" >> $1
-    echo -e "\tstd::cout << \"Hello world!\" << std::endl;" >> $1
-    echo -e "\treturn 0;\n}" >> $1
+    echo -e "    std::cout << \"Hello world!\" << std::endl;" >> $1
+    echo -e "    return 0;\n}" >> $1
 }
 
 ln -s Debug/compile_commands.json .
