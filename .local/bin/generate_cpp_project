@@ -12,9 +12,9 @@ function cmake-file-setup() {
     echo -e "set(CMAKE_CXX_STANDARD_REQUIRED ON)\n" >> $1
     echo -e "enable_testing()\n" >> $1
     echo -e "set(TEST_EXECUTABLE tests)\n" >> $1
-    echo -e "set(MAIN src/main.cpp)" >> $1
+    echo -e "set(SRC src/main.cpp)" >> $1
     echo -e "set(TESTS test/test.cpp)\n" >> $1
-    echo -e "add_executable(\${PROJECT_NAME} \${MAIN})" >> $1
+    echo -e "add_executable(\${PROJECT_NAME} \${SRC})" >> $1
     echo -e "add_executable(\${TEST_EXECUTABLE} \${TESTS})\n" >> $1
     echo -e "target_include_directories(\${TEST_EXECUTABLE} PUBLIC GTEST_INCLUDE_DIRS)" >> $1
     echo -e "target_link_libraries(\${TEST_EXECUTABLE} GTest::gtest_main)\n" >> $1
