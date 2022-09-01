@@ -40,6 +40,7 @@ nmap <leader>cc :CMakeClean<cr>
 
 " GTest Config {{{
 
+let g:gtest#gtest_command = "Debug/tests"
 nmap <leader>gt :GTestRunUnderCursor<cr>
 
 " }}}
