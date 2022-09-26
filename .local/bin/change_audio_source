@@ -1,0 +1,19 @@
+echo "Current default audio sorce and sink"
+pactl get-default-source
+pactl get-default-sink
+
+echo -e "\nAll sources:\n"
+echo "$(pactl list short sources | awk '{ print $1 " " $2 }')"
+echo -e "\nChoose one to set as default: \c"
+read new_source
+
+echo -e "\nAll sinks:\n"
+echo "$(pactl list short sinks | awk '{ print $1 " " $2 }')"
+echo -e "\nChoose one to set as default: \c"
+read new_sink
+
+sources=($(pactl list short sources | awk '{ print $2 }'))
+sinks=($(pactl list short sinks | awk '{ print $2 }'))
+
+pactl set-default-source ${sources[$new_source]}
+pactl set-default-sink ${sinks[$new_sink]}
