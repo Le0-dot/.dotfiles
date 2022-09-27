@@ -41,6 +41,8 @@ alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 
+alias vim='nvim'
+
 shopt -s autocd
 
 export PATH="$HOME/.local/bin/:$PATH"

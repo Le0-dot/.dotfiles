@@ -53,3 +53,6 @@ ftp
 .config/transmission
 .config/coc
 .config/keepassxc/keepassxc.ini
+.config/memos.json
+.config/gcolor3
+.config/nvim/plugin

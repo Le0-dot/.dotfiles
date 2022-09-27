@@ -1,7 +1,9 @@
 set nocompatible
 filetype off
 
-" Setting up Vundle plugin  manager
+" {{{ Plugins
+
+" Setting up Vundle plugin manager
 
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -23,6 +25,8 @@ Plugin 'alepez/vim-gtest'
 
 call vundle#end()
 
+" }}}
+
 autocmd FileType vim setlocal foldmethod=marker
 
 " Configs {{{
@@ -33,14 +37,15 @@ let g:cmake_link_compile_commands = 1
 let g:cmake_root_markers = ['compile_commands.json']
 
 nmap <leader>cg :CMakeGenerate<cr>
-nmap <leader>cb :CMakeBuild<cr>
+nmap <leader>cb :w<cr> :CMakeBuild<cr>
 nmap <leader>cc :CMakeClean<cr>
+nmap <leader>ck :CMakeClose<cr>
 
 " }}}
 
 " GTest Config {{{
 
-let g:gtest#gtest_command = "Debug/tests"
+let g:gtest#gtest_command = "../../Debug/tests"
 nmap <leader>gt :GTestRunUnderCursor<cr>
 
 " }}}
