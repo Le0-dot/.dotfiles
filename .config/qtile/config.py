@@ -27,229 +27,31 @@
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
+from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 from libqtile.dgroups import simple_key_binder
 
-mod = "mod4"
-terminal = guess_terminal()
+from groups import get_groups, get_group_names
+from keybindings import get_keys, mod
+from layouts import get_layouts
+from colors import colors
 
-print(terminal)
+groups = get_groups()
 
-commands = {
-    'volume_mute': 'amixer -q -D pulse sset Master 0%',
-    'volume_up': 'amixer -q -D pulse sset Master 5%+',
-    'volume_down': 'amixer -q -D pulse sset Master 5%-',
-    'brightness_up': 'sudo light -A 5',
-    'brightness_down': 'sudo light -U 5',
-    'music_toggle': 'mpc --host=127.0.0.1 --port=6606 toggle',
-    'music_prev': 'mpc --host=127.0.0.1 --port=6606 prev',
-    'music_next': 'mpc --host=127.0.0.1 --port=6606 next',
-    'music_volume_up': 'mpc --host=127.0.0.1 --port=6606 volume +2',
-    'music_volume_down': 'mpc --host=127.0.0.1 --port=6606 volume -2',
-    'music_random_toggle': 'mpc --host=127.0.0.1 --port=6606 random',
-    'rofi': 'rofi -show drun -theme ~/.config/rofi/themes/center.rasi',
-    'firefox': 'firefox',
-    'firefox-private': 'firefox --private-window',
-    'telegram': 'telegram-desktop',
-    'ms_teams': 'teams --disable-seccomp-filter-sandbox',
-    'discord': 'discord',
-    'exit_menu': './.local/bin/exit_menu',
-    'lock': './.local/bin/lock',
-    'filezilla': 'filezilla',
-    'thunderbird': 'thunderbird'
-}
+layouts = get_layouts()
 
-group_names = (
-        '1:  ',
-        '2:  ',
-        '3:  ',
-        '4:  ',
-        '5:  ',
-        '6',
-        '7',
-        '8',
-        '9:  ',
-        '10:  '
-)
+keys = get_keys(get_group_names())
 
-colors = {
-    'background': ['#282c34','#282c34'],
-    'foreground': ['#f3f4f5', '#f3f4f5'],
-    'background-1': ['#cccccc', '#cccccc'],
-    'foreground-1': ['#282c34','#282c34'],
-    'background-2': ['#15488c', '#15488c'],
-    'foreground-2': ['#cccccc', '#cccccc'],
-    'active-background': ['#282c34','#282c34'],
-    'active-foreground': ['#f3f4f5', '#f3f4f5'],
-    'inactive-background': ['#282c34','#282c34'],
-    'inactive-foreground': ['#676e7d', '#676e7d'],
-    'urgent-background': ['#e53835', '#e53835'],
-    'urgent-foreground': ['#f3f4f5', '#f3f4f5']
-}
 
 padding_from_arrow = 10 
 padding_between_widget_and_sign = 6
-
-keys = [
-    # Switch between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack"),
-
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
-        desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
-        desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
-        desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(),
-        desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
-
-    # Volume and brightness control
-    Key([], 'XF86AudioMute', lazy.spawn(commands['volume_mute']),
-        desc='Volume mute'),
-    Key([], 'F1', lazy.spawn(commands['volume_mute']),
-        desc='Volume mute'),
-    Key([], 'XF86AudioRaiseVolume', lazy.spawn(commands['volume_up']),
-        desc='Volume up'),
-    Key([], 'F3', lazy.spawn(commands['volume_up']),
-        desc='Volume up'),
-    Key([], 'XF86AudioLowerVolume', lazy.spawn(commands['volume_down']),
-        desc='Volume down'),
-    Key([], 'F2', lazy.spawn(commands['volume_down']),
-        desc='Volume down'),
-
-    Key([], 'XF86MonBrightnessUp', lazy.spawn(commands['brightness_up']),
-        desc='Brightness up'),
-    Key([], 'F8', lazy.spawn(commands['brightness_up']),
-        desc='Brightness up'),
-    Key([], 'XF86MonBrightnessDown', lazy.spawn(commands['brightness_down']),
-        desc='Brightness down'),
-    Key([], 'F7', lazy.spawn(commands['brightness_down']),
-        desc='Brightness down'),
-
-    # MPD control
-    Key([mod, 'mod1'], 'space', lazy.spawn(commands['music_toggle']),
-        desc='Toggle music'),
-    Key([mod, 'mod1'], 'h', lazy.spawn(commands['music_prev']),
-        desc='Next track'),
-    Key([mod, 'mod1'], 'l', lazy.spawn(commands['music_next']),
-        desc='Previous track'),
-    Key([mod, 'mod1'], 'k', lazy.spawn(commands['music_volume_up']),
-        desc='Music volume up'),
-    Key([mod, 'mod1'], 'j', lazy.spawn(commands['music_volume_down']),
-        desc='Music volume down'),
-    Key([mod, 'mod1'], 'r', lazy.spawn(commands['music_random_toggle']),
-        desc='Toggle random track'),
-
-    # Launch programs
-    Key([mod, 'shift'], 'Return', lazy.spawn(commands['rofi']),
-            desc='Launch rofi'),
-    Key([mod], 'Escape', lazy.spawn(commands['exit_menu']),
-            desc='Launch exit_menu script'),
-    Key([mod, 'shift'], 'x', lazy.spawn(commands['lock']),
-            desc='Launch locker script'),
-
-    Key([mod], 'f', lazy.spawn(commands['firefox']),
-            lazy.group[group_names[1]].toscreen(toggle=False),
-            desc='Launch firefox'),
-    Key([mod], 'p', lazy.spawn(commands['firefox-private']),
-            lazy.group[group_names[1]].toscreen(toggle=False),
-            desc='Launch firefox private window'),
-    Key([mod], 't', lazy.spawn(commands['telegram']),
-            lazy.group[group_names[2]].toscreen(toggle=False),
-            desc='Launch telegram'),
-    Key([mod], 'd', lazy.spawn(commands['discord']),
-            desc='Launch discord'),
-    Key([mod, 'shift'], 't', lazy.spawn(commands['ms_teams']),
-            desc='Launch Miscrosoft Teams'),
-    Key([mod, 'control'], 'f', lazy.spawn(commands['filezilla']),
-            lazy.group[group_names[4]].toscreen(toggle=False),
-            desc='Launch Filezilla'),
-    Key([mod, 'control'], 't', lazy.spawn(commands['thunderbird']),
-            lazy.group[group_names[8]].toscreen(toggle=False),
-            desc='Launch Thunderbird')
-]
-
-groups = [Group(group_names[0], layout='columns',
-              matches=[Match(wm_class=["alacritty"])]),
-          Group(group_names[1], layout='max', 
-              matches=[Match(wm_class=["firefox"])]),
-          Group(group_names[2], layout='max', 
-              matches=[Match(wm_class=["TelegramDesktop"]),
-                       Match(wm_class=["discord"]),
-                       Match(wm_class=["microsoft teams - preview"]),
-                       Match(wm_class=["viber"])]
-              ),
-          Group(group_names[3], layout='max',
-              matches=[Match(wm_class=['mupdf'])]
-              ),
-          Group(group_names[4], layout='max',
-              matches=[Match(wm_class=['filezilla'])]
-              ),
-          Group(group_names[5]),
-          Group(group_names[6]),
-          Group(group_names[7]),
-          Group(group_names[8], layout='max',
-              matches=[Match(wm_class=['Thunderbird'])]
-              ),
-          Group(group_names[9], layout='max',
-              matches=[Match(wm_class=["vlc"])])]
-
-
-layouts = [
-    layout.Columns(
-        border_focus = colors['background-2'],
-        border_normal = colors['background'],
-        border_width = 1
-    ),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
-]
 
 widget_defaults = dict(
     font='UbuntuMono Nerd Font',
     fontsize=14,
     padding=1,
 )
+
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -279,8 +81,6 @@ screens = [
                     port = 6606,
                     status_format = '{play_status}  {artist} - {title} [{repeat}{random}{single}]',
                     play_states = {'pause': '', 'play': '', 'stop': ''},
-                    mouse_callbacks = {'Button1': lazy.spawn(commands['music_toggle']),
-                        'Button2': lazy.spawncmd('ncmpcpp')},
                     background = colors['background'],
                     foreground = colors['foreground']
                 ),
