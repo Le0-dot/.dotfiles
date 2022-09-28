@@ -2,7 +2,7 @@ from libqtile import layout
 
 from colors import colors
 
-layouts = (
+layouts = [
     layout.Columns(
         border_focus = colors['background-2'],
         border_normal = colors['background'],
@@ -20,7 +20,7 @@ layouts = (
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
-)
+]
 
 def get_layouts():
-    return list(layouts)
+    return layouts

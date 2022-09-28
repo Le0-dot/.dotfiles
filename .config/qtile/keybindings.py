@@ -27,6 +27,7 @@ class Keybinding:
         return Key(self.mods, self.key, *self.actions, desc=self.name)
 
 
+
 mod = 'mod4'
 alt = 'mod1'
 shift = 'shift'
@@ -66,7 +67,7 @@ keybindings_config = {
     Keybinding('switch_screen_3', [mod, alt], '3', action=lazy.to_screen(2)),
 
     # Volume control
-    Keybinding('volume_mute', [], 'F1', spawn='amixer -q -D pulse sset Master 0%'),
+    Keybinding('volume_mute', [], 'F1', spawn='amixer -q -D pulse sset Master toggle'),
     Keybinding('volume_up', [], 'F3', spawn='amixer -q -D pulse sset Master 5%+'),
     Keybinding('volume_down', [], 'F2', spawn='amixer -q -D pulse sset Master 5%-'),
 
