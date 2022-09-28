@@ -2,6 +2,8 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+from groups import group_names
+
 
 class Keybinding:
     group_names = None # Should be initialized before usage of class
@@ -38,8 +40,8 @@ keybindings_config = {
     # General keybindings
     Keybinding('toggle_layout', [mod], "Tab", action=lazy.next_layout()),
     Keybinding('kill_window', [mod], "w", action=lazy.window.kill()),
-    Keybinding('restart_qtile', [mod, "control"], "r", action=lazy.restart()),
-    Keybinding('kill_qtile', [mod, "control"], "q", action=lazy.shutdown()),
+    Keybinding('restart_qtile', [mod, control], "r", action=lazy.restart()),
+    Keybinding('kill_qtile', [mod, control], "q", action=lazy.shutdown()),
 
     # Move between windows
     Keybinding('focus_left', [mod], 'h', action=lazy.layout.left()),
@@ -98,9 +100,8 @@ keybindings_config = {
 }
 
 
-def get_keys(group_names):
-    Keybinding.group_names = group_names
-    for k in keybindings_config:
-        k.evaluateActions()
+Keybinding.group_names = group_names
+for k in keybindings_config:
+    k.evaluateActions()
 
-    return [keybinding.toKey() for keybinding in keybindings_config]
+keys = [keybinding.toKey() for keybinding in keybindings_config]

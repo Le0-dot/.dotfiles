@@ -1,6 +1,9 @@
 from libqtile import layout
+from libqtile.config import Click, Drag
+from libqtile.lazy import lazy
 
 from colors import colors
+from keybindings import mod
 
 layouts = [
     layout.Columns(
@@ -22,5 +25,11 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-def get_layouts():
-    return layouts
+mouse = [
+    Drag([mod], 'Button1', lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Click([mod], 'Button1', lazy.window.toggle_floating()),
+    Drag([mod], 'Button3', lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
+    Click([mod], 'Button2', lazy.window.bring_to_front())
+]

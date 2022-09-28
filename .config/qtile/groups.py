@@ -13,13 +13,16 @@ group_config = (
     {'name': '10:  ', 'layout': 'max', 'matches': ['vlc']}
 )
 
-def makeMatches(l):
-    return [Match(wm_class=[window]) for window in l]
-
-def dictToGroup(d):
-    return Group(d['name'], layout=d['layout'], matches=makeMatches(d['matches']))
 
 class Groups:
+    @staticmethod
+    def makeMatches(l):
+        return [Match(wm_class=[window]) for window in l]
+
+    @staticmethod
+    def dictToGroup(d):
+        return Group(d['name'], layout=d['layout'], matches=Groups.makeMatches(d['matches']))
+
     def __init__(self, group_config):
         self._group_generator = (x for x in group_config)
         self._current_group_repr = None
@@ -31,13 +34,11 @@ class Groups:
     def __next__(self):
         if self._current_group_repr is None:
             raise StopIteration
-        group = dictToGroup(self._current_group_repr)
+        group = Groups.dictToGroup(self._current_group_repr)
         self._current_group_repr = next(self._group_generator, None)
         return group
 
 
-def get_groups():
-    return list(Groups(group_config))
+groups = list(Groups(group_config))
 
-def get_group_names():
-    return [group['name'] for group in group_config]
+group_names = [group['name'] for group in group_config]
