@@ -15,7 +15,7 @@ padding_from_arrow = 10
 padding_between_windget_and_icon = 6
 padding_from_border = 4
 
-left_side = [
+left_side = lambda: [
     widget.GroupBox(
         rounded = False,
         disable_drag = True,
@@ -37,7 +37,7 @@ left_side = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-inet = [
+inet = lambda: [
     widget.TextBox(
         font = 'sans',
         text = '',
@@ -52,7 +52,7 @@ inet = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-volume = [
+volume = lambda: [
     widget.TextBox(
         text = '',
         font = 'sans',
@@ -63,7 +63,7 @@ volume = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-brightness = [
+brightness = lambda: [
     widget.TextBox(
         text = '',
         font = 'sans',
@@ -77,7 +77,7 @@ brightness = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-battery = [
+battery = lambda: [
     widget.Battery(
         format = '{char}',
         font = 'sans',
@@ -98,7 +98,7 @@ battery = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-ram = [
+ram = lambda: [
     widget.TextBox(
         text = '',
         font = 'sans',
@@ -112,7 +112,7 @@ ram = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-mem = [
+mem = lambda: [
     widget.DF(
         format = '  {r:.0f}%',
         visible_on_warn = False,
@@ -120,7 +120,7 @@ mem = [
     widget.Sep(padding = padding_from_arrow)
 ]
 
-kbd = [
+kbd = lambda: [
     widget.TextBox(
         text = '',
         font = 'sans',
@@ -130,38 +130,51 @@ kbd = [
     widget.Sep(padding = padding_from_arrow)        
 ]
 
-time = [
+time = lambda: [
     widget.Clock(format='%H:%M:%S'), #format='%Y-%m-%d %H:%M:%S'
     widget.Sep(padding = padding_from_arrow),
 ]
 
-tray = [
+tray = lambda: [
     widget.Systray(),
     widget.Sep(padding = padding_from_border)
 ]
 
 
-widget_groups = [
-        left_side,
-        inet,
-        volume,
-        brightness,
-        battery,
-        ram,
-        mem,
-        kbd,
-        time,
-        tray
+main_widget_groups = [
+        left_side(),
+        inet(),
+        volume(),
+        brightness(),
+        battery(),
+        ram(),
+        mem(),
+        kbd(),
+        time(),
+        tray()
 ]
 
-def get_widgets():
+secondary_widget_groups = [
+        left_side(),
+        inet(),
+        volume(),
+        brightness(),
+        battery(),
+        ram(),
+        mem(),
+        kbd(),
+        time(),
+]
+
+def get_widgets(widget_groups):
     def get_colors():
         yield {'bg': colors['background'], 'fg': colors['foreground']}
 
         current_colors = {'bg': colors['background-1'], 'fg': colors['foreground-1']}
         next_colors = {'bg': colors['background-2'], 'fg': colors['foreground-2']}
 
-        for _ in range(8):
+        for _ in range(len(widget_groups) - 2):
+            print(current_colors)
             yield current_colors
             current_colors, next_colors = next_colors, current_colors
 
@@ -177,7 +190,7 @@ def get_widgets():
         yield g
 
 
-def get_arrows():
+def get_arrows(num):
     def construct_arrow(color):
         return widget.TextBox(font = 'sans', text = '',
             background = color['bg'], foreground = color['fg'],
@@ -189,21 +202,24 @@ def get_arrows():
         current_colors = {'bg': colors['background-1'], 'fg': colors['background-2']}
         next_colors = {'bg': colors['background-2'], 'fg': colors['background-1']}
 
-        for _ in range(7):
+        for _ in range(num - 2):
             yield current_colors
             current_colors, next_colors = next_colors, current_colors
 
-        yield {'bg': colors['background-2'], 'fg': colors['background']}
+        yield {'bg': current_colors['bg'], 'fg': colors['background']}
 
     for color in get_colors():
         yield construct_arrow(color)
 
 
-def get_bar():
-    widget_group = get_widgets()
+def get_bar(widget_groups):
+    widget_group = get_widgets(widget_groups)
     widget_list = next(widget_group)
-    for arrow in get_arrows():
+    for arrow in get_arrows(len(widget_groups) - 1):
         widget_list.append(arrow)
         widget_list += next(widget_group)
 
     return bar.Bar(widget_list, bar_size)
+
+main_bar = get_bar(main_widget_groups)
+secondary_bar = get_bar(secondary_widget_groups)
