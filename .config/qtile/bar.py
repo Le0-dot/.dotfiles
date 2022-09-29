@@ -140,6 +140,10 @@ tray = lambda: [
     widget.Sep(padding = padding_from_border)
 ]
 
+empty = lambda: [
+    widget.Sep(padding = padding_from_border)
+]
+
 
 main_widget_groups = [
         left_side(),
@@ -164,6 +168,7 @@ secondary_widget_groups = [
         mem(),
         kbd(),
         time(),
+        empty()
 ]
 
 def get_widgets(widget_groups):

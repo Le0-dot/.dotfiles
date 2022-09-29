@@ -1,32 +1,32 @@
+from dataclasses import dataclass, field
+
 from libqtile.config import Key
-from libqtile.lazy import lazy
+from libqtile.lazy import lazy, LazyCall
 from libqtile.utils import guess_terminal
 
 from groups import group_names
 
-
+@dataclass
 class Keybinding:
-    group_names = None # Should be initialized before usage of class
+    name: str
+    mods: list[str]
+    key: str
+    spawn: str = ''
+    to_group: int = -1
+    action: LazyCall = None
+    __all_actions: list[LazyCall] = field(repr = False, default_factory = list)
 
-    def __init__(self, name, mods, key, spawn=None, to_group=None, action=None):
-        self.name = name
-        self.mods = mods
-        self.key = key
-        self.actions = []
-        self._spawn = spawn
-        self._to_group = to_group
-        self._action = action
-
-    def evaluateActions(self):
-        if not self._spawn is None:
-            self.actions.append(lazy.spawn(self._spawn))
-        if not self._to_group is None:
-            self.actions.append(lazy.group[Keybinding.group_names[self._to_group]].toscreen(toggle=False))
-        if not self._action is None:
-            self.actions.append(self._action)
+    def evaluateActions(self, group_names):
+        if self.spawn:
+            self.__all_actions.append(lazy.spawn(self.spawn))
+        if 0 <= self.to_group <= 9:
+            self.__all_actions.append(lazy.group[group_names[self.to_group]].toscreen(toggle=False))
+        if not self.action is None:
+            self.__all_actions.append(self.action)
+        return self
 
     def toKey(self):
-        return Key(self.mods, self.key, *self.actions, desc=self.name)
+        return Key(self.mods, self.key, *self.__all_actions, desc=self.name)
 
 
 
@@ -36,7 +36,7 @@ shift = 'shift'
 control = 'control'
 terminal = guess_terminal()
 
-keybindings_config = {
+keybindings_config = [
     # General keybindings
     Keybinding('toggle_layout', [mod], "Tab", action=lazy.next_layout()),
     Keybinding('kill_window', [mod], "w", action=lazy.window.kill()),
@@ -97,11 +97,7 @@ keybindings_config = {
     Keybinding('lock', [mod, shift], 'x', spawn='./.local/bin/lock'),
     Keybinding('filezilla', [mod, control], 'f', spawn='filezilla', to_group=3),
     Keybinding('thunderbird', [mod, control], 't', spawn='thunderbird', to_group=8)
-}
+]
 
 
-Keybinding.group_names = group_names
-for k in keybindings_config:
-    k.evaluateActions()
-
-keys = [keybinding.toKey() for keybinding in keybindings_config]
+keys = [keybinding.evaluateActions(group_names).toKey() for keybinding in keybindings_config]
