@@ -7,13 +7,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-feh --bg-scale ~/Pictures/wallpapers/wallpaper0.jpg
+random_wallpaperd &
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 mpc --port=6606 repeat on
 blueman-applet &
 kbdd &
-
-xrandr -s 2560x1440
 
 exec qtile start
 #exec i3
