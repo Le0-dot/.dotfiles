@@ -58,7 +58,7 @@ map('n', '<leader>fh', ':Telescope help_tags<cr>')
 g.cmake_link_complie_commands = 1
 g.cmake_root_markers = {'compile_commands.json'}
 
-map('n', '<leader>cg', ':CMakeGenereate<cr>')
+map('n', '<leader>cg', ':CMakeGenerate<cr>')
 map('n', '<leader>cb', ':w<cr> :CMakeBuild<cr>')
 map('n', '<leader>cl', ':CMakeClean<cr>')
 map('n', '<leader>cc', ':CMakeClose<cr>')
@@ -68,7 +68,7 @@ map('n', '<leader>cc', ':CMakeClose<cr>')
 
 g['gtest#gtest_command'] = '../../Debug/tests'
 
-map('n', '<leader>gt', ':GTestRunUnderCursor')
+map('n', '<leader>gt', ':GTestRunUnderCursor<cr>')
 
 
 -- Floaterm config
@@ -234,7 +234,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>

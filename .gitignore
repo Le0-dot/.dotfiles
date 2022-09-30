@@ -56,3 +56,4 @@ ftp
 .config/memos.json
 .config/gcolor3
 .config/nvim/plugin
+.config/autorandr/
