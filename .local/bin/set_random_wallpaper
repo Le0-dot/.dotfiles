@@ -1,0 +1,9 @@
+wallpaper_dir=~/Pictures/wallpapers
+
+wallpapers=( $(ls $wallpaper_dir | grep wallpaper) )
+
+random_number=$(($RANDOM % ${#wallpapers[@]}))
+
+random_wallpaper=${wallpapers[$random_number]}
+
+feh --bg-scale $wallpaper_dir/$random_wallpaper
