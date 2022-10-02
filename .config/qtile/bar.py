@@ -30,7 +30,7 @@ left_side = lambda: [
     widget.Mpd2(
         port = 6606,
         status_format = '{play_status}  {artist} - {title} [{repeat}{random}{single}]',
-        play_states = {'pause': '', 'play': '', 'stop': ''},
+        play_states = {'pause': '', 'play': '', 'stop': ''},
     ),
     widget.WindowName(format = ''),
     widget.CurrentLayoutIcon(),
