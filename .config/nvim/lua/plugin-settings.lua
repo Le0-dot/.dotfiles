@@ -6,6 +6,35 @@ end
 
 g.mapleader = ' '
 
+-- Treesitter config
+
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = { "cpp", "python", "bash" },
+
+    -- Automatically install missing parsers when entering buffer
+    auto_install = true,
+
+    highlight = {
+	enable = true,
+
+	-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    	-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    	-- Using this option may slow down your editor, and you may see some duplicate highlights.
+    	-- Instead of true it can also be a list of languages
+    	additional_vim_regex_highlighting = false
+    },
+
+    indent = {
+	enable = true
+    }
+}
+
+--vim.cmd([[
+--set foldmethod=expr
+--set foldexpr=nvim_treesitter#foldexpr()
+--]])
+
+
 -- Telescope config
 
 require('telescope').setup{
@@ -19,15 +48,6 @@ require('telescope').setup{
 		["<C-h>"] = "which_key"
 	    }
 	}
-    },
-    pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
     },
     extensions = {
     -- Your extension configuration goes here:
@@ -55,8 +75,10 @@ map('n', '<leader>fh', ':Telescope help_tags<cr>')
 
 -- CMake config 
 
-g.cmake_link_complie_commands = 1
-g.cmake_root_markers = {'compile_commands.json'}
+vim.cmd ([[ 
+let g:cmake_link_compile_commands = 1
+let g:cmake_root_markers = ['compile_commands.json']
+]])
 
 map('n', '<leader>cg', ':CMakeGenerate<cr>')
 map('n', '<leader>cb', ':w<cr> :CMakeBuild<cr>')

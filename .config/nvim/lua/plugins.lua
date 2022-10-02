@@ -40,4 +40,8 @@ return require('packer').startup(function(use)
 	'alepez/vim-gtest',
 	ft = {'c', 'cpp', 'cmake'}
     }
+    use {
+	'nvim-treesitter/nvim-treesitter',
+	run = ':TSUpdate'
+    }
 end)

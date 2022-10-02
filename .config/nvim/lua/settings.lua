@@ -1,6 +1,6 @@
 local o = vim.o
 
-o.syntax = on
+--o.syntax = on
 
 o.backup = false
 o.writebackup = flase
