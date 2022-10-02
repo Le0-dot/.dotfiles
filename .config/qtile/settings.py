@@ -1,8 +1,7 @@
+from keybindings import mod
 from libqtile import layout
 from libqtile.config import Match
 from libqtile.dgroups import simple_key_binder
-
-from keybindings import mod
 
 dgroups_key_binder = simple_key_binder(mod)
 dgroups_app_rules = []

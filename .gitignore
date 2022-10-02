@@ -57,3 +57,8 @@ ftp
 .config/gcolor3
 .config/nvim/plugin
 .config/autorandr/
+
+.local/bin/get_objgraph
+.local/bin/isort
+.local/bin/isort-identify-imports
+.local/bin/undill

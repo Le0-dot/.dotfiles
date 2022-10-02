@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 from libqtile.config import Group, Match
 
+
 @dataclass
 class group:
     name: str

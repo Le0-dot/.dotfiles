@@ -1,9 +1,8 @@
+from colors import colors
+from keybindings import mod
 from libqtile import layout
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
-
-from colors import colors
-from keybindings import mod
 
 layouts = [
     layout.Columns(

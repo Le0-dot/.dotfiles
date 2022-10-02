@@ -1,47 +1,50 @@
 from dataclasses import dataclass, field
-
-from libqtile.config import Key
-from libqtile.lazy import lazy, LazyCall
-from libqtile.utils import guess_terminal
+from typing import Optional
 
 from groups import group_names
+from libqtile.config import Key
+from libqtile.lazy import LazyCall, lazy
+
 
 @dataclass
 class Keybinding:
+    'Proxy class to easily create keybindings'
     name: str
     mods: list[str]
     key: str
     spawn: str = ''
     to_group: int = -1
-    action: LazyCall = None
+    action: Optional[LazyCall] = None
     __all_actions: list[LazyCall] = field(repr = False, default_factory = list)
 
-    def evaluateActions(self, group_names):
+    def evaluate_actions(self, groups: list[str]):
+        'Evaluate actions, such as applications, spawning group, and more'
         if self.spawn:
             self.__all_actions.append(lazy.spawn(self.spawn))
         if 0 <= self.to_group <= 9:
-            self.__all_actions.append(lazy.group[group_names[self.to_group]].toscreen(toggle=False))
+            self.__all_actions.append(lazy.group[groups[self.to_group]].toscreen(toggle=False))
         if not self.action is None:
             self.__all_actions.append(self.action)
         return self
 
-    def toKey(self):
+    def to_key(self):
+        'Construct a qtile Key class from caller'
         return Key(self.mods, self.key, *self.__all_actions, desc=self.name)
 
 
 
-mod = 'mod4'
-alt = 'mod1'
-shift = 'shift'
-control = 'control'
-terminal = guess_terminal()
+mod: str = 'mod4'
+alt: str = 'mod1'
+shift: str = 'shift'
+control: str = 'control'
+terminal: str = 'alacritty' #guess_terminal()
 
 keybindings_config = [
     # General keybindings
-    Keybinding('toggle_layout', [mod], "Tab", action=lazy.next_layout()),
-    Keybinding('kill_window', [mod], "w", action=lazy.window.kill()),
-    Keybinding('restart_qtile', [mod, control], "r", action=lazy.restart()),
-    Keybinding('kill_qtile', [mod, control], "q", action=lazy.shutdown()),
+    Keybinding('toggle_layout', [mod], 'Tab', action=lazy.next_layout()),
+    Keybinding('kill_window', [mod], 'w', action=lazy.window.kill()),
+    Keybinding('restart_qtile', [mod, control], 'r', action=lazy.restart()),
+    Keybinding('kill_qtile', [mod, control], 'q', action=lazy.shutdown()),
 
     # Move between windows
     Keybinding('focus_left', [mod], 'h', action=lazy.layout.left()),
@@ -78,20 +81,28 @@ keybindings_config = [
     Keybinding('brightness_down', [], 'F7', spawn='sudo light -U 5'),
 
     # Mpd control
-    Keybinding('music_toggle', [mod, alt], 'space', spawn='mpc --host=127.0.0.1 --port=6606 toggle'),
-    Keybinding('music_prev', [mod, alt], 'h', spawn='mpc --host=127.0.0.1 --port=6606 prev'),
-    Keybinding('music_next', [mod, alt], 'l', spawn='mpc --host=127.0.0.1 --port=6606 next'),
-    Keybinding('music_volume_up', [mod, alt], 'k', spawn='mpc --host=127.0.0.1 --port=6606 volume +2'),
-    Keybinding('music_volume_down', [mod, alt], 'j', spawn='mpc --host=127.0.0.1 --port=6606 volume -2'),
-    Keybinding('music_random_toggle', [mod, alt], 'r', spawn='mpc --host=127.0.0.1 --port=6606 random'),
+    Keybinding('music_toggle', [mod, alt], 'space',
+               spawn='mpc --host=127.0.0.1 --port=6606 toggle'),
+    Keybinding('music_prev', [mod, alt], 'h',
+               spawn='mpc --host=127.0.0.1 --port=6606 prev'),
+    Keybinding('music_next', [mod, alt], 'l',
+               spawn='mpc --host=127.0.0.1 --port=6606 next'),
+    Keybinding('music_volume_up', [mod, alt], 'k',
+               spawn='mpc --host=127.0.0.1 --port=6606 volume +2'),
+    Keybinding('music_volume_down', [mod, alt], 'j',
+               spawn='mpc --host=127.0.0.1 --port=6606 volume -2'),
+    Keybinding('music_random_toggle', [mod, alt], 'r',
+               spawn='mpc --host=127.0.0.1 --port=6606 random'),
 
     # Program launchers
-    Keybinding('terminal', [mod], "Return", spawn=terminal),
-    Keybinding('rofi', [mod, shift], 'Return', spawn='rofi -show drun -theme ~/.config/rofi/themes/center.rasi'),
+    Keybinding('terminal', [mod], 'Return', spawn=terminal),
+    Keybinding('rofi', [mod, shift], 'Return',
+               spawn='rofi -show drun -theme ~/.config/rofi/themes/center.rasi'),
     Keybinding('firefox', [mod], 'f', spawn='firefox', to_group=1),
     Keybinding('firefox-private', [mod], 'p', spawn='firefox --private-window', to_group=1),
     Keybinding('telegram', [mod], 't', spawn='telegram-desktop', to_group=2),
-    Keybinding('ms_teams', [mod, shift], 't', spawn='teams --disable-seccomp-filter-sandbox', to_group=2),
+    Keybinding('ms_teams', [mod, shift], 't',
+               spawn='teams --disable-seccomp-filter-sandbox', to_group=2),
     Keybinding('discord', [mod], 'd', spawn='discord', to_group=2),
     Keybinding('exit_menu', [mod], 'Escape', spawn='./.local/bin/exit_menu'),
     Keybinding('lock', [mod, shift], 'x', spawn='./.local/bin/lock'),
@@ -100,4 +111,4 @@ keybindings_config = [
 ]
 
 
-keys = [keybinding.evaluateActions(group_names).toKey() for keybinding in keybindings_config]
+keys = [keybinding.evaluate_actions(group_names).to_key() for keybinding in keybindings_config]

@@ -1,6 +1,5 @@
-from libqtile import bar, widget
-
 from colors import colors
+from libqtile import bar, widget
 
 widget_defaults = { 
     'font': 'UbuntuMono Nerd Font',
