@@ -16,6 +16,7 @@ __pycache__/
 .vmware/
 .lyrics/
 .thunderbird/
+.gnupg/
 
 Documents/
 Downloads/
@@ -62,3 +63,4 @@ ftp
 .local/bin/isort
 .local/bin/isort-identify-imports
 .local/bin/undill
+.local/state/
