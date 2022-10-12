@@ -24,10 +24,11 @@ return require('packer').startup(function(use)
     }
     use 'tpope/vim-fugitive'
     use 'voldikss/vim-floaterm'
-    use { 
-	'neoclide/coc.nvim', branch = 'master', 
-	run = 'yarn install --frozen-lockfile'
-    }
+--    use { 
+--	'neoclide/coc.nvim', branch = 'master', 
+--	run = 'yarn install --frozen-lockfile'
+--    }
+    use 'neovim/nvim-lspconfig'
     use {
 	'cdelledonne/vim-cmake',
 	ft = {'c', 'cpp', 'cmake'}

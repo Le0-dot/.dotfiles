@@ -1,6 +1,4 @@
-require('settings')
-require('plugins')
-require('plugin-settings')
+require('le0')
 
 -- Auto compile packer 
 

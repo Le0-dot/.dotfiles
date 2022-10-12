@@ -1,4 +1,7 @@
 local o = vim.o
+local g = vim.g
+
+g.mapleader = ' '
 
 --o.syntax = on
 
