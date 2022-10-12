@@ -9,11 +9,11 @@ class group:
     layout: str = 'max'
     matches: list[str] = field(default_factory=list)
 
-    def __post_init__(self):
-        self.matches = [Match(wm_class=[window]) for window in self.matches]
+    def convert_matches(self):
+        return [Match(wm_class=window) for window in self.matches]
 
     def toGroup(self):
-        return Group(self.name, layout = self.layout, matches = self.matches)
+        return Group(self.name, layout = self.layout, matches = self.convert_matches())
 
 
 group_config = (
