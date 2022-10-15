@@ -1,6 +1,6 @@
 -- CMake config 
 
-local map = require('le0/easy-mapping').map
+local map = require('le0/plugin-settings/easy-mapping').map
 
 vim.cmd ([[ 
 let g:cmake_link_compile_commands = 1

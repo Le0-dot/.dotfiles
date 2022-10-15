@@ -1,6 +1,6 @@
 -- GTest config
 
-local map = require('le0/easy-mapping').map
+local map = require('le0/plugin-settings/easy-mapping').map
 
 vim.g['gtest#gtest_command'] = '../../Debug/tests'
 
