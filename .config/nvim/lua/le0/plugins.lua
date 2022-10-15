@@ -31,13 +31,9 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'ThePrimeagen/vim-be-good'
 
---    use { 
---	'neoclide/coc.nvim', branch = 'master', 
---	run = 'barn install --frozen-lockfile'
---    }
-
     -- Lsp plugins
     use 'neovim/nvim-lspconfig'
+    use 'L3MON4D3/LuaSnip'
     use 'mfussenegger/nvim-lint'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -54,4 +50,5 @@ return require('packer').startup(function(use)
 	'alepez/vim-gtest',
 	ft = {'c', 'cpp', 'cmake'}
     }
+    use 'p00f/clangd_extensions.nvim'
 end)

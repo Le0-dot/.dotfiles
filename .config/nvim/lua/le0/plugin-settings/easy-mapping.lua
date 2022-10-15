@@ -1,7 +1,8 @@
 local M = {}
 
-function M.map(m, k, v)
-   vim.keymap.set(m, k, v, { silent = true })
+function M.map(m, k, v, opts)
+    opts = opts or { silent = true }
+    vim.keymap.set(m, k, v, opts)
 end
 
 return M
