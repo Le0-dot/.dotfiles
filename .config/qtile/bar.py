@@ -1,5 +1,7 @@
-from colors import colors
+from libqtile.lazy import lazy
 from libqtile import bar, widget
+
+from colors import colors
 
 widget_defaults = { 
     'font': 'UbuntuMono Nerd Font',
@@ -13,6 +15,10 @@ bar_size = 24
 padding_from_arrow = 10 
 padding_between_windget_and_icon = 6
 padding_from_border = 4
+
+network_callback = lambda: lazy.spawn('alacritty -e sudo iwctl')
+resourse_callback = lambda: lazy.spawn('alacritty -e htop')
+storage_callback = lambda: lazy.spawn('alacritty -e sudo storage_stats')
 
 left_side = lambda: [
     widget.GroupBox(
@@ -41,13 +47,18 @@ inet = lambda: [
         font = 'sans',
         text = '',
         fontsize = 30,
+        mouse_callbacks = {'Button1': network_callback()},
     ),
     widget.Sep(padding = padding_between_windget_and_icon),
     widget.Wlan(
         format = '{essid}',
         disconnected_message = '',
+        mouse_callbacks = {'Button1': network_callback()},
     ),
-    widget.Net(format = ' {down} ↓↑ {up}'),
+    widget.Net(
+        format = ' {down} ↓↑ {up}',
+        mouse_callbacks = {'Button1': network_callback()},
+    ),
     widget.Sep(padding = padding_from_arrow)
 ]
 
@@ -102,11 +113,13 @@ ram = lambda: [
         text = '',
         font = 'sans',
         fontsize = 24,
+        mouse_callbacks = {'Button1': resourse_callback()},
     ),
     widget.Sep(padding = padding_between_windget_and_icon ),
     widget.Memory(
         format = '{MemUsed:.2f}{mm}',
         measure_mem = 'G',
+        mouse_callbacks = {'Button1': resourse_callback()},
     ),
     widget.Sep(padding = padding_from_arrow)
 ]
@@ -115,6 +128,7 @@ mem = lambda: [
     widget.DF(
         format = '  {r:.0f}%',
         visible_on_warn = False,
+        mouse_callbacks = {'Button1': storage_callback()},
     ),
     widget.Sep(padding = padding_from_arrow)
 ]
