@@ -51,6 +51,13 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 
 lspconfig.sumneko_lua.setup {
     single_file_support = true,
+    settings = {
+	Lua = {
+	    diagnostics = {
+		globals = { 'vim' },
+	    }
+	}
+    }
 }
 
 lspconfig.pyright.setup {}
