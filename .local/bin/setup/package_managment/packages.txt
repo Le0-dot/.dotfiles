@@ -23,6 +23,7 @@ i3lock pac min
 i3wm pac
 iwd pac min
 kbdd-git aur min
+kbdd-git aur min
 keepassxc pac
 laptop-mode-tools pac
 light pac
@@ -54,6 +55,7 @@ ranger pac min
 ripgrep pac min
 rofi pac min
 sudo pac min
+synth-shell aur min
 teams aur
 telegram-desktop pac
 thunderbird pac
