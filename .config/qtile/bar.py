@@ -3,7 +3,7 @@ from libqtile import bar, widget
 
 from colors import colors
 
-widget_defaults = { 
+widget_defaults = {
     'font': 'UbuntuMono Nerd Font',
     'fontsize': 14,
     'padding': 1,
@@ -11,177 +11,213 @@ widget_defaults = {
 
 extention_defaults = widget_defaults.copy()
 
-bar_size = 24
-padding_from_arrow = 10 
-padding_between_windget_and_icon = 6
-padding_from_border = 4
+BAR_SIZE = 24
+PADDING_FROM_ARROW = 10 
+PADDING_BETWEEN_WIDGET_AND_ICON = 6
+PADDING_FROM_BORDER = 4
 
-network_callback = lambda: lazy.spawn('alacritty -e sudo iwctl')
-resourse_callback = lambda: lazy.spawn('alacritty -e htop')
-storage_callback = lambda: lazy.spawn('alacritty -e sudo storage_stats')
+def get_network_callback():
+    ''' Get callback for network widget '''
+    return lazy.spawn('alacritty -e sudo iwctl')
 
-left_side = lambda: [
-    widget.GroupBox(
-        rounded = False,
-        disable_drag = True,
-        active = colors['active-foreground'],
-        highlight_color = colors['active-background'],
-        highlight_method = 'block',
-        inactive = colors['inactive-foreground'],
-        urgent_text = colors['urgent-foreground'],
-        urgent_border = colors['urgent-background'],
-        urgent_alert_method = 'block',
-    ),
-    widget.Mpd2(
-        port = 6606,
-        status_format = '{play_status}  {artist} - {title} [{repeat}{random}{single}]',
-        play_states = {'pause': '', 'play': '', 'stop': ''},
-    ),
-    widget.WindowName(format = ''),
-    widget.CurrentLayoutIcon(),
-    widget.Sep(padding = padding_from_arrow)
-]
+def get_resourse_callback():
+    ''' Get callback for ram widget '''
+    return lazy.spawn('alacritty -e htop')
 
-inet = lambda: [
-    widget.TextBox(
-        font = 'sans',
-        text = '',
-        fontsize = 30,
-        mouse_callbacks = {'Button1': network_callback()},
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon),
-    widget.Wlan(
-        format = '{essid}',
-        disconnected_message = '',
-        mouse_callbacks = {'Button1': network_callback()},
-    ),
-    widget.Net(
-        format = ' {down} ↓↑ {up}',
-        mouse_callbacks = {'Button1': network_callback()},
-    ),
-    widget.Sep(padding = padding_from_arrow)
-]
+def get_storage_callback():
+    ''' Get callback for disk widget '''
+    return lazy.spawn('alacritty -e sudo storage_stats')
 
-volume = lambda: [
-    widget.TextBox(
-        text = '',
-        font = 'sans',
-        fontsize = 24,
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon ),
-    widget.Volume(),
-    widget.Sep(padding = padding_from_arrow)
-]
 
-brightness = lambda: [
-    widget.TextBox(
-        text = '',
-        font = 'sans',
-        fontsize = 14,
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon),
-    widget.Backlight(
-        format = '{percent:2.0%}',
-        backlight_name = 'amdgpu_bl1',
-    ),
-    widget.Sep(padding = padding_from_arrow)
-]
+def wm_groups():
+    return [
+        widget.GroupBox(
+            rounded = False,
+            disable_drag = True,
+            active = colors['active-foreground'],
+            highlight_color = colors['active-background'],
+            highlight_method = 'block',
+            inactive = colors['inactive-foreground'],
+            urgent_text = colors['urgent-foreground'],
+            urgent_border = colors['urgent-background'],
+            urgent_alert_method = 'block',
+        )
+    ]
 
-battery = lambda: [
-    widget.Battery(
-        format = '{char}',
-        font = 'sans',
-        fontsize = 26,
-        charge_char = ' ',
-        discharge_char = ' ',
-        empty_char = '',
-        full_char = '',
-        low_background = colors['urgent-background'],
-        low_foreground = colors['urgent-foreground']
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon ),
-    widget.Battery(
-        format = '{percent:2.0%}',
-        low_background = colors['urgent-background'],
-        low_foreground = colors['urgent-foreground']
-    ),
-    widget.Sep(padding = padding_from_arrow)
-]
+def mpd():
+    return [
+        widget.Mpd2(
+            port = 6606,
+            status_format = '{play_status}  {artist} - {title} [{repeat}{random}{single}]',
+            play_states = {'pause': '', 'play': '', 'stop': ''},
+        )
+    ]
 
-ram = lambda: [
-    widget.TextBox(
-        text = '',
-        font = 'sans',
-        fontsize = 24,
-        mouse_callbacks = {'Button1': resourse_callback()},
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon ),
-    widget.Memory(
-        format = '{MemUsed:.2f}{mm}',
-        measure_mem = 'G',
-        mouse_callbacks = {'Button1': resourse_callback()},
-    ),
-    widget.Sep(padding = padding_from_arrow)
-]
+def middle_separator():
+    return [
+        widget.WindowName(format = '')
+    ]
 
-mem = lambda: [
-    widget.DF(
-        format = '  {r:.0f}%',
-        visible_on_warn = False,
-        mouse_callbacks = {'Button1': storage_callback()},
-    ),
-    widget.Sep(padding = padding_from_arrow)
-]
+def layout():
+    return [
+        widget.CurrentLayoutIcon(),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
 
-kbd = lambda: [
-    widget.TextBox(
-        text = '',
-        font = 'sans',
-    ),
-    widget.Sep(padding = padding_between_windget_and_icon ),
-    widget.KeyboardKbdd(configured_keyboards = ['us', 'ru']),
-    widget.Sep(padding = padding_from_arrow)        
-]
+def inet():
+    return [
+        widget.TextBox(
+            font = 'sans',
+            text = '',
+            fontsize = 30,
+            mouse_callbacks = {'Button1': get_network_callback()},
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
+        widget.Wlan(
+            format = '{essid}',
+            disconnected_message = '',
+            mouse_callbacks = {'Button1': get_network_callback()},
+        ),
+        widget.Net(
+            format = ' {down} ↓↑ {up}',
+            mouse_callbacks = {'Button1': get_network_callback()},
+        ),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
 
-time = lambda: [
-    widget.Clock(format='%H:%M:%S'), #format='%Y-%m-%d %H:%M:%S'
-    widget.Sep(padding = padding_from_arrow),
-]
+def volume():
+    return [
+        widget.TextBox(
+            text = '',
+            font = 'sans',
+            fontsize = 24,
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
+        widget.Volume(),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
 
-tray = lambda: [
-    widget.Systray(),
-    widget.Sep(padding = padding_from_border)
-]
+def brightness():
+    return [
+        widget.TextBox(
+            text = '',
+            font = 'sans',
+            fontsize = 14,
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
+        widget.Backlight(
+            format = '{percent:2.0%}',
+            backlight_name = 'amdgpu_bl1',
+        ),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
 
-empty = lambda: [
-    widget.Sep(padding = padding_from_border)
-]
+def battery():
+    return [
+        widget.Battery(
+            format = '{char}',
+            font = 'sans',
+            fontsize = 26,
+            charge_char = ' ',
+            discharge_char = ' ',
+            empty_char = '',
+            full_char = '',
+            show_short_text = False,
+            low_background = colors['urgent-background'],
+            low_foreground = colors['urgent-foreground']
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
+        widget.Battery(
+            format = '{percent:2.0%}',
+            show_short_text = False,
+            low_background = colors['urgent-background'],
+            low_foreground = colors['urgent-foreground']
+        ),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
 
+def ram():
+    return [
+        widget.TextBox(
+            text = '',
+            font = 'sans',
+            fontsize = 24,
+            mouse_callbacks = {'Button1': get_resourse_callback()},
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
+        widget.Memory(
+            format = '{MemUsed:.2f}{mm}',
+            measure_mem = 'G',
+            mouse_callbacks = {'Button1': get_resourse_callback()},
+        ),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
+
+def mem():
+    return [
+        widget.DF(
+            format = '  {r:.0f}%',
+            visible_on_warn = False,
+            mouse_callbacks = {'Button1': get_storage_callback()},
+        ),
+        widget.Sep(padding = PADDING_FROM_ARROW)
+    ]
+
+def kbd():
+    return [
+        widget.TextBox(
+            text = '',
+            font = 'sans',
+        ),
+        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
+        widget.KeyboardKbdd(configured_keyboards = ['US', 'RU']),
+        widget.Sep(padding = PADDING_FROM_ARROW)        
+    ]
+
+def time():
+    return [
+        widget.Clock(format='%H:%M:%S'), #format='%Y-%m-%d %H:%M:%S'
+        widget.Sep(padding = PADDING_FROM_ARROW),
+    ]
+
+def tray():
+    return [
+        widget.Systray(),
+        widget.Sep(padding = PADDING_FROM_BORDER)
+    ]
+
+def empty():
+    return [
+        widget.Sep(padding = PADDING_FROM_BORDER)
+    ]
+
+def mandatory():
+    return [*wm_groups(), *mpd(), *middle_separator(), *layout()]
 
 main_widget_groups = [
-        left_side(),
-        inet(),
-        volume(),
-        brightness(),
-        battery(),
-        ram(),
-        mem(),
-        kbd(),
-        time(),
-        tray()
+        mandatory,
+        inet,
+        volume,
+        brightness,
+        battery,
+        ram,
+        mem,
+        kbd,
+        time,
+        tray
 ]
 
 secondary_widget_groups = [
-        left_side(),
-        inet(),
-        volume(),
-        brightness(),
-        battery(),
-        ram(),
-        mem(),
-        kbd(),
-        time(),
-        empty()
+        mandatory,
+        inet,
+        volume,
+        brightness,
+        battery,
+        ram,
+        mem,
+        kbd,
+        time,
+        empty
 ]
 
 def get_widgets(widget_groups):
@@ -200,12 +236,13 @@ def get_widgets(widget_groups):
 
     color = get_colors()
 
-    for g in widget_groups:
+    for widget_group in widget_groups:
         current_colors = next(color)
-        for w in g:
+        group = widget_group()
+        for w in group:
             w.background = current_colors['bg']
             w.foreground = current_colors['fg'] if not isinstance(w, widget.Sep) else current_colors['bg']
-        yield g
+        yield group
 
 
 def get_arrows(num):
@@ -237,7 +274,7 @@ def get_bar(widget_groups):
         widget_list.append(arrow)
         widget_list += next(widget_group)
 
-    return bar.Bar(widget_list, bar_size)
+    return bar.Bar(widget_list, BAR_SIZE)
 
 main_bar = get_bar(main_widget_groups)
 secondary_bar = get_bar(secondary_widget_groups)
