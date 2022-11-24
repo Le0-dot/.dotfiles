@@ -61,3 +61,7 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.pyright.setup {}
+
+lspconfig.clangd.setup {}
+
+lspconfig.gopls.setup {}

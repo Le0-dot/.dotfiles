@@ -30,6 +30,10 @@ return require('packer').startup(function(use)
     use 'ap/vim-css-color'
     use 'tpope/vim-fugitive'
     use 'ThePrimeagen/vim-be-good'
+    use({
+	"iamcco/markdown-preview.nvim",
+	run = function() vim.fn["mkdp#util#install"]() end,
+    })
 
     -- Lsp plugins
     use 'neovim/nvim-lspconfig'

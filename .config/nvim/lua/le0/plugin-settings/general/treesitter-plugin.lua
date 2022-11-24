@@ -1,7 +1,7 @@
 -- Treesitter config
 
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "cpp", "python", "bash" },
+    ensure_installed = { "cpp", "python", "bash", "go" },
 
     -- Automatically install missing parsers when entering buffer
     auto_install = true,
