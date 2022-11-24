@@ -170,7 +170,7 @@ def kbd():
             font = 'sans',
         ),
         widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
-        widget.KeyboardKbdd(configured_keyboards = ['US', 'RU']),
+        widget.KeyboardKbdd(configured_keyboards = ['EN', 'RU']),
         widget.Sep(padding = PADDING_FROM_ARROW)        
     ]
 

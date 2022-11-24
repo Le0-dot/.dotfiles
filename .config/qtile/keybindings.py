@@ -100,6 +100,7 @@ keybindings_config = [
                spawn='rofi -show drun -theme ~/.config/rofi/themes/center.rasi'),
     Keybinding('firefox', [mod], 'f', spawn='firefox', to_group=1),
     Keybinding('firefox-private', [mod], 'p', spawn='firefox --private-window', to_group=1),
+    Keybinding('youtube-private', [mod], 'y', spawn='firefox --private-window https://youtube.com', to_group=1),
     Keybinding('telegram', [mod], 't', spawn='telegram-desktop', to_group=2),
     Keybinding('ms_teams', [mod, shift], 't',
                spawn='teams --disable-seccomp-filter-sandbox', to_group=2),
