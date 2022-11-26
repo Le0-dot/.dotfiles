@@ -114,8 +114,8 @@ def battery():
             format = '{char} {percent:2.0%}',
             charge_char = '   ',
             discharge_char = '   ',
-            empty_char = '',
-            full_char = '',
+            empty_char = '  ',
+            full_char = '  ',
             show_short_text = False,
             low_background = colors['urgent-background'],
             low_foreground = colors['urgent-foreground']
@@ -195,21 +195,21 @@ def get_widget_groups(widget_groups_functions):
     return [f() for f in widget_groups_functions]
 
 def add_separators(widget_groups):
-    SEP_LEFT = lambda: [widget.Sep(padding = PADDING_LEFT, linewidth = 0)]
-    SEP_RIGHT = lambda: [widget.Sep(padding = PADDING_RIGHT, linewidth = 0, **powerline,)]
-    SEP_BORDER = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
+    sep_left = lambda: [widget.Sep(padding = PADDING_LEFT, linewidth = 0)]
+    sep_right = lambda: [widget.Sep(padding = PADDING_RIGHT, linewidth = 0, **powerline,)]
+    sep_bordeR = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
 
     result = []
     for widget_group in widget_groups:
-        left = SEP_LEFT()
-        right = SEP_RIGHT()
+        left = sep_left()
+        right = sep_right()
 
         match widget_group:
             case [widget.Sep]:
                 left = []
                 right = []
             case [widget.Systray()]:
-                right = SEP_BORDER()
+                right = sep_bordeR()
             case [widget.GroupBox(), widget.Mpd2(), widget.WindowName(), widget.CurrentLayoutIcon()]:
                 left = []
         result.append(left + widget_group + right)
