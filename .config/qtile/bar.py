@@ -1,6 +1,9 @@
 from libqtile.lazy import lazy
 from libqtile import bar, widget
 
+from qtile_extras import widget
+from qtile_extras.widget.decorations import PowerLineDecoration
+
 from colors import colors
 
 widget_defaults = {
@@ -12,21 +15,35 @@ widget_defaults = {
 extention_defaults = widget_defaults.copy()
 
 BAR_SIZE = 24
-PADDING_FROM_ARROW = 10 
-PADDING_BETWEEN_WIDGET_AND_ICON = 6
+PADDING_LEFT = 6
+PADDING_RIGHT = 8
 PADDING_FROM_BORDER = 4
+
+powerline = {
+    'decorations': [
+        PowerLineDecoration(path="arrow_right", size=12)
+    ]
+}
 
 def get_network_callback():
     ''' Get callback for network widget '''
     return lazy.spawn('alacritty -e sudo iwctl')
+#    return None
 
 def get_resourse_callback():
     ''' Get callback for ram widget '''
     return lazy.spawn('alacritty -e htop')
+#    return None
 
 def get_storage_callback():
     ''' Get callback for disk widget '''
     return lazy.spawn('alacritty -e sudo storage_stats')
+#    return None
+
+def get_time_callback():
+    ''' Get callback for time widget '''
+    return lazy.spawn('firefox https://time.is')
+#    return None
 
 
 def wm_groups():
@@ -61,20 +78,12 @@ def middle_separator():
 def layout():
     return [
         widget.CurrentLayoutIcon(),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def inet():
     return [
-        widget.TextBox(
-            font = 'sans',
-            text = '',
-            fontsize = 30,
-            mouse_callbacks = {'Button1': get_network_callback()},
-        ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
         widget.Wlan(
-            format = '{essid}',
+            format = '   {essid}',
             disconnected_message = '',
             mouse_callbacks = {'Button1': get_network_callback()},
         ),
@@ -82,75 +91,44 @@ def inet():
             format = ' {down} ↓↑ {up}',
             mouse_callbacks = {'Button1': get_network_callback()},
         ),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def volume():
     return [
-        widget.TextBox(
-            text = '',
-            font = 'sans',
-            fontsize = 24,
-        ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
-        widget.Volume(),
-        widget.Sep(padding = PADDING_FROM_ARROW)
+        widget.Volume(fmt = '  {}'),
     ]
 
 def brightness():
     return [
-        widget.TextBox(
-            text = '',
-            font = 'sans',
-            fontsize = 14,
-        ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
         widget.Backlight(
-            format = '{percent:2.0%}',
+            format = ' {percent:2.0%}',
+            font = 'hack',
+            fontsize = 14,
             backlight_name = 'amdgpu_bl1',
         ),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def battery():
     return [
         widget.Battery(
-            format = '{char}',
-            font = 'sans',
-            fontsize = 26,
-            charge_char = ' ',
-            discharge_char = ' ',
+            format = '{char} {percent:2.0%}',
+            charge_char = '   ',
+            discharge_char = '   ',
             empty_char = '',
             full_char = '',
             show_short_text = False,
             low_background = colors['urgent-background'],
             low_foreground = colors['urgent-foreground']
         ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON),
-        widget.Battery(
-            format = '{percent:2.0%}',
-            show_short_text = False,
-            low_background = colors['urgent-background'],
-            low_foreground = colors['urgent-foreground']
-        ),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def ram():
     return [
-        widget.TextBox(
-            text = '',
-            font = 'sans',
-            fontsize = 24,
-            mouse_callbacks = {'Button1': get_resourse_callback()},
-        ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
         widget.Memory(
-            format = '{MemUsed:.2f}{mm}',
+            format = '  {MemUsed:.2f}{mm}',
             measure_mem = 'G',
             mouse_callbacks = {'Button1': get_resourse_callback()},
         ),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def mem():
@@ -160,36 +138,29 @@ def mem():
             visible_on_warn = False,
             mouse_callbacks = {'Button1': get_storage_callback()},
         ),
-        widget.Sep(padding = PADDING_FROM_ARROW)
     ]
 
 def kbd():
     return [
-        widget.TextBox(
-            text = '',
-            font = 'sans',
+        widget.KeyboardKbdd(
+            configured_keyboards = ['EN', 'RU'],
+            fmt = '  {}'
         ),
-        widget.Sep(padding = PADDING_BETWEEN_WIDGET_AND_ICON ),
-        widget.KeyboardKbdd(configured_keyboards = ['EN', 'RU']),
-        widget.Sep(padding = PADDING_FROM_ARROW)        
     ]
 
 def time():
     return [
-        widget.Clock(format='%H:%M:%S'), #format='%Y-%m-%d %H:%M:%S'
-        widget.Sep(padding = PADDING_FROM_ARROW),
+        widget.Clock(
+            format='%H:%M:%S',
+            mouse_callbacks = {'Button1': get_time_callback()},
+        ),
     ]
 
 def tray():
-    return [
-        widget.Systray(),
-        widget.Sep(padding = PADDING_FROM_BORDER)
-    ]
+    return [widget.Systray()]
 
 def empty():
-    return [
-        widget.Sep(padding = PADDING_FROM_BORDER)
-    ]
+    return [widget.Sep(padding = PADDING_FROM_BORDER)]
 
 def mandatory():
     return [*wm_groups(), *mpd(), *middle_separator(), *layout()]
@@ -220,61 +191,67 @@ secondary_widget_groups = [
         empty
 ]
 
-def get_widgets(widget_groups):
-    def get_colors():
-        yield {'bg': colors['background'], 'fg': colors['foreground']}
+def get_widget_groups(widget_groups_functions):
+    return [f() for f in widget_groups_functions]
 
-        current_colors = {'bg': colors['background-1'], 'fg': colors['foreground-1']}
-        next_colors = {'bg': colors['background-2'], 'fg': colors['foreground-2']}
+def add_separators(widget_groups):
+    SEP_LEFT = lambda: [widget.Sep(padding = PADDING_LEFT, linewidth = 0)]
+    SEP_RIGHT = lambda: [widget.Sep(padding = PADDING_RIGHT, linewidth = 0, **powerline,)]
+    SEP_BORDER = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
 
-        for _ in range(len(widget_groups) - 2):
-            print(current_colors)
-            yield current_colors
-            current_colors, next_colors = next_colors, current_colors
-
-        yield {'bg': colors['background'], 'fg': colors['foreground']}
-
-    color = get_colors()
-
+    result = []
     for widget_group in widget_groups:
-        current_colors = next(color)
-        group = widget_group()
-        for w in group:
-            w.background = current_colors['bg']
-            w.foreground = current_colors['fg'] if not isinstance(w, widget.Sep) else current_colors['bg']
-        yield group
+        left = SEP_LEFT()
+        right = SEP_RIGHT()
+
+        match widget_group:
+            case [widget.Sep]:
+                left = []
+                right = []
+            case [widget.Systray()]:
+                right = SEP_BORDER()
+            case [widget.GroupBox(), widget.Mpd2(), widget.WindowName(), widget.CurrentLayoutIcon()]:
+                left = []
+        result.append(left + widget_group + right)
+
+    return result
+
+def add_colors(widget_groups):
+    def add_color(wg, color):
+        for w in wg:
+            w.background = color[0]
+            w.foreground = color[1]
+        return wg
+
+    FIRST_COLOR = colors['background'], colors['foreground']
+    REPEATING_COLORS = (
+        colors['background-1'], colors['foreground-1']
+    ), (
+        colors['background-2'], colors['foreground-2']
+    )
+    LAST_COLOR = colors['background'], colors['foreground']
 
 
-def get_arrows(num):
-    def construct_arrow(color):
-        return widget.TextBox(font = 'sans', text = '',
-            background = color['bg'], foreground = color['fg'],
-            padding = 0, fontsize = 26)
+    result = [add_color(widget_groups[0], FIRST_COLOR)]
 
-    def get_colors():
-        yield {'bg': colors['background'], 'fg': colors['background-1']}
+    cur_color, next_color = REPEATING_COLORS
+    for wg in widget_groups[1:-1]:
+        result.append(add_color(wg, cur_color))
+        cur_color, next_color = next_color, cur_color
 
-        current_colors = {'bg': colors['background-1'], 'fg': colors['background-2']}
-        next_colors = {'bg': colors['background-2'], 'fg': colors['background-1']}
+    result.append(add_color(widget_groups[-1], LAST_COLOR))
 
-        for _ in range(num - 2):
-            yield current_colors
-            current_colors, next_colors = next_colors, current_colors
+    return result
 
-        yield {'bg': current_colors['bg'], 'fg': colors['background']}
-
-    for color in get_colors():
-        yield construct_arrow(color)
-
+def get_widgets(widget_groups):
+    widget_groups = get_widget_groups(widget_groups)
+    widget_groups = add_separators(widget_groups)
+    widget_groups = add_colors(widget_groups)
+    return [w for wg in widget_groups for w in wg]
 
 def get_bar(widget_groups):
-    widget_group = get_widgets(widget_groups)
-    widget_list = next(widget_group)
-    for arrow in get_arrows(len(widget_groups) - 1):
-        widget_list.append(arrow)
-        widget_list += next(widget_group)
-
-    return bar.Bar(widget_list, BAR_SIZE)
+    widgets = get_widgets(widget_groups)
+    return bar.Bar(widgets, BAR_SIZE)
 
 main_bar = get_bar(main_widget_groups)
 secondary_bar = get_bar(secondary_widget_groups)
