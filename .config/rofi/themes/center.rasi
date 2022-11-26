@@ -16,6 +16,7 @@
 #window {
     border:  1;
     padding: 5;
+    border-radius:    2px;
 }
 #mainbox {
     border:  0;
