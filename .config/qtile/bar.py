@@ -1,4 +1,4 @@
-from libqtile.lazy import lazy
+#from libqtile.lazy import lazy
 from libqtile import bar, widget
 
 from qtile_extras import widget
@@ -27,23 +27,23 @@ powerline = {
 
 def get_network_callback():
     ''' Get callback for network widget '''
-    return lazy.spawn('alacritty -e sudo iwctl')
-#    return None
+ #   return lazy.spawn('alacritty -e sudo iwctl')
+    return None
 
 def get_resourse_callback():
     ''' Get callback for ram widget '''
-    return lazy.spawn('alacritty -e htop')
-#    return None
+ #   return lazy.spawn('alacritty -e htop')
+    return None
 
 def get_storage_callback():
     ''' Get callback for disk widget '''
-    return lazy.spawn('alacritty -e sudo storage_stats')
-#    return None
+ #   return lazy.spawn('alacritty -e sudo storage_stats')
+    return None
 
 def get_time_callback():
     ''' Get callback for time widget '''
-    return lazy.spawn('firefox https://time.is')
-#    return None
+ #   return lazy.spawn('firefox https://time.is')
+    return None
 
 
 def wm_groups():
@@ -160,7 +160,7 @@ def tray():
     return [widget.Systray()]
 
 def empty():
-    return [widget.Sep(padding = PADDING_FROM_BORDER)]
+    return []
 
 def mandatory():
     return [*wm_groups(), *mpd(), *middle_separator(), *layout()]
@@ -197,7 +197,7 @@ def get_widget_groups(widget_groups_functions):
 def add_separators(widget_groups):
     sep_left = lambda: [widget.Sep(padding = PADDING_LEFT, linewidth = 0)]
     sep_right = lambda: [widget.Sep(padding = PADDING_RIGHT, linewidth = 0, **powerline,)]
-    sep_bordeR = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
+    sep_border = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
 
     result = []
     for widget_group in widget_groups:
@@ -205,11 +205,11 @@ def add_separators(widget_groups):
         right = sep_right()
 
         match widget_group:
-            case [widget.Sep]:
+            case []:
                 left = []
-                right = []
+                right = sep_border()
             case [widget.Systray()]:
-                right = sep_bordeR()
+                right = sep_border()
             case [widget.GroupBox(), widget.Mpd2(), widget.WindowName(), widget.CurrentLayoutIcon()]:
                 left = []
         result.append(left + widget_group + right)
