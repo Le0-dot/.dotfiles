@@ -7,6 +7,7 @@ __pycache__/
 .cache/
 .mozilla/
 .ssh/
+.var/
 .vim/
 .mpd/
 .icons/
