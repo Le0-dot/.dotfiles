@@ -1,4 +1,4 @@
-#from libqtile.lazy import lazy
+from libqtile.lazy import lazy
 from libqtile import bar, widget
 
 from qtile_extras import widget
@@ -27,23 +27,23 @@ powerline = {
 
 def get_network_callback():
     ''' Get callback for network widget '''
- #   return lazy.spawn('alacritty -e sudo iwctl')
-    return None
+    return lazy.spawn('alacritty -e sudo iwctl')
+#    return None
 
 def get_resourse_callback():
     ''' Get callback for ram widget '''
- #   return lazy.spawn('alacritty -e htop')
-    return None
+    return lazy.spawn('alacritty -e htop')
+#    return None
 
 def get_storage_callback():
     ''' Get callback for disk widget '''
- #   return lazy.spawn('alacritty -e sudo storage_stats')
-    return None
+    return lazy.spawn('alacritty -e sudo storage_stats')
+#    return None
 
 def get_time_callback():
     ''' Get callback for time widget '''
- #   return lazy.spawn('firefox https://time.is')
-    return None
+    return lazy.spawn('firefox https://time.is')
+#    return None
 
 
 def wm_groups():
@@ -82,14 +82,17 @@ def layout():
 
 def inet():
     return [
-        widget.Wlan(
-            format = '   {essid}',
-            disconnected_message = '',
-            mouse_callbacks = {'Button1': get_network_callback()},
+        widget.WiFiIcon(
+            active_colour = colors['foreground-1'][0],
+            inactive_colour = colors['background-1'][0],
+            mouse_callbacks = {'Button3': get_network_callback()},
+            expanded_timeout = 10,
+            wifi_arc = 80,
+            padding_y = 4,
         ),
         widget.Net(
-            format = ' {down} ↓↑ {up}',
-            mouse_callbacks = {'Button1': get_network_callback()},
+            format = '{down} ↓↑ {up}',
+            mouse_callbacks = {'Button3': get_network_callback()},
         ),
     ]
 
