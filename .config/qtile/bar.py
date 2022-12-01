@@ -18,6 +18,7 @@ BAR_SIZE = 24
 PADDING_LEFT = 6
 PADDING_RIGHT = 8
 PADDING_FROM_BORDER = 4
+PADDING_GROUP_BOX = 4
 
 powerline = {
     'decorations': [
@@ -198,6 +199,7 @@ def get_widget_groups(widget_groups_functions):
     return [f() for f in widget_groups_functions]
 
 def add_separators(widget_groups):
+    sep_group_box = lambda: [widget.Sep(padding = PADDING_GROUP_BOX, linewidth = 0)]
     sep_left = lambda: [widget.Sep(padding = PADDING_LEFT, linewidth = 0)]
     sep_right = lambda: [widget.Sep(padding = PADDING_RIGHT, linewidth = 0, **powerline,)]
     sep_border = lambda: [widget.Sep(padding = PADDING_FROM_BORDER, linewidth = 0)]
@@ -215,6 +217,7 @@ def add_separators(widget_groups):
                 right = sep_border()
             case [widget.GroupBox(), widget.Mpd2(), widget.WindowName(), widget.CurrentLayoutIcon()]:
                 left = []
+                widget_group = widget_group[:1] + sep_group_box() + widget_group[1:]
         result.append(left + widget_group + right)
 
     return result

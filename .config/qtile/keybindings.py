@@ -77,8 +77,8 @@ keybindings_config = [
     Keybinding('volume_down', [], 'F2', spawn='amixer -q -D pulse sset Master 5%-'),
 
     # Brightness control
-    Keybinding('brightness_up', [], 'F8', spawn='sudo light -A 5'),
-    Keybinding('brightness_down', [], 'F7', spawn='sudo light -U 5'),
+    Keybinding('brightness_up', [], 'F8', spawn='light -A 5'),
+    Keybinding('brightness_down', [], 'F7', spawn='light -U 5'),
 
     # Mpd control
     Keybinding('music_toggle', [mod, alt], 'space',
