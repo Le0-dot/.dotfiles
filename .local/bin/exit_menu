@@ -21,23 +21,15 @@ done < <(grep 'Name=' /usr/share/xsessions/*.desktop | cut -d'=' -f2)
 
 case $option in
     "Lock")
-	~/.local/bin/lock 
-    	;;
+	~/.local/bin/lock;;
     "Exit")
-	for manager in "${MANAGERS[@]}"; do 
-	    killall "${manager}" ||
-		output "Process ${manager} was not running."
-	done
-    	;;
+	loginctl terminate-session ${XDG_SESSION_ID-};;
     "Suspend")
-	systemctl suspend
-    	;;
+	systemctl suspend;;
     "Reboot")
-	systemctl reboot
-    	;;
+	systemctl reboot;;
     "Shutdown")
-	systemctl poweroff
-    	;;
+	systemctl poweroff;;
     "Quit" | *)
 	;;
 esac
