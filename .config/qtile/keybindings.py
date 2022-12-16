@@ -97,7 +97,7 @@ keybindings_config = [
     # Program launchers
     Keybinding('terminal', [mod], 'Return', spawn=terminal),
     Keybinding('rofi', [mod, shift], 'Return',
-               spawn='rofi -show drun -theme ~/.config/rofi/themes/center.rasi'),
+               spawn='rofi -show drun -theme center'),
     Keybinding('firefox', [mod], 'f', spawn='firefox', to_group=1),
     Keybinding('firefox-private', [mod], 'p', spawn='firefox --private-window', to_group=1),
     Keybinding('youtube-private', [mod], 'y', spawn='firefox --private-window https://youtube.com', to_group=1),
@@ -108,7 +108,8 @@ keybindings_config = [
     Keybinding('exit_menu', [mod], 'Escape', spawn='./.local/bin/exit_menu'),
     Keybinding('lock', [mod, shift], 'x', spawn='./.local/bin/lock'),
     Keybinding('filezilla', [mod, control], 'f', spawn='filezilla', to_group=3),
-    Keybinding('thunderbird', [mod, control], 't', spawn='thunderbird', to_group=8)
+    Keybinding('thunderbird', [mod, control], 't', spawn='thunderbird', to_group=8),
+    Keybinding('ncmpcpp', [mod], 'm', spawn='alacritty -e ncmpcpp'),
 ]
 
 
