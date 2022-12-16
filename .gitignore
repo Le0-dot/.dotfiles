@@ -60,6 +60,7 @@ go/
 .config/gcolor3
 .config/nvim/plugin
 .config/autorandr/
+.config/libreoffice/
 
 .local/bin/get_objgraph
 .local/bin/isort
