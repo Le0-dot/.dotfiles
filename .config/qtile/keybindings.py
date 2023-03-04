@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
-from groups import group_names
 from libqtile.config import Key
 from libqtile.lazy import LazyCall, lazy
+
+from groups import group_names
 
 
 @dataclass
@@ -15,21 +16,21 @@ class Keybinding:
     spawn: str = ''
     to_group: int = -1
     action: Optional[LazyCall] = None
-    __all_actions: list[LazyCall] = field(repr = False, default_factory = list)
+    all_actions: list[LazyCall] = field(repr = False, default_factory = list)
 
     def evaluate_actions(self, groups: list[str]):
         'Evaluate actions, such as applications, spawning group, and more'
         if self.spawn:
-            self.__all_actions.append(lazy.spawn(self.spawn))
+            self.all_actions.append(lazy.spawn(self.spawn))
         if 0 <= self.to_group <= 9:
-            self.__all_actions.append(lazy.group[groups[self.to_group]].toscreen(toggle=False))
+            self.all_actions.append(lazy.group[groups[self.to_group]].toscreen(toggle=False))
         if not self.action is None:
-            self.__all_actions.append(self.action)
+            self.all_actions.append(self.action)
         return self
 
     def to_key(self):
         'Construct a qtile Key class from caller'
-        return Key(self.mods, self.key, *self.__all_actions, desc=self.name)
+        return Key(self.mods, self.key, *self.all_actions, desc=self.name)
 
 
 
@@ -100,10 +101,11 @@ keybindings_config = [
                spawn='rofi -show drun -theme center'),
     Keybinding('firefox', [mod], 'f', spawn='firefox', to_group=1),
     Keybinding('firefox-private', [mod], 'p', spawn='firefox --private-window', to_group=1),
-    Keybinding('youtube-private', [mod], 'y', spawn='firefox --private-window https://youtube.com', to_group=1),
+    Keybinding('youtube-private', [mod], 'y', 
+               spawn='firefox --private-window https://youtube.com', to_group=1),
     Keybinding('telegram', [mod], 't', spawn='telegram-desktop', to_group=2),
     Keybinding('ms_teams', [mod, shift], 't',
-               spawn='teams --disable-seccomp-filter-sandbox', to_group=2),
+               spawn='flatpak run com.github.IsmaelMartinez.teams_for_linux', to_group=2),
     Keybinding('discord', [mod], 'd', spawn='discord', to_group=2),
     Keybinding('exit_menu', [mod], 'Escape', spawn='./.local/bin/exit_menu'),
     Keybinding('lock', [mod, shift], 'x', spawn='./.local/bin/lock'),
