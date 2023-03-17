@@ -1,0 +1,10 @@
+[Unit]
+Description=Set random wallpaper for user %i with local script
+
+[Service]
+User=%i
+Type=forking
+Environment=DISPLAY=:0
+ExecStartPre=
+ExecStart=
+ExecStart=/home/%i/.local/bin/set_random_wallpaper

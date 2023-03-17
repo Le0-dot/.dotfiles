@@ -36,6 +36,8 @@ alias ll='ls -laF --time-style=long-iso'
 
 alias tree='exa --tree'
 
+alias cal='cal -m -3'
+
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'

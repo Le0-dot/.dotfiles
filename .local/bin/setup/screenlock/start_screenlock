@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if [ ! $# -eq 1 ]
-then
-	echo "First argument must be user name"
-	exit
-fi
+user=$(user | cut -d' ' -f1)
 
 sudo cp screenlock@.service /etc/systemd/system/
-sudo systemctl enable --now screenlock@$1
+sudo systemctl enable --now screenlock@$user

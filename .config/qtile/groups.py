@@ -19,14 +19,14 @@ class group:
 group_config = (
     group('1:  ', layout = 'columns', matches = ['alacritty']),
     group('2:  ', matches = ['firefox']),
-    group('3:  ', matches = ['TelegramDesktop', 'discord', 'microsoft teams - preview', 'viber']),
+    group('3:  ', matches = ['TelegramDesktop', 'discord', 'microsoft teams - preview', 'Viber']),
     group('4:  ', matches = ['mupdf']),
     group('5:  ', matches = ['filezilla']),
     group('6', matches = []),
     group('7', matches = []),
     group('8', matches = []),
     group('9:  ', matches = ['Thunderbird']),
-    group('10:  ', matches = ['vlc'])
+    group('10:  ', matches = ['vlc', 'spotify'])
 )
 
 

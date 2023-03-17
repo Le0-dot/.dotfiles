@@ -1,0 +1,10 @@
+[Unit]
+Description=Run %i service every 5 minutes
+
+[Timer]
+OnCalendar=*:0/1
+Persistent=true
+Unit=%i.service
+
+[Install]
+WantedBy=default.target

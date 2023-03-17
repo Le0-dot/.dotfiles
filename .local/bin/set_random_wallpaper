@@ -1,11 +1,5 @@
 #!/bin/bash
 
-wallpaper_dir=~/Pictures/wallpapers
+wallpaper_dir=~/Pictures/wallpapers/background/
 
-wallpapers=( $(ls $wallpaper_dir | grep wallpaper) )
-
-random_number=$(($RANDOM % ${#wallpapers[@]}))
-
-random_wallpaper=${wallpapers[$random_number]}
-
-feh --bg-tile $wallpaper_dir/$random_wallpaper
+pidof Xorg &> /dev/null && feh --bg-tile --randomize $wallpaper_dir
