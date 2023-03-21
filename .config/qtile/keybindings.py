@@ -73,9 +73,15 @@ keybindings_config = [
     Keybinding('switch_screen_3', [mod, alt], '3', action=lazy.to_screen(2)),
 
     # Volume control
-    Keybinding('volume_mute', [], 'F1', spawn='amixer -q -D pulse sset Master toggle'),
-    Keybinding('volume_up', [], 'F3', spawn='amixer -q -D pulse sset Master 5%+'),
-    Keybinding('volume_down', [], 'F2', spawn='amixer -q -D pulse sset Master 5%-'),
+    Keybinding('volume_mute', [], 'F1', spawn='wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'),
+    Keybinding('volume_down', [], 'F2', spawn='wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-'),
+    Keybinding('volume_up', [], 'F3', spawn='wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+'),
+    #Keybinding('micro_mute', [], 'F4', spawn='wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'),
+
+    Keybinding('volume_mute', [], 'XF86AudioMute', spawn='wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'),
+    Keybinding('volume_up', [], 'XF86AudioLowerVolume', spawn='wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-'),
+    Keybinding('volume_down', [], 'XF86AudioRaiseVolume', spawn='wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+'),
+    #Keybinding('micro_mute', [], 'XF86AudioMicMute', spawn='wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'),
 
     # Brightness control
     Keybinding('brightness_up', [], 'F8', spawn='light -A 5'),

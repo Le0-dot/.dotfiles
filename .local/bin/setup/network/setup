@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo cp ~/.local/bin/setup/network/iwd.conf /etc/NetworkManager/conf.d/iwd.conf
+sudo cp ~/.local/bin/setup/network/dhcp-client.conf /etc/NetworkManager/conf.d/dhcp-client.conf
+sudo cp ~/.local/bin/setup/network/dns.conf /etc/NetworkManager/conf.d/dns.conf
