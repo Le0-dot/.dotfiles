@@ -67,6 +67,8 @@ keybindings_config = [
     Keybinding('grow_window_down', [mod, control], 'j', action=lazy.layout.grow_down()),
     Keybinding('normalize_window', [mod], 'n', action=lazy.layout.normalize_window()),
 
+    Keybinding('fullsceen', [mod, shift, control], 'f', action=lazy.window.toggle_fullscreen()),
+
     # Screen switch
     Keybinding('switch_screen_1', [mod, alt], '1', action=lazy.to_screen(0)),
     Keybinding('switch_screen_2', [mod, alt], '2', action=lazy.to_screen(1)),
