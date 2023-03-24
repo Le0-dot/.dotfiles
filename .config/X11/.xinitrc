@@ -13,12 +13,12 @@ set_random_wallpaper
 blueman-applet &
 nm-applet &
 mpc --port=6606 repeat on
-pactl load-module module-switch-on-connect # pipewire set newly connected devices as default
+pactl load-module module-switch-on-connect # pipewire-pulseaudio set newly connected devices as default
 
 # Xorg
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 kbdd &
-xinput --set-prop 'pointer:Logitech G703 LS' 'libinput Accel Speed' -0.75
+xinput --set-prop 'pointer:Logitech G703 LS' 'libinput Accel Speed' -1
 
 exec qtile start
 #exec i3
