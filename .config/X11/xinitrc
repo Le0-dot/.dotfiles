@@ -14,11 +14,11 @@ blueman-applet &
 nm-applet &
 mpc --port=6606 repeat on
 pactl load-module module-switch-on-connect # pipewire-pulseaudio set newly connected devices as default
+/home/le0/.local/bin/mouse_set_sens
 
 # Xorg
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 kbdd &
-xinput --set-prop 'pointer:Logitech G703 LS' 'libinput Accel Speed' -1
 
 exec qtile start
 #exec i3
