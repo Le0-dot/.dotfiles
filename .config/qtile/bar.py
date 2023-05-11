@@ -82,7 +82,10 @@ def inet():
 
 def volume():
     return [
-        widget.Volume(fmt = '  {}'),
+        widget.Volume(
+            fmt = '  {}',
+            step = 5
+        ),
     ]
 
 def brightness():
