@@ -1,4 +1,4 @@
-from libqtile.lazy import lazy
+from libqtile.command import lazy
 from libqtile import bar, widget
 
 from qtile_extras import widget
