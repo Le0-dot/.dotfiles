@@ -25,7 +25,7 @@ group_config = (
     group('6', matches = []),
     group('7', matches = []),
     group('8', matches = []),
-    group('9:  ', matches = ['Thunderbird']),
+    group('9:  ', matches = ['thunderbird']),
     group('10:  ', matches = ['vlc', 'spotify'])
 )
 
