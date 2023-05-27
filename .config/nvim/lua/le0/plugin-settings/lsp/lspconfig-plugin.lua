@@ -65,3 +65,7 @@ lspconfig.pyright.setup {}
 lspconfig.clangd.setup {}
 
 lspconfig.gopls.setup {}
+
+lspconfig.hls.setup {
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
