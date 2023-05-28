@@ -47,7 +47,7 @@ alias vim='nvim'
 
 shopt -s autocd
 
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$PATH"
 export EDITOR=nvim
 
 # PS1='[\u@\h \W]\$ '
