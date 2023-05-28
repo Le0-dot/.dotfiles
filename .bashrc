@@ -45,6 +45,8 @@ alias gp='git push'
 
 alias vim='nvim'
 
+alias ranger='. ranger' # will change the directory after quitting
+
 shopt -s autocd
 
 export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$PATH"
