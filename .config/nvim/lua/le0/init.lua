@@ -8,6 +8,7 @@ require('le0/plugin-settings/general/floaterm-plugin')
 require('le0/plugin-settings/general/telescope-plugin')
 require('le0/plugin-settings/general/treesitter-plugin')
 require('le0/plugin-settings/general/markdown-plugin')
+require('le0/plugin-settings/general/fugitive-plugin')
 
 -- Lsp plugins
 require('le0/plugin-settings/lsp/lspconfig-plugin')
