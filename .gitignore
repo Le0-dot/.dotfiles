@@ -21,6 +21,7 @@ __pycache__/
 .gnupg/
 .cabal/
 .ghc/
+.parallel/
 
 Documents/
 Downloads/
@@ -69,4 +70,5 @@ go/
 .local/bin/isort
 .local/bin/isort-identify-imports
 .local/bin/undill
+.local/bin/pja-sftp
 .local/state/
