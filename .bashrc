@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-calc(){ awk "BEGIN { print "$*" }"; }
+calc(){ python -c "print($*)"; }
 
 function swap {
     if [ $# -eq 2 ]
