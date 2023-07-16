@@ -5,9 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-calc(){ python -c "print($*)"; }
+calc() { python -c "print($*)"; }
 
-function swap {
+swap() {
     if [ $# -eq 2 ]
     then
 	cp "$1" tmpfile
@@ -16,6 +16,23 @@ function swap {
     else
 	echo "Needed 2 arguments"
     fi
+}
+
+ranger_non_recursive() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
+
+ranger_cd() {
+    temp_file="$(mktemp -t "ranger.XXXXXXXXXX")"
+    ranger_non_recursive --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
 }
 
 ##-----------------------------------------------------
@@ -45,13 +62,17 @@ alias gp='git push'
 
 alias vim='nvim'
 
-alias ranger='. ranger' # will change the directory after quitting
+alias ranger='ranger_cd'
 
 shopt -s autocd
 
 export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$PATH"
 export EDITOR=nvim
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+export GTK_THEME=Arc-Dark
+export RANGER_LOAD_DEFAULT_RC=false
+
+bind '"\C-o":"ranger\C-m"'
 
 # PS1='[\u@\h \W]\$ '
 
