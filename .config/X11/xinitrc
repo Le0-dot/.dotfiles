@@ -15,6 +15,7 @@ nm-applet &
 mpc --port=6606 repeat on
 pactl load-module module-switch-on-connect # pipewire-pulseaudio set newly connected devices as default
 /home/le0/.local/bin/mouse_set_sens
+synology-drive autostart &
 
 # Xorg
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
