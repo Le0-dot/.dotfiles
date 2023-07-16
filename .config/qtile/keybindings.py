@@ -86,8 +86,8 @@ keybindings_config = [
     #Keybinding('micro_mute', [], 'XF86AudioMicMute', spawn='wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'),
 
     # Brightness control
-    Keybinding('brightness_up', [], 'F8', spawn='light -A 5'),
-    Keybinding('brightness_down', [], 'F7', spawn='light -U 5'),
+    Keybinding('brightness_up', [], 'XF86MonBrightnessUp', spawn='brightnessctl s +5%'),
+    Keybinding('brightness_down', [], 'XF86MonBrightnessDown', spawn='brightnessctl s 5%-'),
 
     # Mpd control
     Keybinding('music_toggle', [mod, alt], 'space',

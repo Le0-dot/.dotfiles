@@ -94,7 +94,7 @@ def brightness():
             format = ' {percent:2.0%}',
             font = 'hack',
             fontsize = 14,
-            backlight_name = 'amdgpu_bl1',
+            backlight_name = 'intel_backlight',
         ),
     ]
 
