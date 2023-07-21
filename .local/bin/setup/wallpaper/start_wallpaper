@@ -1,7 +1,0 @@
-#!/bin/bash
-
-user=$(user | cut -d' ' -f1)
-
-sudo cp ./every5minutes@.timer /etc/systemd/system/
-sudo cp ./wallpaper@.service /etc/systemd/system/
-sudo systemctl enable --now every5minutes@wallpaper@$user.timer
