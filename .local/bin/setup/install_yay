@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+sudo chown -R $(users) yay
+cd yay
+makepkg -si
+cd ..
+rm -rf yay
