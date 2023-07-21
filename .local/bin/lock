@@ -1,22 +1,3 @@
 #!/bin/bash
 
-pictures_path=~/Pictures/wallpapers/lock
-
-command=i3lock
-picture_command=$command" -i "
-
-if [ -d "$pictures_path" ]; then
-    counter=$(ls $pictures_path | wc -l)
-
-    if (( counter > 0 )); then
-	image_number=$(($RANDOM % $counter))
-	filename="$image_number.png"
-
-	$picture_command$pictures_path/$filename
-    else
-	$command
-    fi
-
-else
-    $command
-fi
+xwd -root | convert xwd:- -blur 0x12 RGB:- | i3lock --raw 2560x1440:rgb --image /dev/stdin
