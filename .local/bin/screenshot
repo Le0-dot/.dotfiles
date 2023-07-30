@@ -1,0 +1,20 @@
+#!/bin/sh
+
+showUsage() {
+    echo "Usage: $1 [-a|--area]"
+}
+
+filename=$(date +'%Y-%m-%d-%H-%M-%S.png')
+path=$(xdg-user-dir PICTURES)/screenshots/$filename
+
+if (( $# == 1 )); then
+    if [ "$1" = "-a" ] || [ "$1" = "--area" ]; then
+	grim -g "$(slurp)" "$path"
+    else
+	showUsage
+    fi
+elif (( $# == 0 )); then
+	grim "$path"
+else
+    showUsage
+fi
