@@ -1,5 +1,11 @@
 #!/bin/bash
 
+dmenu="dmenu"
+
+if [ $# -eq 1 ]; then
+    dmenu="$1"
+fi
+
 declare -a option_list=(
     "Lock"
     "Exit"
@@ -9,8 +15,7 @@ declare -a option_list=(
     "Quit"
 )
 
-option=$(printf '%s\n' "${option_list[@]}" | rofi -dmenu -theme ~/.config/rofi/themes/center.rasi -i -l 20 -p "Choose what to do:" "$@") ||
-exit 1
+option=$(printf '%s\n' "${option_list[@]}" | "$dmenu") || exit 1
 
 declare -a MANAGERS
 while IFS= read -r manager
