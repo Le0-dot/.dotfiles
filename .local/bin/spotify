@@ -1,0 +1,3 @@
+#!/bin/sh
+
+LD_PRELOAD=~/.local/lib/spotifywm.so flatpak run com.spotify.Client
