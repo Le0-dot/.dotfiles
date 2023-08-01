@@ -34,3 +34,7 @@ o.softtabstop = 4
 
 o.splitright = true
 o.splitbelow = true
+
+vim.api.nvim_create_user_command("Cppath", function()
+    vim.fn.setreg('+', vim.fn.getreg('0'))
+end, {})
