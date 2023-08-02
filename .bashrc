@@ -5,8 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-calc() { python -c "print($*)"; }
-
 swap() {
     if [ $# -eq 2 ]
     then

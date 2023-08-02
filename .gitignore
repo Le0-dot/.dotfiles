@@ -23,6 +23,8 @@ __pycache__/
 .ghc/
 .parallel/
 .SynologyDrive/
+.nv/
+.vcpkg/
 
 Documents/
 Downloads/
@@ -69,6 +71,7 @@ SynologyDrive/
 .config/rncbc.org/
 .config/obs-studio/
 .config/ranger/plugins/
+.config/a2ln
 
 .local/bin/get_objgraph
 .local/bin/isort
