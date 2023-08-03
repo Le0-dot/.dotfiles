@@ -1,0 +1,103 @@
+@define-color bg #282c34;
+@define-color fg #f3f4f5;
+@define-color urgent #e53835;
+@define-color active #000000;
+@define-color passive #615f67;
+@define-color charging #26a65b;
+@define-color warning #ffff00;
+
+* {
+    font-family: FontAwesome;
+    font-size: 18px;
+}
+
+window#waybar {
+    background: transparent;
+    color: @fg;
+}
+
+#workspaces {
+    background: @bg;
+    border: solid 2px @fg;
+    border-radius: 25px;
+    padding: 0 12px;
+    margin: 6px 0 8px 0;
+}
+
+#workspaces button {
+    border-radius: 25px;
+    padding: 0 5px;
+    margin: 4px 4px;
+}
+
+#workspaces button:not(.persistent) {
+    background: @passive;
+}
+
+#workspaces button:hover {
+    background: @active;
+}
+
+#workspaces button.active {
+    background: @active;
+}
+
+#workspaces button.urgent {
+    background: @urgent;
+}
+
+
+.modules-right > widget > * {
+    background: @bg;
+    border: solid 2px @fg;
+    border-radius: 25px;
+    padding: 0 12px;
+    margin: 6px 0 8px 0;
+}
+
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 10px;
+}
+
+.modules-right > widget:last-child > * {
+    margin-right: 10px;
+}
+
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @urgent;
+    border-radius: 25px;
+}
+
+
+#wireplumber.muted {
+    color: @passive;
+}
+
+
+#battery.charging, #battery.plugged {
+    background: @charging;
+}
+
+#battery.warning:not(.charging) {
+    color: @warning;
+    border: solid 2px @warning;
+}
+
+@keyframes blink {
+    to {
+	background: @fg;
+	border: solid 1px @urgent;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: @urgent;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
