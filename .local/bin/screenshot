@@ -10,11 +10,13 @@ path=$(xdg-user-dir PICTURES)/screenshots/$filename
 if (( $# == 1 )); then
     if [ "$1" = "-a" ] || [ "$1" = "--area" ]; then
 	grim -g "$(slurp)" "$path"
+	notify-send "Screenshot taken" "Image was saved to $path"
     else
 	showUsage
     fi
 elif (( $# == 0 )); then
-	grim "$path"
+    grim "$path"
+    notify-send "Screenshot taken" "Image was saved to $path"
 else
     showUsage
 fi
