@@ -56,5 +56,4 @@ return require('packer').startup(function(use)
 	'alepez/vim-gtest',
 	ft = {'c', 'cpp', 'cmake'}
     }
-    use 'p00f/clangd_extensions.nvim'
 end)

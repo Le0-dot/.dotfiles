@@ -19,7 +19,6 @@ require('le0/plugin-settings/lsp/cmp-plugin')
 -- Cpp plugins
 require('le0/plugin-settings/cpp/cmake-plugin')
 require('le0/plugin-settings/cpp/gtest-plugin')
-require('le0/plugin-settings/cpp/clangd-extentions-plugin')
 
 local map = require('le0/plugin-settings/easy-mapping').map
 
