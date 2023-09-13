@@ -45,6 +45,8 @@ if [ -f /home/le0/.config/synth-shell/alias.sh ] && [ -n "$( echo $- | grep i )"
 	source /home/le0/.config/synth-shell/alias.sh
 fi
 
+source /usr/share/doc/pkgfile/command-not-found.bash
+
 alias ls='exa'
 alias la='ls -a'
 alias ll='ls -laF --time-style=long-iso'
@@ -64,22 +66,13 @@ alias ranger='ranger_cd'
 
 shopt -s autocd
 
-export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$HOME/.ghcup/bin/:$PATH"
 export EDITOR=nvim
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 export GTK_THEME=Arc-Dark
 export RANGER_LOAD_DEFAULT_RC=false
 
-# swww variables
-export SWWW_TRANSITION=simple
-export SWWW_TRANSITION_STEP=2
-export SWWW_TRANSITION_DURATION=3 # ignored with simple transition
-export SWWW_TRANSITION_FPS=240
-export SWWW_TRANSITION_ANGLE=45 # only for wipe and wave transitions
-export SWWW_TRANSITION_POS=center # only for grow and outer transitions
-export SWWW_INVERT_Y=false
-export SWWW_TRANSITION_BEZIER=.54,0,.34,.99
-export SWWW_TRANSITION_WAVE=20,20 # only for wave transition
+export CMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 bind '"\C-o":"ranger\C-m"'
 
