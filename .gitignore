@@ -25,6 +25,7 @@ __pycache__/
 .SynologyDrive/
 .nv/
 .vcpkg/
+.ghcup/
 
 Documents/
 Downloads/
@@ -51,6 +52,7 @@ SynologyDrive/
 .config/dconf/
 .config/filezilla/
 .config/gtk-3.0/
+.config/gtk-4.0/
 .config/htop/
 .config/pulse/
 .config/systemd/
