@@ -30,7 +30,7 @@ window#waybar {
     margin: 4px 4px;
 }
 
-#workspaces button:not(.persistent) {
+#workspaces button:not(.empty) {
     background: @passive;
 }
 
