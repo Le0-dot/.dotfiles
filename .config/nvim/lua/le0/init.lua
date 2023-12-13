@@ -2,11 +2,12 @@ require('le0/settings')
 require('le0/plugins')
 
 -- General plugins
-require('le0/plugin-settings/general/nord-plugin') -- Colorscheme always first
+require('le0/plugin-settings/general/catppuccin-plugin') -- Colorscheme always first
 require('le0/plugin-settings/general/lualine-plugin')
 require('le0/plugin-settings/general/floaterm-plugin')
 require('le0/plugin-settings/general/telescope-plugin')
 require('le0/plugin-settings/general/treesitter-plugin')
+require('le0/plugin-settings/general/treesitter-textobjects-plugin')
 require('le0/plugin-settings/general/markdown-plugin')
 require('le0/plugin-settings/general/fugitive-plugin')
 require('le0/plugin-settings/general/yanky-plugin')

@@ -6,10 +6,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 return require('packer').startup(function(use)
     -- General plugins
-    use {
-        'shaunsingh/nord.nvim',
-        run = 'cp ~/.config/nvim/my-colors.lua ./lua/nord/named_colors.lua'
-    }
+    use { "catppuccin/nvim", as = "catppuccin" }
     use {
 	'nvim-lualine/lualine.nvim',
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -26,6 +23,11 @@ return require('packer').startup(function(use)
     use {
 	'nvim-treesitter/nvim-treesitter',
 	run = ':TSUpdate'
+    }
+    use {
+	"nvim-treesitter/nvim-treesitter-textobjects",
+	after = "nvim-treesitter",
+	requires = "nvim-treesitter/nvim-treesitter",
     }
     use 'ap/vim-css-color'
     use 'tpope/vim-fugitive'

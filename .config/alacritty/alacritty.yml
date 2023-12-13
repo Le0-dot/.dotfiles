@@ -1,5 +1,9 @@
 import:
-  - ~/.config/alacritty/colorscheme.yml
+  #- ~/.config/alacritty/colorscheme.yml
+  #- ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+  #- ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+
 #env:
   # TERM variable
   #
@@ -188,7 +192,7 @@ hints:
 key_bindings:
   - { key: V,         mods: Control|Shift,              action: Paste }
   - { key: C,         mods: Control|Shift,              action: Copy }
-  - { key: N,         mods: Control,                    action: SpawnNewInstance }
+  #- { key: N,         mods: Control,                    action: SpawnNewInstance }
   - { key: K,         mods: Control|Shift,   mode: ~Alt,        action: ScrollPageUp,  }
   - { key: J,         mods: Control|Shift,   mode: ~Alt,        action: ScrollPageDown }
 
