@@ -28,6 +28,7 @@ __pycache__/
 .ghcup/
 .tmux/
 .npm/
+.docker/
 
 Documents/
 Downloads/
@@ -39,6 +40,7 @@ SynologyDrive/
 
 .local/share/
 .local/lib/
+.local/pipx/
 
 .xsession-errors
 .tz
@@ -84,4 +86,5 @@ SynologyDrive/
 .local/bin/undill
 .local/bin/pja-sftp
 .local/bin/spotifywm.so
+.local/bin/pyright*
 .local/state/
