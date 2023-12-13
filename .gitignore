@@ -26,6 +26,8 @@ __pycache__/
 .nv/
 .vcpkg/
 .ghcup/
+.tmux/
+.npm/
 
 Documents/
 Downloads/
@@ -74,6 +76,7 @@ SynologyDrive/
 .config/obs-studio/
 .config/ranger/plugins/
 .config/a2ln
+.config/tmux/plugins/
 
 .local/bin/get_objgraph
 .local/bin/isort
