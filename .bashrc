@@ -78,4 +78,6 @@ bind '"\C-o":"ranger\C-m"'
 
 # PS1='[\u@\h \W]\$ '
 
+eval "$(zoxide init bash)"
+
 neofetch
