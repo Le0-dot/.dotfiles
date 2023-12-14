@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
     }
     use 'ap/vim-css-color'
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-obsession'
     use 'ThePrimeagen/vim-be-good'
     use({
 	"iamcco/markdown-preview.nvim",
