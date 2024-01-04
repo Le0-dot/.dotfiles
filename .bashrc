@@ -51,6 +51,8 @@ alias ls='exa'
 alias la='ls -a'
 alias ll='ls -laF --time-style=long-iso'
 
+alias cd='z'
+
 alias tree='exa --tree'
 
 alias cal='cal -m -3'
@@ -75,6 +77,7 @@ export RANGER_LOAD_DEFAULT_RC=false
 export CMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 bind '"\C-o":"ranger\C-m"'
+bind '"\C-a":"tmux a\C-m"'
 
 # PS1='[\u@\h \W]\$ '
 
