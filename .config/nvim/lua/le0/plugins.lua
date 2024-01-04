@@ -11,7 +11,6 @@ return require('packer').startup(function(use)
 	'nvim-lualine/lualine.nvim',
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
-    use 'voldikss/vim-floaterm'
     use {
 	'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	requires = { {'nvim-lua/plenary.nvim'} }
@@ -37,7 +36,8 @@ return require('packer').startup(function(use)
 	"iamcco/markdown-preview.nvim",
 	run = function() vim.fn["mkdp#util#install"]() end,
     })
-    use("gbprod/yanky.nvim")
+    use 'gbprod/yanky.nvim'
+    use 'numToStr/Comment.nvim'
 
 
     -- Lsp plugins

@@ -53,8 +53,8 @@ cmp.setup {
     sources = {
 	{name = 'path'},
 	{name = 'nvim_lsp', keyword_length = 1},
-	{name = 'buffer', keyword_length = 2},
-	{name = 'luasnip', keyword_length = 2},
+	{name = 'buffer', keyword_length = 1},
+	{name = 'luasnip', keyword_length = 1},
     },
     window = {
 	documentation = cmp.config.window.bordered()
@@ -64,7 +64,6 @@ cmp.setup {
             cmp.config.compare.offset,
             cmp.config.compare.exact,
             cmp.config.compare.recently_used,
-            require("clangd_extensions.cmp_scores"),
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,

@@ -1,5 +1,16 @@
 require('lint').linters_by_ft = {
-    python = { 'pylint' },
+    python = {
+	'clangtidy',
+	'cmakelint',
+	'codespell',
+	'commitlint',
+	'golangcilint',
+	'jsonlint',
+	'luacheck',
+	'markdownlint',
+	'pylint',
+	'yamllint',
+    },
 }
 
 --"BufWritePost"

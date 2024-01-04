@@ -2,24 +2,24 @@ require('le0/settings')
 require('le0/plugins')
 
 -- General plugins
-require('le0/plugin-settings/general/catppuccin-plugin') -- Colorscheme always first
-require('le0/plugin-settings/general/lualine-plugin')
-require('le0/plugin-settings/general/floaterm-plugin')
-require('le0/plugin-settings/general/telescope-plugin')
-require('le0/plugin-settings/general/treesitter-plugin')
-require('le0/plugin-settings/general/treesitter-textobjects-plugin')
-require('le0/plugin-settings/general/markdown-plugin')
-require('le0/plugin-settings/general/fugitive-plugin')
-require('le0/plugin-settings/general/yanky-plugin')
+require('le0/plugin-settings/catppuccin-plugin')
+require('le0/plugin-settings/lualine-plugin')
+require('le0/plugin-settings/telescope-plugin')
+require('le0/plugin-settings/treesitter-plugin')
+require('le0/plugin-settings/treesitter-textobjects-plugin')
+require('le0/plugin-settings/markdown-plugin')
+require('le0/plugin-settings/fugitive-plugin')
+require('le0/plugin-settings/yanky-plugin')
+require('le0/plugin-settings/comment-plugin')
 
 -- Lsp plugins
-require('le0/plugin-settings/lsp/lspconfig-plugin')
-require('le0/plugin-settings/lsp/lint-plugin')
-require('le0/plugin-settings/lsp/cmp-plugin')
+require('le0/plugin-settings/lspconfig-plugin')
+require('le0/plugin-settings/cmp-plugin')
 
 -- Cpp plugins
-require('le0/plugin-settings/cpp/cmake-plugin')
-require('le0/plugin-settings/cpp/gtest-plugin')
+require('le0/plugin-settings/cmake-plugin')
+require('le0/plugin-settings/lint-plugin')
+require('le0/plugin-settings/gtest-plugin')
 
 local map = require('le0/plugin-settings/easy-mapping').map
 
