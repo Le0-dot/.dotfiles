@@ -29,6 +29,10 @@ __pycache__/
 .tmux/
 .npm/
 .docker/
+.asdf/
+.themes/
+.cargo/
+.codeium/
 
 Documents/
 Downloads/
@@ -50,6 +54,7 @@ SynologyDrive/
 .nvidia-settings-rc
 .git-credentials
 .gitconfig
+.tool-versions
 
 .config/QtProject.conf
 .config/caja/
@@ -79,6 +84,12 @@ SynologyDrive/
 .config/ranger/plugins/
 .config/a2ln
 .config/tmux/plugins/
+.config/BraveSoftware/
+.config/bashtop/
+.config/blender/
+.config/chromium/
+.config/transmission-remote-gtk/
+.config/syncthingtray.ini
 
 .local/bin/get_objgraph
 .local/bin/isort
@@ -87,4 +98,6 @@ SynologyDrive/
 .local/bin/pja-sftp
 .local/bin/spotifywm.so
 .local/bin/pyright*
+.local/bin/codespell
+.local/bin/t
 .local/state/
