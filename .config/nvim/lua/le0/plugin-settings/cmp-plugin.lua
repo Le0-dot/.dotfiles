@@ -51,10 +51,11 @@ cmp.setup {
 	end, {'i', 's'}),
     }),
     sources = {
-	{name = 'path'},
 	{name = 'nvim_lsp', keyword_length = 1},
+	{name = "codeium"},
 	{name = 'buffer', keyword_length = 1},
 	{name = 'luasnip', keyword_length = 1},
+	{name = 'path'},
     },
     window = {
 	documentation = cmp.config.window.bordered()

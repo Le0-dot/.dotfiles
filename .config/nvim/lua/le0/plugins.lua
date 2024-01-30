@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
     use {
-	'nvim-telescope/telescope.nvim', tag = '0.1.0',
+	'nvim-telescope/telescope.nvim',
 	requires = { {'nvim-lua/plenary.nvim'} }
     }
     use {
@@ -49,6 +49,14 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+
+    use {
+	"Exafunction/codeium.nvim",
+	requires = {
+	    "nvim-lua/plenary.nvim",
+	    "hrsh7th/nvim-cmp",
+	},
+    }
 
     -- Cpp plugins
     use {
