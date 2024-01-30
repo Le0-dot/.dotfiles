@@ -33,19 +33,23 @@ ranger_cd() {
     rm -f -- "$temp_file"
 }
 
-##-----------------------------------------------------
-## synth-shell-prompt.sh
-if [ -f /home/le0/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
-	source /home/le0/.config/synth-shell/synth-shell-prompt.sh
-fi
+# starship
+eval "$(starship init bash)"
 
-##-----------------------------------------------------
-## alias
-if [ -f /home/le0/.config/synth-shell/alias.sh ] && [ -n "$( echo $- | grep i )" ]; then
-	source /home/le0/.config/synth-shell/alias.sh
-fi
+# zoxide
+eval "$(zoxide init bash)"
 
+# pacman suggestions for commands
 source /usr/share/doc/pkgfile/command-not-found.bash
+
+# fzf
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
+
+# source asdf
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
+
 
 alias ls='exa'
 alias la='ls -a'
@@ -70,6 +74,7 @@ shopt -s autocd
 
 export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$HOME/.ghcup/bin/:$PATH"
 export EDITOR=nvim
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 export GTK_THEME=Arc-Dark
 export RANGER_LOAD_DEFAULT_RC=false
@@ -78,9 +83,5 @@ export CMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 bind '"\C-o":"ranger\C-m"'
 bind '"\C-a":"tmux a\C-m"'
-
-# PS1='[\u@\h \W]\$ '
-
-eval "$(zoxide init bash)"
 
 neofetch
