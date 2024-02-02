@@ -1,5 +1,0 @@
-#!/bin/bash
-
-wallpaper_dir=~/Pictures/wallpapers/background/
-
-pidof Xorg &> /dev/null && feh --bg-tile --randomize $wallpaper_dir
