@@ -34,9 +34,12 @@ end
 
 local lspconfig = require('lspconfig')
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
 local lsp_defaults = {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    capabilities = capabilities,
 }
 
 lspconfig.util.default_config = vim.tbl_deep_extend(
@@ -45,28 +48,58 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
     lsp_defaults
 )
 
-lspconfig.lua_ls.setup {
-    single_file_support = true,
-    settings = {
-	Lua = {
-	    diagnostics = {
-		globals = { 'vim' },
-	    }
-	}
-    }
+local servers = {
+    lua_ls = {
+	single_file_support = true,
+	settings = {
+	    Lua = {
+		runtime = { version = 'LuaJIT' },
+		workspace = {
+		  checkThirdParty = false,
+		  -- Tells lua_ls where to find all the Lua files that you have loaded
+		  -- for your neovim configuration.
+		  library = {
+		    '${3rd}/luv/library',
+		    unpack(vim.api.nvim_get_runtime_file('', true)),
+		  },
+		},
+		diagnostics = {
+		    globals = { 'vim' },
+		},
+	    },
+	},
+    },
+    pyright = {},
+    clangd = {},
+    gopls = {},
+    hls = {
+	filetypes = { 'haskell', 'lhaskell', 'cabal' },
+    },
+    elixirls = {
+	filetypes = { 'elixir', 'heex' },
+    },
 }
 
-lspconfig.pyright.setup {}
+require('mason').setup()
 
-lspconfig.clangd.setup {}
+local ensure_installed = vim.tbl_keys(servers or {})
+vim.list_extend(ensure_installed, {
+})
+require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-lspconfig.gopls.setup {}
-
-lspconfig.hls.setup {
-    filetypes = { 'haskell', 'lhaskell', 'cabal' },
-}
-
-lspconfig.elixirls.setup {
-    cmd = { "/home/le0/Documents/elixir-ls/release/language_server.sh" },
-    filetypes = { 'elixir', 'heex' },
+require('mason-lspconfig').setup {
+  handlers = {
+    function(server_name)
+      local server = servers[server_name] or {}
+      require('lspconfig')[server_name].setup {
+	cmd = server.cmd,
+	settings = server.settings,
+	filetypes = server.filetypes,
+	-- This handles overriding only values explicitly passed
+	-- by the server configuration above. Useful when disabling
+	-- certain features of an LSP (for example, turning off formatting for tsserver)
+	capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
+      }
+    end,
+  },
 }

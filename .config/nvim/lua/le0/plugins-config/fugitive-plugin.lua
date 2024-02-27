@@ -1,2 +1,0 @@
--- Vim fugitive config
-
