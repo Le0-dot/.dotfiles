@@ -13,7 +13,9 @@ return require('lazy').setup({
 	config = function() require('le0/plugins-config/catppuccin') end,
     },
 
+    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
     'ap/vim-css-color',
+    'tpope/vim-obsession',
     {
 	'tpope/vim-fugitive',
 	config = function()
@@ -23,7 +25,6 @@ return require('lazy').setup({
 	    vim.keymap.set('n', '<leader>gp', ':Git push<cr>')
 	end,
     },
-    'tpope/vim-obsession',
     {
 	'gbprod/yanky.nvim',
 	config = function() require('le0/plugins-config/yanky') end,
@@ -43,7 +44,7 @@ return require('lazy').setup({
     {
 	'nvim-telescope/telescope.nvim',
 	event = 'VeryLazy',
-	dependecies = {
+	dependencies = {
 	    'nvim-lua/plenary.nvim',
 	    {
 		'nvim-telescope/telescope-fzf-native.nvim',
@@ -60,7 +61,7 @@ return require('lazy').setup({
     },
     {
 	'nvim-treesitter/nvim-treesitter-textobjects',
-	dependecies = {
+	dependencies = {
 	    'nvim-treesitter/nvim-treesitter',
 	},
 	config = function() require('le0/plugins-config/treesitter-textobjects') end,
@@ -76,25 +77,45 @@ return require('lazy').setup({
 
     {
 	'neovim/nvim-lspconfig',
+	dependencies = {
+	  -- Automatically install LSPs and related tools to stdpath for neovim
+	  'williamboman/mason.nvim',
+	  'williamboman/mason-lspconfig.nvim',
+	  'WhoIsSethDaniel/mason-tool-installer.nvim',
+	  'j-hui/fidget.nvim',
+	},
 	config = function() require('le0/plugins-config/lspconfig') end,
     },
     {
-	'mfussenegger/nvim-lint',
-	config = function() require('le0/plugins-config/lint') end,
-    },
-    {
 	'hrsh7th/nvim-cmp',
+	event = 'InsertEnter',
 	dependencies = {
-	    'hrsh7th/cmp-nvim-lsp',
-	    'hrsh7th/cmp-buffer',
-	    'hrsh7th/cmp-path',
-	    'hrsh7th/cmp-cmdline',
 	    {
 		'L3MON4D3/LuaSnip',
 		build = "make install_jsregexp",
 	    },
+	    'saadparwaiz1/cmp_luasnip',
+	    'hrsh7th/cmp-nvim-lsp',
+	    'hrsh7th/cmp-buffer',
+	    'hrsh7th/cmp-path',
+	    'hrsh7th/cmp-cmdline',
 	},
 	config = function() require('le0/plugins-config/cmp') end,
+    },
+
+    { -- Collection of various small independent plugins/modules
+      'echasnovski/mini.nvim',
+      config = function()
+	-- Examples:
+	--  - va)  - [V]isually select [A]round [)]parenthen
+	--  - yinq - [Y]ank [I]nside [N]ext [']quote
+	--  - ci'  - [C]hange [I]nside [']quote
+	require('mini.ai').setup { n_lines = 500 }
+	-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+	-- - sd'   - [S]urround [D]elete [']quotes
+	-- - sr)'  - [S]urround [R]eplace [)] [']
+	require('mini.surround').setup()
+      end,
     },
 
     {
@@ -128,4 +149,14 @@ return require('lazy').setup({
 	    "hrsh7th/nvim-cmp",
 	},
     },
+
+    {
+	"ThePrimeagen/harpoon",
+	branch = "harpoon2",
+	dependencies = {
+	    "nvim-lua/plenary.nvim",
+	    'nvim-telescope/telescope.nvim',
+	},
+	config = function() require('le0/plugins-config/harpoon') end,
+    }
 }, {})
