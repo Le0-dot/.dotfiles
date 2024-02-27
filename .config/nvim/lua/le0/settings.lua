@@ -1,40 +1,57 @@
-local o = vim.o
-local g = vim.g
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-g.mapleader = ' '
+vim.opt.number = true
 
---o.syntax = on
+vim.opt.showmode = false
 
-o.backup = false
-o.writebackup = flase
+vim.opt.clipboard = 'unnamedplus'
 
-o.updatetime = 300
+vim.opt.breakindent = true
 
-o.number = true
-o.relativenumber = true
-o.cursorline = true
-o.signcolumn = 'yes'
+vim.opt.undofile = true
 
-o.scrolloff = 8
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-o.linebreak = true
-o.showbreak = '+++'
+vim.opt.signcolumn = 'yes'
+vim.opt.relativenumber = true
 
-o.showmatch = true
-o.hlsearch = true
-o.smartcase = true
-o.ignorecase = true
-o.incsearch = true
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 500
 
-o.autoindent = true
-o.shiftwidth = 4
-o.smartindent = true
-o.smarttab = true
-o.softtabstop = 4
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-o.splitright = true
-o.splitbelow = true
+vim.opt.inccommand = 'split'
 
-vim.api.nvim_create_user_command("Cppath", function()
-    vim.fn.setreg('+', vim.fn.getreg('0'))
-end, {})
+vim.opt.cursorline = true
+
+vim.opt.scrolloff = 10
+
+vim.opt.backup = false
+vim.opt.writebackup = false
+
+vim.opt.showmatch = true
+
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.opt.autoindent = true
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+vim.opt.smarttab = true
+vim.opt.softtabstop = 4
+
+vim.opt.linebreak = true
+vim.opt.showbreak = '+++'
+
+vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close focused window' })
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set("n", "<leader>o", "o<C-[>k")
+vim.keymap.set("n", "<leader>O", "O<C-[>j")
