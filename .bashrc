@@ -50,6 +50,9 @@ source /usr/share/fzf/completion.bash
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
 
+# source direnv
+eval "$(direnv hook bash)"
+
 
 alias ls='exa'
 alias la='ls -a'
