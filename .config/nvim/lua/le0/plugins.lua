@@ -1,70 +1,131 @@
-vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
-    pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile',
-})
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-    -- General plugins
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use {
+return require('lazy').setup({
+    {
+	'catppuccin/nvim',
+	lazy = false,
+	init = function() vim.cmd.colorscheme("catppuccin") end,
+	config = function() require('le0/plugins-config/catppuccin') end,
+    },
+
+    'ap/vim-css-color',
+    {
+	'tpope/vim-fugitive',
+	config = function()
+	    vim.keymap.set('n', '<leader>gc', ':Git commit<cr>')
+	    vim.keymap.set('n', '<leader>ga', ':Gwrite<cr>')
+	    vim.keymap.set('n', '<leader>gs', ':Git<cr>')
+	    vim.keymap.set('n', '<leader>gp', ':Git push<cr>')
+	end,
+    },
+    'tpope/vim-obsession',
+    {
+	'gbprod/yanky.nvim',
+	config = function() require('le0/plugins-config/yanky') end,
+    },
+    {
+	'numToStr/Comment.nvim',
+	config = function() require('le0/plugins-config/comment') end,
+    },
+
+    {
 	'nvim-lualine/lualine.nvim',
-	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-    use {
+	dependencies = {
+	    'kyazdani42/nvim-web-devicons',
+	},
+	config = function() require('le0/plugins-config/lualine') end,
+    },
+    {
 	'nvim-telescope/telescope.nvim',
-	requires = { {'nvim-lua/plenary.nvim'} }
-    }
-    use {
-	'nvim-telescope/telescope-fzf-native.nvim',
-	run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-    }
-    use {
+	event = 'VeryLazy',
+	dependecies = {
+	    'nvim-lua/plenary.nvim',
+	    {
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'make'
+	    },
+	    'nvim-telescope/telescope-ui-select.nvim',
+	},
+	config = function() require('le0/plugins-config/telescope') end,
+    },
+    {
 	'nvim-treesitter/nvim-treesitter',
-	run = ':TSUpdate'
-    }
-    use {
-	"nvim-treesitter/nvim-treesitter-textobjects",
-	after = "nvim-treesitter",
-	requires = "nvim-treesitter/nvim-treesitter",
-    }
-    use 'ap/vim-css-color'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-obsession'
-    use 'ThePrimeagen/vim-be-good'
-    use({
-	"iamcco/markdown-preview.nvim",
-	run = function() vim.fn["mkdp#util#install"]() end,
-    })
-    use 'gbprod/yanky.nvim'
-    use 'numToStr/Comment.nvim'
+	build = ':TSUpdate',
+	config = function() require('le0/plugins-config/treesitter') end,
+    },
+    {
+	'nvim-treesitter/nvim-treesitter-textobjects',
+	dependecies = {
+	    'nvim-treesitter/nvim-treesitter',
+	},
+	config = function() require('le0/plugins-config/treesitter-textobjects') end,
+    },
+    {
+	'iamcco/markdown-preview.nvim',
+	build = function() vim.fn['mkdp#util#install']() end,
+	config = function()
+	    vim.keymap.set('n', '<leader>pt', '<Plug>MarkdownPreviewToggle')
+	    vim.g.mkdp_auto_start = 1
+	end,
+    },
 
+    {
+	'neovim/nvim-lspconfig',
+	config = function() require('le0/plugins-config/lspconfig') end,
+    },
+    {
+	'mfussenegger/nvim-lint',
+	config = function() require('le0/plugins-config/lint') end,
+    },
+    {
+	'hrsh7th/nvim-cmp',
+	dependencies = {
+	    'hrsh7th/cmp-nvim-lsp',
+	    'hrsh7th/cmp-buffer',
+	    'hrsh7th/cmp-path',
+	    'hrsh7th/cmp-cmdline',
+	    {
+		'L3MON4D3/LuaSnip',
+		build = "make install_jsregexp",
+	    },
+	},
+	config = function() require('le0/plugins-config/cmp') end,
+    },
 
-    -- Lsp plugins
-    use 'neovim/nvim-lspconfig'
-    use 'L3MON4D3/LuaSnip'
-    use 'mfussenegger/nvim-lint'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
+    {
+	'cdelledonne/vim-cmake',
+	ft = {'c', 'cpp', 'cmake'},
+	config = function()
+	    vim.cmd ([[ 
+	    let g:cmake_link_compile_commands = 1
+	    let g:cmake_root_markers = ['compile_commands.json']
+	    ]])
 
-    use {
+	    vim.keymap.set('n', '<leader>cg', ':CMakeGenerate<cr>')
+	    vim.keymap.set('n', '<leader>cb', ':w<cr> :CMakeBuild<cr>')
+	    vim.keymap.set('n', '<leader>cl', ':CMakeClean<cr>')
+	    vim.keymap.set('n', '<leader>cc', ':CMakeClose<cr>')
+	end,
+    },
+    {
+	'alepez/vim-gtest',
+	ft = {'c', 'cpp', 'cmake'},
+	config = function()
+	    vim.g['gtest#gtest_command'] = '../Debug/tests'
+	    vim.keymap.set('n', '<leader>gt', ':GTestRunUnderCursor<cr>')
+	end,
+    },
+
+    {
 	"Exafunction/codeium.nvim",
-	requires = {
+	dependencies = {
 	    "nvim-lua/plenary.nvim",
 	    "hrsh7th/nvim-cmp",
 	},
-    }
-
-    -- Cpp plugins
-    use {
-	'cdelledonne/vim-cmake',
-	ft = {'c', 'cpp', 'cmake'}
-    }
-    use {
-	'alepez/vim-gtest',
-	ft = {'c', 'cpp', 'cmake'}
-    }
-end)
+    },
+}, {})

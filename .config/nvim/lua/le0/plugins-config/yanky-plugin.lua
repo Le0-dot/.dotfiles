@@ -1,5 +1,3 @@
-local map = require('le0/plugin-settings/easy-mapping').map
-
 require("telescope").load_extension("yank_history")
 
 require('yanky').setup {
@@ -31,16 +29,16 @@ require('yanky').setup {
     },
 }
 
-map({"n","x"}, "y", "<Plug>(YankyYank)")
+vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
 
-map({"n","x"}, "p", "<Plug>(YankyPutIndentAfter)")
-map({"n","x"}, "P", "<Plug>(YankyPutIndentBefore)")
-map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutIndentAfter)")
+vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutIndentBefore)")
+vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
 
-map("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
-map("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
-map("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
-map("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
+vim.keymap.set("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
+vim.keymap.set("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
+vim.keymap.set("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
+vim.keymap.set("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
 
-map("n", "<leader>y", ":Telescope yank_history<cr>")
+vim.keymap.set("n", "<leader>y", ":Telescope yank_history<cr>")

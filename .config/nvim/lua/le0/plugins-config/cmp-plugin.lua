@@ -11,9 +11,7 @@ local select_opts = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup {
     snippet = {
-	expand = function(args)
-	    require('luasnip').lsp_expand(args.body)
-	end
+	expand = function(args) luasnip.lsp_expand(args.body) end
     },
     mapping = cmp.mapping.preset.insert({
 	['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -21,7 +19,7 @@ cmp.setup {
 	['<C-Space>'] = cmp.mapping.complete(),
 	['<C-e>'] = cmp.mapping.abort(),
 	['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-	-- NExt item
+	-- Next item
 	['<Tab>'] = cmp.mapping(function(fallback)
 	    local col = vim.fn.col('.') - 1
 

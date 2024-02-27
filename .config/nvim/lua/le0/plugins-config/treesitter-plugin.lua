@@ -1,7 +1,5 @@
--- Treesitter config
-
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "cpp", "python", "bash", "go", "haskell" },
+    ensure_installed = { "cpp", "python", "bash", "go", "haskell", "elixir" },
 
     -- Automatically install missing parsers when entering buffer
     auto_install = true,
@@ -79,8 +77,3 @@ require('nvim-treesitter.configs').setup {
 
     },
 }
-
---vim.cmd([[
---set foldmethod=expr
---set foldexpr=nvim_treesitter#foldexpr()
---]])

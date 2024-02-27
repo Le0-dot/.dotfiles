@@ -1,0 +1,21 @@
+-- require('lint').linters_by_ft = {
+--     python = {
+-- 	'clangtidy',
+-- 	'cmakelint',
+-- 	'codespell',
+-- 	'commitlint',
+-- 	'golangcilint',
+-- 	'jsonlint',
+-- 	'luacheck',
+-- 	'markdownlint',
+-- 	'pylint',
+-- 	'yamllint',
+--     },
+-- }
+--
+-- --"BufWritePost"
+-- vim.api.nvim_create_autocmd({ "TextChanged" }, {
+--   callback = function()
+--     require("lint").try_lint()
+--   end,
+-- })
