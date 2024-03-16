@@ -51,3 +51,12 @@ vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close focused window' })
 
 vim.keymap.set("n", "<leader>o", "o<C-[>k")
 vim.keymap.set("n", "<leader>O", "O<C-[>j")
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = {"*"},
+    callback = function()
+	local save_cursor = vim.fn.getpos(".")
+	pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+	vim.fn.setpos(".", save_cursor)
+    end,
+})
