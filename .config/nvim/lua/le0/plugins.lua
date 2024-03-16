@@ -17,12 +17,27 @@ return require('lazy').setup({
     'ap/vim-css-color',
     'tpope/vim-obsession',
     {
-	'tpope/vim-fugitive',
+	"NeogitOrg/neogit",
+	dependencies = {
+	    "nvim-lua/plenary.nvim",         -- required
+	    "sindrets/diffview.nvim",        -- optional - Diff integration
+	    "nvim-telescope/telescope.nvim", -- optional
+	},
 	config = function()
-	    vim.keymap.set('n', '<leader>gc', ':Git commit<cr>')
-	    vim.keymap.set('n', '<leader>ga', ':Gwrite<cr>')
-	    vim.keymap.set('n', '<leader>gs', ':Git<cr>')
-	    vim.keymap.set('n', '<leader>gp', ':Git push<cr>')
+	    require('neogit').setup({})
+
+	    vim.keymap.set("n", "<leader>gs", ":Neogit<cr>",
+		{silent = true, noremap = true}
+	    )
+	    vim.keymap.set("n", "<leader>gc", ":Neogit commit<cr>",
+		{silent = true, noremap = true}
+	    )
+	    vim.keymap.set("n", "<leader>gp", ":Neogit pull<cr>",
+		{silent = true, noremap = true}
+	    )
+	    vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<cr>",
+		{silent = true, noremap = true}
+	    )
 	end,
     },
     {
@@ -122,7 +137,7 @@ return require('lazy').setup({
 	'cdelledonne/vim-cmake',
 	ft = {'c', 'cpp', 'cmake'},
 	config = function()
-	    vim.cmd ([[ 
+	    vim.cmd ([[
 	    let g:cmake_link_compile_commands = 1
 	    let g:cmake_root_markers = ['compile_commands.json']
 	    ]])
