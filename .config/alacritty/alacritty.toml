@@ -1,6 +1,10 @@
 import = ["~/.config/alacritty/catppuccin/catppuccin-macchiato.toml"]
 live_config_reload = true
 
+[shell]
+program = "/usr/bin/tmux"
+args = ["-L", "0", "a", "-t", "home"]
+
 [colors]
 draw_bold_text_with_bright_colors = false
 
