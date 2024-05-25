@@ -5,6 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+
 return require('lazy').setup({
     {
 	'catppuccin/nvim',
@@ -117,6 +118,49 @@ return require('lazy').setup({
 	},
 	config = function() require('le0/plugins-config/cmp') end,
     },
+    {
+	'mfussenegger/nvim-lint',
+	dependencies = {
+	    'williamboman/mason.nvim',
+	},
+	config = function ()
+	    local lint = require('lint')
+	    lint.linters_by_ft = lint.linters_by_ft or {}
+	    local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+	    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+		group = lint_augroup,
+		callback = function()
+		require('lint').try_lint()
+		end,
+	    })
+	end,
+    },
+    { -- Autoformat
+	'stevearc/conform.nvim',
+	lazy = false,
+	keys = {
+	    {
+		'<leader>f',
+		function()
+		    require('conform').format { async = true, lsp_fallback = true }
+		end,
+		mode = '',
+		desc = '[F]ormat buffer',
+	    },
+	},
+    },
+
+    {
+	'mfussenegger/nvim-dap',
+	dependencies = {
+	    'rcarriga/nvim-dap-ui',
+	    'nvim-neotest/nvim-nio',
+	    'williamboman/mason.nvim',
+	    'jay-babu/mason-nvim-dap.nvim',
+	    'mfussenegger/nvim-dap-python',
+	},
+	config = function () require('le0/plugins-config/dap') end,
+    },
 
     { -- Collection of various small independent plugins/modules
       'echasnovski/mini.nvim',
@@ -158,14 +202,6 @@ return require('lazy').setup({
     },
 
     {
-	"Exafunction/codeium.nvim",
-	dependencies = {
-	    "nvim-lua/plenary.nvim",
-	    "hrsh7th/nvim-cmp",
-	},
-    },
-
-    {
 	"ThePrimeagen/harpoon",
 	branch = "harpoon2",
 	dependencies = {
@@ -173,5 +209,17 @@ return require('lazy').setup({
 	    'nvim-telescope/telescope.nvim',
 	},
 	config = function() require('le0/plugins-config/harpoon') end,
-    }
+    },
+
+    {
+	"m4xshen/hardtime.nvim",
+	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+	opts = {}
+    },
+    {
+	'tris203/precognition.nvim',
+	config = function ()
+	    require("precognition").toggle()
+	end
+    },
 }, {})
