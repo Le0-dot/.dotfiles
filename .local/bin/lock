@@ -1,3 +1,0 @@
-#!/bin/bash
-
-xwd -root | convert xwd:- -blur 0x12 RGB:- | i3lock --raw 2560x1440:rgb --image /dev/stdin
