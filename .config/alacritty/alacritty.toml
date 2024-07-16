@@ -58,7 +58,3 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
 [window]
 decorations = "none"
-
-[window.padding]
-x = 2
-y = 3
