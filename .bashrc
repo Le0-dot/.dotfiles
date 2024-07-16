@@ -68,6 +68,8 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
+alias gd='git diff'
+alias gl='git log'
 
 alias vim='nvim'
 
@@ -82,9 +84,7 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 export GTK_THEME=Arc-Dark
 export RANGER_LOAD_DEFAULT_RC=false
 
-export CMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
-
-bind '"\C-o":"ranger\C-m"'
-bind '"\C-a":"tmux a\C-m"'
+export VCPKG_ROOT=$HOME/.local/share/vcpkg
+export CMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
 
 neofetch
