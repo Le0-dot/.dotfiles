@@ -75,6 +75,8 @@ alias vim='nvim'
 
 alias ranger='ranger_cd'
 
+alias docker-prune='docker system prune'
+
 shopt -s autocd
 
 export PATH="$HOME/.local/bin/:$HOME/.cabal/bin/:$HOME/.ghcup/bin/:$PATH"
