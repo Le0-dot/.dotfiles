@@ -79,6 +79,7 @@ return require('lazy').setup({
     },
     {
 	'iamcco/markdown-preview.nvim',
+	ft = { 'md' },
 	build = function() vim.fn['mkdp#util#install']() end,
 	config = function()
 	    vim.keymap.set('n', '<leader>pt', '<Plug>MarkdownPreviewToggle')
@@ -125,13 +126,17 @@ return require('lazy').setup({
 	    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
 		group = lint_augroup,
 		callback = function()
-		require('lint').try_lint()
+		    require('lint').try_lint()
 		end,
 	    })
 	end,
     },
     { -- Autoformat
-	'stevearc/conform.nvim',
+	'zapling/mason-conform.nvim',
+	dependencies = {
+	    'williamboman/mason.nvim',
+	    'stevearc/conform.nvim',
+	},
 	lazy = false,
 	keys = {
 	    {
@@ -143,18 +148,6 @@ return require('lazy').setup({
 		desc = '[F]ormat buffer',
 	    },
 	},
-    },
-
-    {
-	'mfussenegger/nvim-dap',
-	dependencies = {
-	    'rcarriga/nvim-dap-ui',
-	    'nvim-neotest/nvim-nio',
-	    'williamboman/mason.nvim',
-	    'jay-babu/mason-nvim-dap.nvim',
-	    'mfussenegger/nvim-dap-python',
-	},
-	config = function () require('le0/plugins-config/dap') end,
     },
 
     { -- Collection of various small independent plugins/modules
@@ -169,6 +162,7 @@ return require('lazy').setup({
 	-- - sd'   - [S]urround [D]elete [']quotes
 	-- - sr)'  - [S]urround [R]eplace [)] [']
 	require('mini.surround').setup()
+	require('mini.pairs').setup()
       end,
     },
 
