@@ -46,11 +46,6 @@ return require('lazy').setup({
 	config = function() require('le0/plugins-config/yanky') end,
     },
     {
-	'numToStr/Comment.nvim',
-	config = function() require('le0/plugins-config/comment') end,
-    },
-
-    {
 	'nvim-lualine/lualine.nvim',
 	dependencies = {
 	    'kyazdani42/nvim-web-devicons',
