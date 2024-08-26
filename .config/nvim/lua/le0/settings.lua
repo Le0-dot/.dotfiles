@@ -39,6 +39,7 @@ vim.opt.incsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.opt.autoindent = true
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.smarttab = true
@@ -53,11 +54,11 @@ vim.keymap.set("n", "<leader>o", "o<C-[>k")
 vim.keymap.set("n", "<leader>O", "O<C-[>j")
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = {"*"},
-    callback = function()
-	local save_cursor = vim.fn.getpos(".")
-	pcall(function() vim.cmd [[%s/\s\+$//e]] end) -- Delete trailing whitespaces
-	pcall(function() vim.cmd [[%s/\n\+\%$//e]] end) -- Delete trailing empty lines
-	vim.fn.setpos(".", save_cursor)
-    end,
+	pattern = { "*" },
+	callback = function()
+		local save_cursor = vim.fn.getpos(".")
+		pcall(function() vim.cmd [[%s/\s\+$//e]] end) -- Delete trailing whitespaces
+		pcall(function() vim.cmd [[%s/\n\+\%$//e]] end) -- Delete trailing empty lines
+		vim.fn.setpos(".", save_cursor)
+	end,
 })
