@@ -56,7 +56,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = {"*"},
     callback = function()
 	local save_cursor = vim.fn.getpos(".")
-	pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+	pcall(function() vim.cmd [[%s/\s\+$//e]] end) -- Delete trailing whitespaces
+	pcall(function() vim.cmd [[%s/\n\+\%$//e]] end) -- Delete trailing empty lines
 	vim.fn.setpos(".", save_cursor)
     end,
 })

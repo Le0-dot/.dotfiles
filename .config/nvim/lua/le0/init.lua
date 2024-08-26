@@ -1,2 +1,2 @@
-require('le0/settings')
-require('le0/plugins')
+require('le0.settings')
+require('le0.lazy')
