@@ -9,36 +9,6 @@
     "modules-center": [],
     "modules-right": ["tray", "wireplumber", "backlight", "battery", "hyprland/language", "clock"],
 
-    "wlr/workspaces": {
-	"format": "{icon}",
-	"on-click": "activate",
-	"format-icons": {
-	    "1": "",
-	    "2": "",
-	    "3": "",
-	    "4": "",
-	    "5": "5",
-	    "6": "6",
-	    "7": " ",
-	    "8": "",
-	    "9": "",
-	    "10": "",
-	},
-	"persistent_workspaces": {
-	    "1": [], 
-	    "2": [], 
-	    "3": [], 
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": [],
-	},
-	"sort-by-number": true
-    },
-
     "hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
@@ -48,13 +18,13 @@
 	    "4": "",
 	    "5": "5",
 	    "6": "6",
-	    "7": " ",
+	    "7": "",
 	    "8": "",
 	    "9": "",
 	    "10": "",
 	},
 	"persistent-workspaces": {
-             "*": 10, 
+             "*": 10,
 	}
     },
 
@@ -65,8 +35,8 @@
 
     "wireplumber": {
 	"format": "{icon}  {volume}%",
-	"format-muted": "<",
-    	"format-icons": ["", "", ""],
+	"format-muted": "  {volume}%",
+    	"format-icons": ["", " ", " "],
 	"scroll-step": 5,
     },
 
@@ -109,18 +79,4 @@
 	    "on-click": "mode",
 	}
     },
-
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-
 }

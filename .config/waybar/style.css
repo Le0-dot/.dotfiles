@@ -7,7 +7,7 @@
 @define-color warning #ffff00;
 
 * {
-    font-family: FontAwesome;
+    font-family: 'Fira Sans', 'Font Awesome 6 Free', 'Hack Nerd';
     font-size: 18px;
 }
 
