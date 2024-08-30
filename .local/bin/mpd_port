@@ -1,3 +1,0 @@
-#!/bin/env bash
-
-netstat -lp 2>/dev/null | rg mpd | rg tcp | awk '{ print $4 }' | awk -F: '{ print $4 }'

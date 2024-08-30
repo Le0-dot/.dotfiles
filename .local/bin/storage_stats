@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cd /home/
-du -hx * | sort -rh | head -10
-read
