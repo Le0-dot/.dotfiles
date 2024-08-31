@@ -25,6 +25,7 @@ window#waybar {
 }
 
 #workspaces button {
+    color: @fg;
     border-radius: 25px;
     padding: 0 5px;
     margin: 4px 4px;
