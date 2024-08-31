@@ -5,6 +5,7 @@ export PATH
 export EDITOR=nvim
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 export ZOXIDE_CMD_OVERRIDE=cd
 
 export VCPKG_ROOT=$HOME/.local/share/vcpkg
