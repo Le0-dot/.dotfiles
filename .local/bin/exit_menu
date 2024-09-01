@@ -1,40 +1,7 @@
 #!/bin/bash
 
-dmenu="dmenu"
+resolution=$(hyprctl monitors | head -2 | tail -1 | tr -d '[:space:]' | cut -d'@' -f1)
+width=$(echo $resolution | cut -d'x' -f 1)
+quarter=$(($width / 4))
 
-if [ $# -eq 1 ]; then
-    dmenu="$1"
-fi
-
-declare -a option_list=(
-    "Lock"
-    "Exit"
-    "Shutdown"
-    "Reboot"
-    "Suspend"
-    "Quit"
-)
-
-option=$(printf '%s\n' "${option_list[@]}" | "$dmenu") || exit 1
-
-declare -a MANAGERS
-while IFS= read -r manager
-do
-    MANAGERS+=("${manager,,}")
-done < <(grep 'Name=' /usr/share/xsessions/*.desktop | cut -d'=' -f2)
-
-
-case $option in
-    "Lock")
-	hyprlock;;
-    "Exit")
-	loginctl terminate-session ${XDG_SESSION_ID-};;
-    "Suspend")
-	systemctl suspend;;
-    "Reboot")
-	systemctl reboot;;
-    "Shutdown")
-	systemctl poweroff;;
-    "Quit" | *)
-	;;
-esac
+wlogout -b 2 -L $quarter -R $quarter
