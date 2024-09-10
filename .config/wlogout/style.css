@@ -17,7 +17,7 @@ button {
     background-color: rgba(30, 30, 46, 0);
     color: rgba(30, 30, 46, 0);
     border: none;
-    border-radius: 50;
+    border-radius: 50px;
     margin: 10px;
     transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
