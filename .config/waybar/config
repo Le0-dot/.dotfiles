@@ -10,22 +10,22 @@
     "modules-right": ["tray", "wireplumber", "backlight", "battery", "hyprland/language", "clock"],
 
     "hyprland/workspaces": {
-	"format": "{icon}",
-	"format-icons": {
-	    "1": "",
-	    "2": "",
-	    "3": "",
-	    "4": "",
-	    "5": "5",
-	    "6": "6",
-	    "7": "",
-	    "8": "",
-	    "9": "",
-	    "10": "",
-	},
-	"persistent-workspaces": {
-             "*": 10,
-	}
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "5",
+            "6": "6",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": "",
+        },
+        "persistent-workspaces": {
+                 "*": 10,
+        }
     },
 
     "tray": {
@@ -34,49 +34,49 @@
     },
 
     "wireplumber": {
-	"format": "{icon}  {volume}%",
-	"format-muted": "  {volume}%",
-    	"format-icons": ["", "", ""],
-	"scroll-step": 5,
+        "format": "{icon}  {volume}%",
+        "format-muted": "  {volume}%",
+        "format-icons": ["", "", ""],
+        "scroll-step": 5,
     },
 
     "backlight": {
         "format": "{icon}  {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
-	"scroll-step": 5,
-	"tooltip": false,
+        "scroll-step": 5,
+        "tooltip": false,
     },
 
     "battery": {
-	"interval": 5,
+        "interval": 5,
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}   {capacity}%",
+        "format": "{icon}  {capacity}%",
         "format-charging": "  {capacity}%",
         "format-plugged": " {capacity}%",
         "format-icons": ["", "", "", "", ""],
-	"format-time": "{H}h {m}m",
+        "format-time": "{H}h {m}m",
     },
 
     "hyprland/language": {
-	"format-en": "EN",
-	"format-ru": "RU",
+        "format-en": "EN",
+        "format-ru": "RU",
     },
 
     "clock": {
-	"format": "{:%H:%M}",
+        "format": "{:%H:%M}",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
-	"calendar": {
-	    "mode": "month",
-	    "mode-mon-col": 3,
-	    "format": {
-		"today": "<span color='#dddd00' background='#000000'><b><u>{}</u></b></span>",
-	    },
-	},
-	"actions": {
-	    "on-click": "mode",
-	}
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "format": {
+                "today": "<span color='#dddd00' background='#000000'><b><u>{}</u></b></span>",
+            },
+        },
+        "actions": {
+            "on-click": "mode",
+        }
     },
 }
