@@ -36,7 +36,7 @@
     "wireplumber": {
 	"format": "{icon}  {volume}%",
 	"format-muted": "  {volume}%",
-    	"format-icons": ["", " ", " "],
+    	"format-icons": ["", "", ""],
 	"scroll-step": 5,
     },
 
