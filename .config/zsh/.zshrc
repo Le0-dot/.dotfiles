@@ -44,6 +44,8 @@ alias cal='cal -m -3'
 
 alias v='nvim'
 
+alias zellij='zellij -l welcome'
+
 alias docker-prune='docker system prune'
 
 function yy() {
@@ -53,4 +55,11 @@ function yy() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+function za() {
+    local session=$(zellij list-sessions | fzf --ansi | cut -d' ' -f1)
+    if ! [[ -z "$session" ]]; then
+        zellij attach $session
+    fi
 }
