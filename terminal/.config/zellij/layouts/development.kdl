@@ -7,8 +7,8 @@ layout {
     }
     tab name="nvim" focus=true {
         pane {
-            command "nvim"
-            args "-c" "TrackSession"
+            command "zsh"
+            args "-c" "nvim -c TrackSession"
         }
     }
     tab name="zsh"
