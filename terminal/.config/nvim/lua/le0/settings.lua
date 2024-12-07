@@ -80,15 +80,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
-vim.api.nvim_create_user_command('TrackSession', function ()
-    local session_file = 'Session.vim'
-    if vim.fn.filereadable(vim.fn.expand(session_file)) == 0 then
-        vim.cmd('Obsession')
-    else
-        vim.cmd('source ' .. session_file)
-    end
-end, {})
-
 
 vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close focused window' })
 
