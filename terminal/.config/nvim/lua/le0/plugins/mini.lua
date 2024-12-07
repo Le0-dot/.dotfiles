@@ -3,9 +3,7 @@ return {
     config = function()
         require('mini.extra').setup()
         require('mini.surround').setup()
-        require('mini.sessions').setup {
-            autoread = true,
-        }
+        require('mini.sessions').setup()
 
         local ai = require('mini.ai')
         ai.setup {

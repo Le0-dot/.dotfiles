@@ -80,6 +80,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
+vim.api.nvim_create_user_command("WithSession", function()
+    if next(MiniSessions.detected) == nil then
+        MiniSessions.write(MiniSessions.config.file)
+    else
+        MiniSessions.read()
+    end
+end, {})
+
 
 vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close focused window' })
 
