@@ -1,0 +1,8 @@
+layout {
+    tab name="lazygit" focus=true {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane command="lazygit" close_on_exit=true
+    }
+}
