@@ -25,8 +25,8 @@ keybinds {
         bind "Alt 8" { GoToTab 8; SwitchToMode "Normal"; }
         bind "Alt 9" { GoToTab 9; SwitchToMode "Normal"; }
         bind "Ctrl n" { NewTab; SwitchToMode "Normal"; }
-        bind "Alt g" { NewTab { layout "./layouts/auxiliary/lazygit.kdl"; }; }
-        bind "Alt y" { NewTab { layout "./layouts/auxiliary/yazi.kdl"; }; }
+        bind "Alt g" { NewTab { layout "/home/le0/.config/zellij/layouts/auxiliary/lazygit.kdl"; }; }
+        bind "Alt y" { NewTab { layout "/home/le0/.config/zellij/layouts/auxiliary/yazi.kdl"; }; }
     }
 }
 
