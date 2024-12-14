@@ -36,6 +36,11 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 
 
+-- Folding NOTE: I guess this will be in 0.10.3 or 0.11.0, see https://github.com/neovim/neovim/pull/31311
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+
+
 -- Line breaks
 vim.opt.linebreak = true
 vim.opt.showbreak = '+++'
