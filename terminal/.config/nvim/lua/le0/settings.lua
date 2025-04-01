@@ -69,7 +69,10 @@ vim.opt.showmatch = true
 vim.opt.formatoptions:remove('o')
 vim.opt.inccommand = 'split' -- Show preview in a split
 
+-- Diagnostics
+vim.diagnostic.config({ virtual_lines = { current_line = true } })
 
+-- Remove trailing spaces and trailing empty lines
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
     callback = function()
@@ -80,6 +83,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
+-- Command to start with in sessions like tmux or zellij
 vim.api.nvim_create_user_command("WithSession", function()
     if next(MiniSessions.detected) == nil then
         MiniSessions.write(MiniSessions.config.file)
