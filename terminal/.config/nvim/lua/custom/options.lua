@@ -69,8 +69,10 @@ vim.opt.showmatch = true
 vim.opt.formatoptions:remove('o')
 vim.opt.inccommand = 'split' -- Show preview in a split
 
+
 -- Diagnostics
 vim.diagnostic.config({ virtual_lines = { current_line = true } })
+
 
 -- Remove trailing spaces and trailing empty lines
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -83,6 +85,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
+
 -- Command to start with in sessions like tmux or zellij
 vim.api.nvim_create_user_command("WithSession", function()
     if next(MiniSessions.detected) == nil then
@@ -93,6 +96,7 @@ vim.api.nvim_create_user_command("WithSession", function()
 end, {})
 
 
+-- Some custom general keymaps
 vim.keymap.set('n', '<leader>x', ':.lua<cr>', { desc = 'Execute current lua line' })
 vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'Execute selected lua lines' })
 
@@ -130,6 +134,7 @@ vim.keymap.set('n', '<leader>O', function() print("use [<space>") end)
 
 vim.keymap.set('n', '<leader>do', function() print("use d]<space>") end)
 vim.keymap.set('n', '<leader>dO', function() print("use d[<space>") end)
+
 
 function Dump(o)
     if type(o) == 'table' then
