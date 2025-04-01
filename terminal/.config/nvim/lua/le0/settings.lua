@@ -94,13 +94,13 @@ vim.api.nvim_create_user_command("WithSession", function()
 end, {})
 
 
+vim.keymap.set('n', '<leader>x', ':.lua<cr>', { desc = 'Execute current lua line' })
+vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'Execute selected lua lines' })
+
 vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close focused window' })
 
-vim.keymap.set('n', '<leader>o', 'o<C-[>0"_Dk', { desc = 'Insert empty line below' })
-vim.keymap.set('n', '<leader>O', 'O<C-[>0"_Dj', { desc = 'Insert empty line above' })
-
-vim.keymap.set('n', '<leader>do', 'j"_ddk', { desc = 'Delete line below' })
-vim.keymap.set('n', '<leader>dO', 'k"_dd', { desc = 'Delete line above' })
+vim.keymap.set('n', 'd]<space>', 'j"_ddk', { desc = 'Delete line below' })
+vim.keymap.set('n', 'd[<space>', 'k"_dd', { desc = 'Delete line above' })
 
 vim.keymap.set('n', '<C-D>', '<C-D>zz', { desc = 'Scroll down and center' })
 vim.keymap.set('n', '<C-U>', '<C-U>zz', { desc = 'Scroll up and center' })
@@ -117,6 +117,20 @@ vim.keymap.set('n', 'gcA', function()
     vim.fn.setline('.', new_line) ---@diagnostic disable-line: param-type-mismatch
     vim.cmd [[ startinsert! ]]
 end, { desc = 'Append comment to the line' })
+
+
+-- New defaults replaced the following keymaps
+vim.keymap.set('n', 'gr', function() print("use grr") end)
+vim.keymap.set('n', 'gi', function() print("use gri") end)
+vim.keymap.set('n', '<C-k>', function() print("use <C-S>") end)
+vim.keymap.set('n', '<leader>rn', function() print("use grn") end)
+vim.keymap.set('n', '<leader>ca', function() print("use gra") end)
+
+vim.keymap.set('n', '<leader>o', function() print("use ]<space>") end)
+vim.keymap.set('n', '<leader>O', function() print("use [<space>") end)
+
+vim.keymap.set('n', '<leader>do', function() print("use d]<space>") end)
+vim.keymap.set('n', '<leader>dO', function() print("use d[<space>") end)
 
 function Dump(o)
     if type(o) == 'table' then
