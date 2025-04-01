@@ -2,7 +2,6 @@ return {
     'echasnovski/mini.nvim',
     config = function()
         require('mini.extra').setup()
-        require('mini.operators').setup()
         require('mini.sessions').setup()
         require('mini.surround').setup()
 
