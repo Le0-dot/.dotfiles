@@ -8,6 +8,6 @@ return {
     keys = {
         { "y", "<Plug>(YankyYank)",            mode = { "n", "x" }, },
         { "p", "<Plug>(YankyPutIndentAfter)",  mode = { "n", "x" }, },
-        { "P", "<Plug>(YankyPutIndentBefore}", mode = { "n", "x" }, },
+        { "P", "<Plug>(YankyPutIndentBefore)", mode = { "n", "x" }, },
     },
 }
