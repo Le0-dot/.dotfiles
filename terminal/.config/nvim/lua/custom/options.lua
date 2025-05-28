@@ -136,6 +136,43 @@ vim.keymap.set('n', '<leader>do', function() print("use d]<space>") end)
 vim.keymap.set('n', '<leader>dO', function() print("use d[<space>") end)
 
 
+-- Some better shortcuts
+vim.keymap.set('n', 'vi(', function() print("use vib") end)
+vim.keymap.set('n', 'va(', function() print("use vab") end)
+vim.keymap.set('n', 'ci(', function() print("use cib") end)
+vim.keymap.set('n', 'ca(', function() print("use cab") end)
+vim.keymap.set('n', 'di(', function() print("use dib") end)
+vim.keymap.set('n', 'da(', function() print("use dab") end)
+
+vim.keymap.set('n', 'vi[', function() print("use vib") end)
+vim.keymap.set('n', 'va[', function() print("use vab") end)
+vim.keymap.set('n', 'ci[', function() print("use cib") end)
+vim.keymap.set('n', 'ca[', function() print("use cab") end)
+vim.keymap.set('n', 'di[', function() print("use dib") end)
+vim.keymap.set('n', 'da[', function() print("use dab") end)
+
+vim.keymap.set('n', 'vi{', function() print("use viB") end)
+vim.keymap.set('n', 'va{', function() print("use vaB") end)
+vim.keymap.set('n', 'ci{', function() print("use ciB") end)
+vim.keymap.set('n', 'ca{', function() print("use caB") end)
+vim.keymap.set('n', 'di{', function() print("use diB") end)
+vim.keymap.set('n', 'da{', function() print("use daB") end)
+
+vim.keymap.set('n', 'vi"', function() print("use viq") end)
+vim.keymap.set('n', 'va"', function() print("use vaq") end)
+vim.keymap.set('n', 'ci"', function() print("use ciq") end)
+vim.keymap.set('n', 'ca"', function() print("use caq") end)
+vim.keymap.set('n', 'di"', function() print("use diq") end)
+vim.keymap.set('n', 'da"', function() print("use daq") end)
+
+vim.keymap.set('n', 'vi\"', function() print("use viq") end)
+vim.keymap.set('n', 'va\"', function() print("use vaq") end)
+vim.keymap.set('n', 'ci\"', function() print("use ciq") end)
+vim.keymap.set('n', 'ca\"', function() print("use caq") end)
+vim.keymap.set('n', 'di\"', function() print("use diq") end)
+vim.keymap.set('n', 'da\"', function() print("use daq") end)
+
+
 function Dump(o)
     if type(o) == 'table' then
         local s = '{ '
